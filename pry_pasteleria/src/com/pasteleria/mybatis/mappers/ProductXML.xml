@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productxml">
+
+	<sql id="sql_all">
+		select * from buscar_producto
+	</sql>
+	
+	<select id="sql_select" resultMap="mapxml.productMap" statementType="PREPARED">
+		select * from buscar_producto;
+	</select>
+		
+	<select id="sql_find"  parameterType="int" resultMap="mapxml.productMap" statementType="PREPARED">
+		select * from buscar_producto where idProducto=#{idProducto};
+	</select>
+	
+	<insert id="sql_insert" parameterType="product" statementType="CALLABLE">
+		exec NUEVO_PRODUCTO #{descripcion},#{stock},#{precio},#{image_resource},#{categoria.idCategoria},#{cobertura.idCobertura},#{masa.idMasa},#{relleno.idRelleno}
+	</insert>
+	
+	<update id="sql_update" parameterType="product" statementType="CALLABLE">
+		exec SP_MODIFICA_PRODUCTO #{descripcion},#{stock},#{precio},#{image_resource},#{categoria.idCategoria},#{cobertura.idCobertura},#{masa.idMasa},#{relleno.idRelleno},#{idProducto}
+	</update>
+	
+	<delete id="sql_delete" parameterType="int" statementType="CALLABLE">
+		exec SP_ELIMINA_PRODUCTO #{idProducto};
+	</delete>
+	
+	<select id="sql_filter" parameterType="map" resultMap="mapxml.productMap" statementType="PREPARED" >
+		<include refid="sql_all"/>
+		 where  idCategoria like #{idCategoria}+'%' and idCobertura like #{idCobertura}+'%' and idMasa like #{idMasa}+'%' and idRelleno like #{idRelleno}+'%';
+	</select>
+	
+</mapper>

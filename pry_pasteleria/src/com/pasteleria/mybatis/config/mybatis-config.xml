@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<properties resource="com/pasteleria/resources/infoSql.properties"/>
+	
+	<typeAliases>
+		<typeAlias alias="status" 
+			type="com.pasteleria.bean.Status" />
+		<typeAlias alias="navbar" 
+			type="com.pasteleria.bean.Navbar"/>
+		<typeAlias alias="customer" 
+			type="com.pasteleria.bean.Customer"/>
+		<typeAlias alias="employed" 
+			type="com.pasteleria.bean.Employed"/>
+		<typeAlias alias="product" 
+			type="com.pasteleria.bean.Product"/>
+		<typeAlias alias="orderDetail"
+			type="com.pasteleria.bean.OrderDetail"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- Registro de los mappers -->
+	<mappers>
+		<mapper resource="com/pasteleria/mybatis/mappers/MapXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/StatusXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/NavbarXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/RolXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/UserXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/CustomerXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/EmployedXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/CategoryXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/CoverageXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/DoughXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/FillingXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/ProductXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/OrderXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/OrderDetailXML.xml"/>
+	</mappers>
+
+</configuration>

@@ -1,0 +1,99 @@
+* {
+  outline: none !important; }
+
+html,body {
+  width: 100%;
+  height: 100%; 
+  background-image: -webkit-radial-gradient(closest-corner, rgba(16, 47, 70, 0) 60%, rgba(16, 47, 70, 0.26)), -webkit-linear-gradient(108deg, #A828D6, #FF69D0 90%);
+  background-image: -moz-radial-gradient(closest-corner, rgba(16, 47, 70, 0) 60%, rgba(16, 47, 70, 0.26)), -moz-linear-gradient(108deg, #A828D6, #FF69D0 90%);
+  background-image: -ms-radial-gradient(closest-corner, rgba(16, 47, 70, 0) 60%, rgba(16, 47, 70, 0.26)), -ms-linear-gradient(108deg, #A828D6, #FF69D0 90%);
+  display: table; 
+  font-family: "Raleway", sans-serif;
+  }
+
+body {
+ width: 100%;
+  height: 100%; 
+  }
+
+#cont{
+  float:left;
+
+}
+
+.caption p a{
+  font-size: 12px;
+}
+
+#myModal input[type='number']{
+  width:50px;
+}
+.alex{
+ /* background-color: #BF4D4D;*/
+  display: inline-block;
+  float: left;
+}
+.alexito{
+  clear: left;
+  margin-top: 2em;
+}
+
+#fecha{
+  font-size:12px;
+  height:35px;
+}
+
+.palex {
+  background-color: red;
+  position: absolute;
+  bottom: 0px;
+}
+
+.calex {
+  height:430px;
+  position: relative;
+}
+
+.panelalex{
+   background-color: white;
+}
+
+.panelalex p{
+	font-size:0.9em;
+}
+.detaAC{
+ 	width: 100%;
+  }
+@media screen and (max-width:768px) {
+ .panelalex{
+   background-color: transparent;
+   margin-top: 10px;
+  }
+ .detaAC{
+ 	width: 80%;
+ 	margin: auto;
+ 	margin-top:30px;
+ 	margin-bottom:50px;
+  }
+  
+}
+
+@media screen and (max-width:914px) and (min-width:769px){
+  .panelalex a.btn.btn-primary{
+  	width: 100px;
+  	font-size: 0.7em;
+  	text-align: center;
+  }
+  
+  .panelalex p{
+  	font-size:0.9em; 	
+  }
+  
+}
+
+}
+
+
+
+
+

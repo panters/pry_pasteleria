@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Definimos la plantilla principal de la aplicacion -->
+	
+	<definition name="layout" template="/templates/layout.jsp">
+		<put-attribute name="title" value="Template"/>
+		<put-attribute name="baner" value="/templates/baner.jsp"/>		
+		<put-attribute name="menu"  value="/templates/menu.jsp"/>
+		<put-attribute name="body"  value="/security/login.jsp"/>
+	</definition>	
+	
+	<!-- 
+	<definition name="menu" template="/templates/plantilla03.jsp">
+		<put-attribute name="cabecera" value="/templates/cabecera.jsp"/>				
+		<put-attribute name="pie" value="/templates/pie.jsp"/>
+	</definition>
+	 -->
+	<!-- LOS SIGUIENTE TILES SON LOS QUE SE UTILIZAN -->
+				
+	<definition name="login" extends="layout">
+		<put-attribute name="title"  value="Login"/>
+		<put-attribute name="body"   value="/security/login.jsp"/>		
+	</definition>	
+	
+	<definition name="singup" extends="layout">
+		<put-attribute name="title" value="Registro de Cliente"/>
+		<put-attribute name="body"  value="/security/singup.jsp"/>
+	</definition>
+	
+	<definition name="catalogo" extends="layout">
+		<put-attribute name="title"  value="Catalogo de Tortas"/>
+		<put-attribute name="body"   value="/pages/catalogo.jsp"/>		
+	</definition>	
+	
+	<definition name="seguimiento" extends="layout">
+		<put-attribute name="title"  value="Seguimiento Pedidos"/>
+		<put-attribute name="body" 	 value="/pages/seguimiento.jsp"/>
+	</definition>
+	
+	<definition name="armar" extends="layout">
+		<put-attribute name="title"  value="Arma tu Torta"/>
+		<put-attribute name="body"   value="/pages/armatutorta.jsp"/>
+	</definition>
+	
+	<definition name="carrito" extends="layout">
+		<put-attribute name="title"  value="Carrito de Compras"/>
+		<put-attribute name="body"   value="/pages/carrito.jsp"/>
+	</definition>
+	
+	<definition name="recoverPwd" extends="layout">
+		<put-attribute name="title"  value="Recuperar clave"/>
+		<put-attribute name="body" 	 value="/security/recoverPassword.jsp"/>
+	</definition>
+	
+	<definition name="mproducto" extends="layout">
+		<put-attribute name="title"  value="Mantenimiento de Productos"/>
+		<put-attribute name="body" 	 value="/maintenances/mantenimientoProducto.jsp"/>
+	</definition>
+	
+	<definition name="mempleado" extends="layout">
+		<put-attribute name="title"  value="Mantenimiento de Empleados"/>
+		<put-attribute name="body" 	 value="/maintenances/mantenimientoEmpleado.jsp"/>
+	</definition>
+	
+	<definition name="mcliente" extends="layout">
+		<put-attribute name="title"  value="Mantenimiento de Cliente"/>
+		<put-attribute name="body" 	 value="/maintenances/mantenimientoCliente.jsp"/>
+	</definition>
+	
+	<definition name="mcobertura" extends="layout">
+		<put-attribute name="title"  value="Mantenimiento de Cobertura"/>
+		<put-attribute name="body" 	 value="/maintenances/mantenimientoCobertura.jsp"/>
+	</definition>
+	
+	<definition name="mcustomer" extends="layout">
+		<put-attribute name="title"  value="Mantenimiento de Clientes"/>
+		<put-attribute name="body" 	 value="/maintenances/customer.jsp"/>
+	</definition>
+	
+	<definition name="memployed" extends="layout">
+		<put-attribute name="title"  value="Mantenimiento de Empleados"/>
+		<put-attribute name="body" 	 value="/maintenances/employed.jsp"/>
+	</definition>
+	
+	<definition name="mproduct" extends="layout">
+		<put-attribute name="title"  value="Mantenimiento de Productos"/>
+		<put-attribute name="body" 	 value="/maintenances/product.jsp"/>
+	</definition>
+	
+</tiles-definitions>
+
+
+

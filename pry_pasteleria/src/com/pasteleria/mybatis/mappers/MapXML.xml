@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapxml">
+
+	<resultMap type="com.pasteleria.bean.Rol" id="rolMap">
+		<id property="idRol" column="idRol" javaType="int"/>
+		<result property="descripcion" column="descripcion" javaType="string"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.User" id="userMap">
+		 <id property="idUsuario" column="idUsuario" javaType="string"/>
+		 <result property="login" column="login" javaType="string"/>
+		 <result property="password" column="password" javaType="string"/>
+		 <result property="nombre" column="nombre" javaType="string"/>
+		 <result property="ape_pa" column="ape_pa" javaType="string"/>
+		 <result property="ape_ma" column="ape_ma" javaType="string"/>
+		 <result property="dni" column="dni" javaType="string"/>
+		 <result property="fec_nacimiento" column="fec_nacimiento" javaType="string"/>
+		 <result property="sexo" column="sexo" javaType="string"/>
+		 <result property="email" column="email" javaType="string"/>
+		 <result property="estado_civil" column="estado_civil" javaType="string"/>
+		 <result property="telefono" column="telefono" javaType="string"/>
+		 <result property="celular" column="celular" javaType="string"/>
+		 <association property="rol" resultMap="rolMap"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Employed" id="employedMap" extends="userMap">
+		<result property="fecha_ingreso" column="fecha_ingreso" javaType="string"/>
+		<result property="sueldo" column="sueldo" javaType="double"/>
+		<result property="fecha_salida" column="fecha_salida" javaType="string"/>
+		<result property="activo" column="activo" javaType="string"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Customer" id="customerMap" extends="userMap">
+		<result property="fecha_registro" column="fecha_registro" javaType="string"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Category" id="categoryMap">
+		<id    property="idCategoria" column="idCategoria" javaType="int"/>
+		<result property="descripcion" column="descripcionCategoria" javaType="string"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Coverage" id="coverageMap">
+		<id    property="idCobertura" column="idCobertura" javaType="int"/>
+		<result property="descripcion" column="descripcionCobertura" javaType="string"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Dough" id="doughMap">
+		<id    property="idMasa" column="idMasa" javaType="int"/>
+		<result property="descripcion" column="descripcionMasa" javaType="string"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Filling" id="fillingMap">
+		<id    property="idRelleno" column="idRelleno" javaType="int"/>
+		<result property="descripcion" column="descripcionRelleno" javaType="string"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Product" id="productMap">
+		<id  property="idProducto" column="idProducto" javaType="int"/>
+		<result property="descripcion" column="descripcion" javaType="string"/>
+		<result property="stock" column="stock" javaType="int"/>
+		<result property="precio" column="precio" javaType="double"/>
+		<result property="image_resource" column="ruta_imagen" javaType="string"/>
+		<association property="categoria" resultMap="categoryMap" />
+		<association property="cobertura" resultMap="coverageMap" />
+		<association property="masa" resultMap="doughMap" />
+		<association property="relleno" resultMap="fillingMap" />
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Status" id="statusMap">
+		<id property="idEstado" column="idEstado" javaType="int"/>
+		<result property="descripcion" column="descripcion" javaType="string"/>
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.Order" id="orderMap">
+		<id property="idPedidoCabe" column="idPedidoCabe" javaType="string" />
+		<result property="fechaPedido" column="fechaPedido" javaType="string"/>
+		<result property="fechaFinPedido" column="fechaFinPedido" javaType="string"/>
+		<association property="usuario" resultMap="userMap"/>
+		<association property="estado" resultMap="statusMap" />
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.OrderDetail" id="orderDetailMap">
+		<result property="precioUnidad" column="precioUnidad" javaType="double"/>
+		<result property="dedicatoria" column="dedicatoria" javaType="string"/>
+		<result property="nombre_agasajado" column="nombre_agasajado" javaType="string"/>
+		<result property="fec_requerimiento" column="fecha_requerimiento" javaType="string"/>
+		<association property="pedidoCabe" resultMap="orderMap"/>
+		<association property="producto" resultMap="productMap"/>
+	</resultMap>
+	
+</mapper>

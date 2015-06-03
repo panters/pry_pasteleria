@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customerxml">
+
+	<select id="sql_select" resultMap="mapxml.customerMap" statementType="PREPARED">
+		 select * from BUSCA_CLIENTE;
+	</select>
+	
+	<insert id="sql_insert" parameterType="customer" statementType="CALLABLE">
+		exec NUEVO_CLIENTE #{nombre}, #{ape_pa}, #{ape_ma}, #{dni}, #{fec_nacimiento}, #{sexo}, #{email}, #{estado_civil}, #{telefono}, #{celular}, #{login}, #{password};
+	</insert>
+	
+	<select id="sql_find" parameterType="String" resultMap="mapxml.customerMap" statementType="PREPARED">
+		select * from BUSCA_CLIENTE where idUsuario=#{idUsuario};
+	</select>
+	
+	<update id="sql_update" parameterType="customer" statementType="CALLABLE">
+		exec SP_MODIFICA_CLIENTE  #{nombre}, #{ape_pa}, #{ape_ma}, #{dni}, #{fec_nacimiento}, #{sexo}, #{email}, #{estado_civil}, #{telefono}, #{celular},#{fecha_registro},#{login}, #{password},#{idUsuario};
+	</update>
+	
+	<delete id="sql_delete" parameterType="String" statementType="CALLABLE">
+		exec SP_ELIMINA_CLIENTE #{idUsuario}
+	</delete>
+	
+</mapper>

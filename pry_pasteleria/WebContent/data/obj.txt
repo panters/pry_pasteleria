@@ -1,0 +1,25 @@
+{
+"cliente":null,
+"data":[
+		{
+		"ape_ma":"Marca",
+		"ape_pa":"Mora",
+		"celular":"954191116",
+		"dni":"36489356",
+		"email":"tonystark1176@gmail.com",
+		"estado_civil":"S",
+		"fec_nacimiento":"1991-10-02",
+		"fecha_registro":"2015-05-08",
+		"idUsuario":"C0001",
+		"login":"tonystark1176@gmail.com",
+		"nombre":"Anthony",
+		"password":"123456",
+		"rol":{
+			"descripcion":"Cliente",
+			"idRol":2
+			},
+		"sexo":"M",
+		"telefono":"4854965"
+		}
+	]
+}

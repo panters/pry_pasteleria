@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderxml">
+
+	<select id="sql_select" resultMap="mapxml.orderMap" statementType="PREPARED">
+		 select * from PedidoCabe;
+	</select>
+	 
+	<select id="sql_find" parameterType="string" resultMap="mapxml.orderMap" statementType="PREPARED" resultType="string">
+		select * from PedidoCabe where idPedidoCabe=#{idPedidoCabe}
+	</select>
+	
+	<select id="sql_insert" parameterType="map" statementType="CALLABLE" resultType="string" >
+		exec registrar_pedido #{idUsuario},#{idPedidoCabe,jdbcType=VARCHAR, javaType=java.lang.String,mode=OUT};
+	</select>	
+	<!-- 
+	<update id="sql_update" parameterType="int" statementType="CALLABLE">
+		exec sp_modifica_cobertura #{idCobertura},#{descripcion};
+	</update>
+	
+	<delete id="sql_delete" parameterType="int" statementType="CALLABLE">
+		exec sp_elimina_cobertura #{idCobertura};
+	</delete>
+	-->
+</mapper>

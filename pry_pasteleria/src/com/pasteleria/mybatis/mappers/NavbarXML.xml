@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="navbarxml">
+
+ <select id="sql_select_fathers" resultType="navbar" parameterType="int" statementType="CALLABLE">
+ 	exec sp_getMenuPadre #{rol}
+ </select>
+ 
+ <select id="sql_select_children" resultType="navbar" parameterType="map" statementType="CALLABLE">
+ 	exec sp_getMenuchildren #{rol},#{father}
+ </select>
+
+</mapper>

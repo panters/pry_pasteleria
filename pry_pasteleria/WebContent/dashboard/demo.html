@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jquery.bootstrap-growl Demo</title>
+        <link href="../css/bootstrap.min.css" media="all" rel="stylesheet">
+     <script src="../js/jquery-1.11.2.js"></script>
+    <script src="../js/jquery.validation.js"></script>
+    <script src="../js/messages_es.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.bootstrap-growl.js"></script>
+   </head>
+    <body>
+        <script type="text/javascript">
+
+            $(function() {
+                $.bootstrapGrowl("This is a test.");
+                
+                setTimeout(function() {
+                    $.bootstrapGrowl("This is another test.", { type: 'success' });
+                }, 1000);
+                
+                setTimeout(function() {
+                    $.bootstrapGrowl("Danger, Danger!", {
+                        type: 'danger',
+                        align: 'center',
+                        width: 'auto',
+                        allow_dismiss: false
+                    });
+                }, 2000);
+                
+                setTimeout(function() {
+                    $.bootstrapGrowl("Danger, Danger!", {
+                        type: 'info',
+                        align: 'left',
+                        stackup_spacing: 30
+                    });
+                }, 3000);
+            });
+
+        </script>
+
+    </body>
+  
+</html>
