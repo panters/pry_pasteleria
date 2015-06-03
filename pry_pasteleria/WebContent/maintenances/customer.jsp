@@ -254,7 +254,6 @@ $(document).ready(function() {
 
 
 <!-- -----------Modal Register New------------ -->
-
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">

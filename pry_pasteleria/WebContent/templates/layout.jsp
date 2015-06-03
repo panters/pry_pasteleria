@@ -12,7 +12,6 @@
     
     <title><tiles:insertAttribute name="title" ignore="true" /></title>
    
-   
      
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" media="all" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Raleway:300,500" rel="stylesheet" type="text/css">

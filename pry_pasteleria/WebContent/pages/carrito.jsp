@@ -84,7 +84,6 @@ background-color: white;
 <!------------------------------------------------------------------- -- -->
 <div class="container" id="setptwo">
 <s:form id="formRegPedido" theme="bootstrap" action="registerOrder" acceptcharset="UTF-8" method="post">
-
 <table class="table" id="cartDetail">
    <thead>
 	  <tr>

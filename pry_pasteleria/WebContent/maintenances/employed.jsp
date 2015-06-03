@@ -1,6 +1,5 @@
 <%@taglib uri="/struts-tags" prefix="s" %>
 <%@taglib uri="/struts-jquery-tags" prefix="sj"%>
-
 <style type="text/css">
     div.container {
         width:95%;

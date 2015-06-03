@@ -2,7 +2,6 @@
 
 <link href="css/styles_reg.css" media="all" rel="stylesheet">
 
-
 <div class="form-header">
 	<h1>REGISTRO DE CLIENTE</h1>
 </div>

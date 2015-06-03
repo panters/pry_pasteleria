@@ -1,8 +1,6 @@
 <%@taglib uri="/struts-tags" prefix="s" %>
 <%@taglib uri="/struts-jquery-tags" prefix="sj"%>
-<%@taglib uri="/struts-jquery-grid-tags" prefix="sjg" %>
 <%@taglib uri="/struts-bootstrap-tags" prefix="sb"%>
-
 <style type="text/css">
     div.container {
         width:95%;

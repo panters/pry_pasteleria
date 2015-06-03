@@ -2,7 +2,6 @@
 <%@taglib uri="/struts-jquery-tags" prefix="sj" %>
 <%@taglib uri="/struts-bootstrap-tags" prefix="sb" %>
 <script src="js/mytemplates/gallery.js"></script>
-
 <s:if test="hasActionMessages()">
 	<s:actionmessage id="messageSucces" />
 	<script>

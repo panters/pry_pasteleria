@@ -1,6 +1,5 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <link href="css/styles_account.css" media="all" rel="stylesheet">
-
 <s:if test="hasActionErrors()">
 	<s:actionerror id="messagerror" />
 	<script>
