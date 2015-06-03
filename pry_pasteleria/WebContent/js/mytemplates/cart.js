@@ -22,7 +22,6 @@ $(document).ready(function(){
 		logueado=data.logged;
 	});
 	
-	
 	//Registro del Pedido
 	$('#formRegPedido').submit(function(event){
 		event.preventDefault();
@@ -56,8 +55,10 @@ $(document).ready(function(){
 	
 	 $('#setptwo').hide();
 	 
-	//Actualiza las grillas de detalles luego las muestra
+	//Continuar con Pedido solo si esta Logueado y Actualiza las grillas de detalles luego las muestra
 	 $('#continuarSteptwo').click(function(){
+		 if (logueado=='false')
+				window.location.href="logueo.action";
 	     loadDetailFields();
 		 $('#stepone').fadeOut(1000);
 		 $('#setptwo').fadeIn(3000);
