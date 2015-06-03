@@ -1,5 +1,11 @@
 package com.pasteleria.util;
 
+import java.util.Iterator;
+import java.util.List;
+
+import com.pasteleria.bean.*;
+import com.pasteleria.services.ServiceProduct;
+
 public class Test {
 
 	
@@ -45,7 +51,8 @@ public class Test {
 	}
 	System.out.println((System.currentTimeMillis()-inicio));
 	*/
-	/*	List<Product>lista3=new ServiceProduct().list();
+	/*	*/
+		List<Product>lista3=new ServiceProduct().list();
 		Iterator<Product> it3=lista3.iterator();
 		while (it3.hasNext()) {
 			Product c=it3.next();
@@ -55,7 +62,7 @@ public class Test {
 			System.out.println(c.getMasa().getIdMasa()+" "+c.getMasa().getDescripcion());
 			System.out.println(c.getRelleno().getIdRelleno()+" "+c.getRelleno().getDescripcion());
 		}
-	*/
+	
 	/*
 		List<Employed> empleados=new ServiceEmployed().list();
 		for (Employed employed : empleados) {
