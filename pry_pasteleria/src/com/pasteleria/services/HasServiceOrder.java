@@ -10,6 +10,11 @@ public class HasServiceOrder implements ServiceOrder {
 	public List<Order> list() {
 		return dao.list();
 	}
+	@Override
+	public List<Order> list(String id) {
+		// TODO Auto-generated method stub
+		return dao.list(id);
+	}	
 
 	@Override
 	public Order find(Order bean) {

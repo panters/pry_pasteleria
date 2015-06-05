@@ -20,10 +20,31 @@ public class OrderAction  extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	
 	private Map<String, Object> session=ActionContext.getContext().getSession();
-	
+	private List<Order> pedidos;
 	private Order order;
 	private List<OrderDetail> orderDetail;
 	
+	
+	@Action(value="listOrder",results={@Result(name=SUCCESS,type="json")})
+	public String list(){
+		
+		if (session.get("user")!=null) {
+			User u=(User) session.get("user");
+			System.out.println((u.getIdUsuario()).substring(0));
+			 
+			if(u.getRol().getIdRol()==2){
+			//if(((u.getIdUsuario()).charAt(0))=='C'){
+				System.out.println("Hola a Cliente");
+				pedidos=new HasServiceOrder().list(u.getIdUsuario());
+			}
+			else{
+				System.out.println("Hola Admin");
+				pedidos=new HasServiceOrder().list();
+			}
+		}
+	
+		return SUCCESS;	
+	}
 	
 	
 	@Action(value="registerOrder",results={@Result(name=SUCCESS,type="json")})
@@ -56,6 +77,16 @@ public class OrderAction  extends ActionSupport{
 	}
 	
 	
+	public List<Order> getPedidos() {
+		return pedidos;
+	}
+
+
+	public void setPedidos(List<Order> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+
 	public Order getOrder() {
 		return order;
 	}
