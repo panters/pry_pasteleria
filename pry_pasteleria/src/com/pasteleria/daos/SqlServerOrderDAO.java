@@ -15,10 +15,33 @@ public class SqlServerOrderDAO implements OrderDAO {
 	
 	SqlSessionFactory SQL_SESSION_FACTORY=SqlServerFactory.SQL_SESSION_FACTORY;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> list() {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		List<Order> list=null;
+		try {
+			list=session.selectList("orderxml.sql_selectAll");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}	
+		return list;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> list(String id) {
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		List<Order> list=null;
+		try {
+			list=session.selectList("orderxml.sql_select", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}	
+		return list;
 	}
 
 	@Override

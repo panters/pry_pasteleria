@@ -4,10 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orderxml">
 
-	<select id="sql_select" resultMap="mapxml.orderMap" statementType="PREPARED">
-		 select * from PedidoCabe;
+	<select id="sql_selectAll" resultMap="mapxml.orderMap" statementType="PREPARED">
+		 select * from Pedidos;
 	</select>
-	 
+    
+    <select id="sql_select" resultMap="mapxml.orderMap" statementType="PREPARED">
+		 select * from Pedidos where idUsuario=#{idUsuario};
+	</select>
+	
 	<select id="sql_find" parameterType="string" resultMap="mapxml.orderMap" statementType="PREPARED" resultType="string">
 		select * from PedidoCabe where idPedidoCabe=#{idPedidoCabe}
 	</select>

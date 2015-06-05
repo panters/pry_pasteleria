@@ -17,20 +17,26 @@ public class Order implements Serializable {
 	private String fechaFinPedido;
 	private Status estado;
 	private List<OrderDetail> orderDetail;
-	
+	private double total;
 	
 	
 	public Order() {
 		super();
 	}
+	
+	
 
+	public double getTotal() {
+		return total;
+	}
+	
+	public void setTotal(double total) {
+		this.total = total;
+	}
 	public Order(String idPedidoCabe) {
 		super();
 		this.idPedidoCabe = idPedidoCabe;
-	}
-	
-	
-	
+	}	
 	public User getUsuario() {
 		return usuario;
 	}
