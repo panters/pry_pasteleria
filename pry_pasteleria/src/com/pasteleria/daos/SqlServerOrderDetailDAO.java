@@ -13,11 +13,23 @@ import com.pasteleria.interfaces.OrderDetailDAO;
 public class SqlServerOrderDetailDAO implements OrderDetailDAO {
 
 	SqlSessionFactory SQL_SESSION_FACTORY=SqlServerFactory.SQL_SESSION_FACTORY;
-
+	
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<OrderDetail> list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OrderDetail> list(String id) {
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		List<OrderDetail> list=null;
+		
+		try {
+			list=session.selectList("orderDetailxml.sql_select",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return list;
+		
 	}
 
 	@Override

@@ -20,6 +20,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			type="com.pasteleria.bean.Product"/>
 		<typeAlias alias="orderDetail"
 			type="com.pasteleria.bean.OrderDetail"/>
+	    <typeAlias alias="order"
+			type="com.pasteleria.bean.Order"/>
 	</typeAliases>
 	
 	<environments default="development">

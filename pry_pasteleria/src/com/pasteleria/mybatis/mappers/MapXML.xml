@@ -85,12 +85,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<resultMap type="com.pasteleria.bean.OrderDetail" id="orderDetailMap">
-		<result property="precioUnidad" column="precioUnidad" javaType="double"/>
+		<result property="precioUnidad" column="precio" javaType="double"/>
 		<result property="dedicatoria" column="dedicatoria" javaType="string"/>
 		<result property="nombre_agasajado" column="nombre_agasajado" javaType="string"/>
 		<result property="fec_requerimiento" column="fecha_requerimiento" javaType="string"/>
 		<association property="pedidoCabe" resultMap="orderMap"/>
 		<association property="producto" resultMap="productMap"/>
+		<association property="estado" resultMap="statusMap"/>
 	</resultMap>
 	
 </mapper>

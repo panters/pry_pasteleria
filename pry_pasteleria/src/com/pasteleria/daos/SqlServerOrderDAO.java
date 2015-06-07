@@ -79,8 +79,17 @@ public class SqlServerOrderDAO implements OrderDAO {
 	
 	@Override
 	public int update(Order bean) {
-		// TODO Auto-generated method stub
-		return 0;
+		int salida=0;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		try {
+			salida=session.update("orderxml.sql_update",bean);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return salida;
 	}
 
 	@Override

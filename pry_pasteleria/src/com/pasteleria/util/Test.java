@@ -1,16 +1,44 @@
 package com.pasteleria.util;
 
-import java.util.Iterator;
-import java.util.List;
 
 import com.pasteleria.bean.*;
-import com.pasteleria.services.ServiceProduct;
+import com.pasteleria.services.HasServiceOrder;
 
 public class Test {
 
 	
 	public static void main(String[] args) {
-	
+	    User user=new User();
+	    user.setIdUsuario("E0002");
+		Order order=new Order();
+		order.setIdPedidoCabe("P00002");
+		//order.setUsuario(user.getIdUsuario());
+		order.setFechaPedido("05-06-2015");
+		order.setFechaFinPedido(null);
+		//order.setEstado();
+		
+		int orden=new HasServiceOrder().update(order);
+		System.out.println(orden);
+//		System.out.println(order.getIdPedidoCabe());
+//		System.out.println(order.getEstado().getIdEstado());
+		
+		
+		
+		
+		
+		
+//        List<OrderDetail> listpd;
+//			
+//		listpd=new HasServiceOrderDetail().list("P00001");
+//		Iterator<OrderDetail> it0=listpd.iterator();
+//		long inicio=System.currentTimeMillis();
+//		while (it0.hasNext()) {
+//			OrderDetail c=it0.next();
+//			System.out.println(c.getProducto().getDescripcion());
+//		}		   
+//		System.out.println((System.currentTimeMillis()-inicio));	    		
+//		
+//		
 		
 	/*
 	User user=new ServiceUser().find("leonxandercs@gmail.com","123456");
@@ -54,16 +82,16 @@ public class Test {
 	System.out.println((System.currentTimeMillis()-inicio));
 	*/
 	/*	*/
-		List<Product>lista3=new ServiceProduct().list();
-		Iterator<Product> it3=lista3.iterator();
-		while (it3.hasNext()) {
-			Product c=it3.next();
-			System.out.println(c.getIdProducto()+" "+c.getDescripcion()+" "+c.getPrecio());
-			System.out.println(c.getCategoria().getIdCategoria()+" "+c.getCategoria().getDescripcion());
-			System.out.println(c.getCobertura().getIdCobertura()+" "+c.getCobertura().getDescripcion());
-			System.out.println(c.getMasa().getIdMasa()+" "+c.getMasa().getDescripcion());
-			System.out.println(c.getRelleno().getIdRelleno()+" "+c.getRelleno().getDescripcion());
-		}
+//		List<Product>lista3=new ServiceProduct().list();
+//		Iterator<Product> it3=lista3.iterator();
+//		while (it3.hasNext()) {
+//			Product c=it3.next();
+//			System.out.println(c.getIdProducto()+" "+c.getDescripcion()+" "+c.getPrecio());
+//			System.out.println(c.getCategoria().getIdCategoria()+" "+c.getCategoria().getDescripcion());
+//			System.out.println(c.getCobertura().getIdCobertura()+" "+c.getCobertura().getDescripcion());
+//			System.out.println(c.getMasa().getIdMasa()+" "+c.getMasa().getDescripcion());
+//			System.out.println(c.getRelleno().getIdRelleno()+" "+c.getRelleno().getDescripcion());
+//		}
 	
 	/*
 		List<Employed> empleados=new ServiceEmployed().list();

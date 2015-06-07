@@ -38,27 +38,141 @@
     	width: 80%;
     	margin: 0 10% 10%;"
     }
+        
+    
 </style>
 
 
 <script>
 
+function myColorChange(object) {
+	var x = $(object).val();
+	if (x == 2) {
+		$(object).removeClass('label label-warning');
+		$(object).addClass('label label-success');
+	} else {
+		$(object).removeClass('label label-success');
+		$(object).addClass('label label-warning');
+	}if (x == 3) {
+		$(object).removeClass('label label-warning');
+		$(object).addClass('label label-danger');
+	}
+}
+
+function update(){
+
+	alert("Holas");
+	
+/* 	if ( $(this).hasClass('selected') ) {
+        $(this).removeClass('selected');
+	}else{
+	table.$('a.selected').removeClass('selected');
+	$(this).addClass('selected');
+	var currentRow=table.row(this).data();
+	alert("hola");}
+	
+	var dato1=currentRow.idPedidoCabe;
+	var dato2=currentRow.fechaPedido;
+
+	alert("hola");
+	
+	 $.ajax({
+		url: "EditStatus.action"
+	}); */
+	
+  //	table.ajax.reload(); 
+}
+
+
+function ver(a){
+	
+	/* $.ajax({
+		url: "listOrderDet?order.idPedidoCabe"
+	}); */
+
+	var table=$('#detalle').DataTable({
+        "processing": true,
+        "ajax": {
+        	"url":"listOrderDet.action",
+        	 "dataSrc":"orderDetail"
+        	},
+        	"bPaginate": false,
+            "bFilter": false,
+            "bInfo":false,
+        "columns": [
+                    { "data": "pedidoCabe.idPedidoCabe" },
+                    { "data": "producto.descripcion" },
+                    { "data": "precioUnidad" },						
+                    { "data": "dedicatoria" },
+                    { "data": "nombre_agasajado" },
+                    { "data": "fec_requerimiento" }
+                ] ,
+           "language": {
+           "lengthMenu": "Mostrar _MENU_ Registros por pagina",
+           "zeroRecords": "No se hallaron Registros ",
+           "info": "Mostrando pagina _PAGE_ de _PAGES_",
+           "infoEmpty": "No hay Registros disponibles",
+           "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+           "search":"Búsqueda:",
+           "loadingRecords": "Cargando...",    
+           "processing":     "Procesando...",
+           "paginate": { 
+                   "first": "Primero",        
+                   "last":   "Ultimo",       
+                   "next":   "siguiente",       
+                   "previous": "Anterior"    
+                  },
+       },
+       "lengthMenu": [
+                      [5,10, 25, 50, -1], 
+                      [5,10, 25, 50, "Todo"]
+                     ]
+       ,responsive:true
+         
+    });
+	
+	$('#detalle').fadeIn(1500);
+	$('.tableCriterios').hide();
+	$('#example').hide();
+	
+}
+
 $(document).ready(function() {
 
   var table=$('#example').DataTable({
-        // "processing": true,
+        "processing": true,
         "ajax": {
         	"url":"listOrder.action",
         	 "dataSrc":"pedidos"
         	},
+        	"bPaginate": false,
+            "bFilter": false,
+            "bInfo":false,
         "columns": [
                     { "data": "idPedidoCabe" },
                     { "data": "fechaPedido" },
-                    { "data": "total" },
+                    { "data": "total" },						
                     { "data": "usuario.nombre" },
                     { "data": "estado.descripcion" }
-                ]
-        , "language": {
+                ] ,
+                "columnDefs":[
+								 {
+									  "targets": [5], 
+									  "data" :null,				  
+								      "defaultContent":"<select class='label label-warning' onchange='myColorChange(this)'><option value='1'>Pendiente</option>Cancelado<option value='2'>Finalizado</option><option value='3'>Aprobado</option></select>"
+								},  
+    	                      {
+    	                    	  "targets": [6], // El objetivo de la columna de posición, desde cero.
+    	                          "data":null, // La inclusión de datos
+    	                          "defaultContent":"<a  class='label label-warning verDetalle' id='verDetalle'>Ver</a>"
+    	                      },
+    	                      {
+    	                    	  "targets": [7], // El objetivo de la columna de posición, desde cero.
+    	                          "data":null, // La inclusión de datos
+    	                          "defaultContent":"<a href='#' onclick='update(this)'><span  class='glyphicon glyphicon-ok'></span></a>"
+    	                      }
+    	                    ] 
+        ,"language": {
            "lengthMenu": "Mostrar _MENU_ Registros por pagina",
            "zeroRecords": "No se hallaron Registros ",
            "info": "Mostrando pagina _PAGE_ de _PAGES_",
@@ -87,6 +201,58 @@ $(document).ready(function() {
   		table.ajax.reload;
   	},2000);
     
+  	
+	$('#example').on('click','.verDetalle',function(){
+		var row=$(this).parents('tr');
+		var datos=table.row(row).data();
+		var idPedidoCabecera=datos.idPedidoCabe;
+		
+		var tablex=$('#detalle').DataTable({
+	        "processing": true,
+	        "ajax": {
+	        	"url":"listOrderDet.action?id="+idPedidoCabecera,
+	        	 "dataSrc":"orderDetail"
+	        	},
+	        	"bPaginate": false,
+	            "bFilter": false,
+	            "bInfo":false,
+	        "columns": [
+	                    { "data": "pedidoCabe.idPedidoCabe" },
+	                    { "data": "producto.descripcion" },
+	                    { "data": "precioUnidad" },						
+	                    { "data": "dedicatoria" },
+	                    { "data": "nombre_agasajado" },
+	                    { "data": "fec_requerimiento" }
+	                ] ,
+	           "language": {
+	           "lengthMenu": "Mostrar _MENU_ Registros por pagina",
+	           "zeroRecords": "No se hallaron Registros ",
+	           "info": "Mostrando pagina _PAGE_ de _PAGES_",
+	           "infoEmpty": "No hay Registros disponibles",
+	           "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+	           "search":"Búsqueda:",
+	           "loadingRecords": "Cargando...",    
+	           "processing":     "Procesando...",
+	           "paginate": { 
+	                   "first": "Primero",        
+	                   "last":   "Ultimo",       
+	                   "next":   "siguiente",       
+	                   "previous": "Anterior"    
+	                  },
+	       },
+	       "lengthMenu": [
+	                      [5,10, 25, 50, -1], 
+	                      [5,10, 25, 50, "Todo"]
+	                     ]
+	       ,responsive:true
+	         
+	    });
+		
+		$('#detalle').fadeIn(1500);
+		$('.tableCriterios').hide();
+		$('#example').hide();
+		
+	});
     
     /*  Evento Doble click */
     $('#example tbody').on( 'dblclick', 'tr', function () {
@@ -118,12 +284,12 @@ $(document).ready(function() {
     <!---->
      $('#mySelect').on('change',function(){
     	 jQuery("#example tbody>tr").hide();
-         jQuery("#example td:contiene-palabra('" + jQuery(this).val() + "')").parent("tr").show();
+         jQuery("#example td:contiene-palabra('" + jQuery(this).val() + "')").parent('tr').show();
     	 
          /*         var selectedValue = $(this).val();
         $('#example').dataTable().fnFilter($(this).val()); */
         
-     });    
+     }); 
     <!---->  
    
 });
@@ -169,6 +335,9 @@ $(document).ready(function() {
 			                <th>Total</th>
 			                <th>Usuario</th>
 			                <th>Estado</th>
+			                <th>EstadoII</th>
+			                <th>Detalle</th>
+			                <th>Guardar</th>
 			            </tr>
 			        </thead>
 			 
@@ -178,12 +347,41 @@ $(document).ready(function() {
 			                <th>Feha de Pedido</th>
 			                <th>Total</th>
 			                <th>Usuario</th>
-			                <th>Estado</th>	              
+			                <th>Estado</th>
+			                <th>EstadoII</th>
+			                <th>Detalle</th>
+			                <th>Guardar</th>	              
+			            </tr>
+			        </tfoot>
+			    </table>
+   </div>
+   <div class="container">
+    <table id="detalle" class="table table-responsive table-striped table-bordered table-hover" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>Codigo</th>
+			                <th>Producto</th>
+			                <th>Precio</th>
+			                <th>Dedicatoria</th>
+			                <th>Agasajado</th>
+			                <th>Fecha Requerimiento</th>
+			            </tr>
+			        </thead>
+			 
+			        <tfoot>
+			            <tr>
+			                <th>Codigo</th>
+			                <th>Producto</th>
+			                <th>Precio</th>
+			                <th>Dedicatoria</th>
+			                <th>Agasajado</th>
+			                <th>Fecha Requerimiento</th>            
 			            </tr>
 			        </tfoot>
 			    </table>
    </div>
 </div>
+
 
 <%-- <div id="lstPedidos" class="panel panel-primary"
  style="width: 80%; margin: 0 10% 10%;">

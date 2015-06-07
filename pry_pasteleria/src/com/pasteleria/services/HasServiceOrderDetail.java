@@ -7,8 +7,8 @@ import com.pasteleria.bean.OrderDetail;
 public class HasServiceOrderDetail implements ServiceOrderDetail {
 
 	@Override
-	public List<OrderDetail> list() {
-		return dao.list();
+	public List<OrderDetail> list(String id) {
+		return dao.list(id);
 	}
 
 	@Override

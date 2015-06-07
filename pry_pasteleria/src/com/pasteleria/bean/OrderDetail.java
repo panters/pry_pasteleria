@@ -18,6 +18,7 @@ public class OrderDetail implements Serializable{
 	private String dedicatoria;
 	private String nombre_agasajado;
 	private String fec_requerimiento;
+	private Status estado;
 	
 	
 	//Sobrescribimos el Metodo Equals
@@ -27,12 +28,27 @@ public class OrderDetail implements Serializable{
 		 ((OrderDetail)obj).getProducto().getIdProducto();
 	}
 	
+	
+	
 	public double getSubTotal(){
 		return this.cantidad*this.producto.getPrecio();
 	}
 	
 	
 	
+	
+	public Status getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(Status estado) {
+		this.estado = estado;
+	}
+
+
+
 	public Order getPedidoCabe() {
 		return pedidoCabe;
 	}

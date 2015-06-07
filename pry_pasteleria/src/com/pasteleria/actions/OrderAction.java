@@ -23,7 +23,15 @@ public class OrderAction  extends ActionSupport{
 	private List<Order> pedidos;
 	private Order order;
 	private List<OrderDetail> orderDetail;
+	private String id;
 	
+	@Action(value="listOrderDet",results={@Result(name=SUCCESS,type="json")})
+	public String listDet(){
+		
+		orderDetail=new HasServiceOrderDetail().list(id);
+			   
+		return SUCCESS;
+	}
 	
 	@Action(value="listOrder",results={@Result(name=SUCCESS,type="json")})
 	public String list(){
@@ -51,6 +59,7 @@ public class OrderAction  extends ActionSupport{
 	public String registerOrder(){
 		
 		System.out.println("register Order was invoked");
+		System.out.println(orderDetail.get(0).getFec_requerimiento());
 		try {
 			
 			this.order=new Order();
@@ -76,7 +85,24 @@ public class OrderAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@Action(value="EditStatus",results={@Result(name=SUCCESS,type="json")})
+	public String EditStatus(){
+		
+		new HasServiceOrder().update(order);
+		
+		return SUCCESS;
+	}
 	
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public List<Order> getPedidos() {
 		return pedidos;
 	}
