@@ -9,9 +9,10 @@ package com.pasteleria.notifications;
  * @author Sanlegas
  */
 import java.util.Properties;
+import java.util.ResourceBundle;
+
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -20,39 +21,43 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.swing.JOptionPane;
-
 
 public class Email {
     
-    String usuarioCorreo;
-    String password;
+	private ResourceBundle rb=ResourceBundle.getBundle("com/pasteleria/resources/configMail");
+	
+    private String usuarioCorreo=rb.getString("cuenta");
+    private String password=rb.getString("clave");
     
-    String rutaArchivo;
-    String nombreArchivo;
+    private String rutaArchivo;
+    private String nombreArchivo;
     
-    String destinatario;
-    String asunto;
-    String mensaje;
+    private String destinatario;
+    private String asunto;
     
-    public Email(String usuarioCorreo, String password, String rutaArchivo, String nombreArchivo, String destinatario, String asunto,String mensaje) {
-        this.usuarioCorreo = usuarioCorreo;
-        this.password = password;
-        this.rutaArchivo = rutaArchivo;
+    private String usuario;
+    private String idpedido;
+    
+    public Email(String rutaArchivo, String nombreArchivo, String destinatario,String usuario,String idpedido) {
+         this.rutaArchivo = rutaArchivo;
         this.nombreArchivo = nombreArchivo;
         this.destinatario = destinatario;
-        this.asunto = asunto;
-        this.mensaje = mensaje;
+        this.asunto = "Registro de Pedido";
+        this.usuario=usuario;
+        this.idpedido=idpedido;
     }
     
-    public Email(String usuarioCorre,String password,String destinatario,String mensaje){
-        this(usuarioCorre,password,"","",destinatario,"",mensaje);
+    public Email(String destinatario,String usuario,String idpedido){
+        this("", "", destinatario, usuario, idpedido);
     }
     
-    public Email(String usuarioCorre,String password,String destinatario,String asunto,String mensaje){
-        this(usuarioCorre,password,"","",destinatario,asunto,mensaje);
+    public Email(String destinatario,String asunto,String usuario,String idpedido){
+        this("","",destinatario,usuario,idpedido);
+        this.asunto=asunto;
     }    
 
+    
+    
     public boolean sendMail(){
         try
         {
@@ -65,10 +70,10 @@ public class Email {
 
             Session session = Session.getDefaultInstance(props, null);
             BodyPart texto = new MimeBodyPart();
-            texto.setText(mensaje);
+            texto.setText(customMessage(usuario,idpedido));
 
             BodyPart adjunto = new MimeBodyPart();
-            if (!rutaArchivo.equals("")){
+            if (!rutaArchivo.equals("") || rutaArchivo!=null || rutaArchivo.length()<1){
                  adjunto.setDataHandler(
                     new DataHandler(new FileDataSource(rutaArchivo)));
                 adjunto.setFileName(nombreArchivo);                
@@ -101,21 +106,27 @@ public class Email {
         }        
     }
     
+    public String customMessage(String usuario,String idPedido){
+    	
+    	String mensaje="Estimado Cliente "+usuario+"\n"+
+    				   "Su pedido ha sido registrado con el codigo: "+idPedido+
+    				   "\n"+"Saludos"+
+    				   "\n\n"+"Tortas Encantadas"+"\n"+"Telefono:954191116"+
+    				   "\n"+"Av.Carlo izaguirre N°3040";
+    				   ;
+    	return mensaje;
+    }
+    
+    
+    
     public static void main(String[] args){
-        String clave = "grupouno"; 
-      /*  Email e = new Email("leonxandercs@gmail.com",clave,"alex_0446@hotmail.com","Adjunto","Prueba del tutorial para mandar un email");
-        if (e.sendMail()){
-            JOptionPane.showMessageDialog(null,"El email se mano correctamente");
-        }else{
-            JOptionPane.showMessageDialog(null,"El email no se mando correctamente");
-        }
-        */
-        Email e = new Email("tortasencantadas1@gmail.com",clave,"C:\\Users\\Pantera\\Downloads\\emblema.jpg","adjunto.jpg","leonxandercs@gmail.com","Adjunto","Prueba del tutorial para mandar un email");
+        
+      
+        Email e = new Email("C:\\Users\\Pantera\\Downloads\\emblema.jpg","adjunto.jpg","leonxandercs@gmail.com","Alexander Chavez","P00001");
+  
         if (e.sendMail()){
         	System.out.println("Envio correcto");
-            JOptionPane.showMessageDialog(null,"El email se mano correctamente");
         }else{
-            JOptionPane.showMessageDialog(null,"El email no se mando correctamente");
             System.out.println("envio fallido");
         }
         
