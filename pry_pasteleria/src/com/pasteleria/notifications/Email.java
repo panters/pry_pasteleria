@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pasteleria.notifications;
 
-/**
- *
- * @author Sanlegas
- */
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
@@ -23,8 +15,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
-public class Email implements Runnable{
+/**
+ * 
+ * @author Pantera
+ *
+ */
+public class Email implements Runnable{ //Implementamos de Runable para utilizarlo como Hilo
     
 	private ResourceBundle rb=ResourceBundle.getBundle("com/pasteleria/resources/configMail");
 	
@@ -81,7 +77,7 @@ public class Email implements Runnable{
 
             Session session = Session.getDefaultInstance(props, null);
             BodyPart texto = new MimeBodyPart();
-            texto.setText(customMessage(usuario,idpedido));
+            //texto.setText(customMessage(usuario,idpedido));
 
             BodyPart adjunto = new MimeBodyPart();
             if (!rutaArchivo.equals("") || rutaArchivo!=null || rutaArchivo.length()<1){
@@ -103,6 +99,7 @@ public class Email implements Runnable{
                 new InternetAddress(destinatario));
                 message.setSubject(asunto);
             message.setContent(multiParte);
+            message.setText(customMessage(usuario, idpedido), "UTF-8", "html");
 
             Transport t = session.getTransport("smtp");
             t.connect(usuarioCorreo, password);
@@ -123,14 +120,12 @@ public class Email implements Runnable{
     public String customMessage(String usuario,String idPedido){
     	
     	Date date=new Date();
-    	SimpleDateFormat formato=new SimpleDateFormat("dd-MM-YYYY");
+    	SimpleDateFormat formato=new SimpleDateFormat("dd/MM/YYYY");
     	
-    	String mensaje="Estimado Cliente "+usuario+"\n"+
-    				   "Su pedido ha sido registrado con el codigo: "+idPedido+" con fecha: "+String.valueOf(formato.format(date))+
-    				   "\n"+"Saludos"+
-    				   "\n\n"+"Tortas Encantadas"+"\n"+"Telefono:954191116"+
-    				   "\n"+"Av.Carlo izaguirre N°3040";
-    				   ;
+    	String mensaje=rb.getString("plantilla");    	
+    	mensaje=mensaje.replaceAll("usuario", usuario);
+    	mensaje=mensaje.replaceAll("idpedido", idPedido);
+    	mensaje=mensaje.replaceAll("date",String.valueOf(formato.format(date)));
     	return mensaje;
     }
     

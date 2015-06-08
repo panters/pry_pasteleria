@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 /*
  * Esta clase permitira crea conexiones de base de datos 
  */
-public class ConexionDB {
+public class Conexion {
 
 	//permite el acceso los parámetros del archivo properties
 	private static ResourceBundle rb = ResourceBundle.getBundle("infoBd");
@@ -38,7 +38,7 @@ public class ConexionDB {
 	}
 	
 	public static void main(String[] args) {
-			ConexionDB con = new ConexionDB();
+			Conexion con = new Conexion();
 			Connection obj =   con.getConexion();
 			System.out.println(obj);
 
