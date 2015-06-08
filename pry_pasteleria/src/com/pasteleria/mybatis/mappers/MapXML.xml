@@ -89,6 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dedicatoria" column="dedicatoria" javaType="string"/>
 		<result property="nombre_agasajado" column="nombre_agasajado" javaType="string"/>
 		<result property="fec_requerimiento" column="fecha_requerimiento" javaType="string"/>
+		<result property="indice" column="indice" javaType="int"/>
 		<association property="pedidoCabe" resultMap="orderMap"/>
 		<association property="producto" resultMap="productMap"/>
 		<association property="estado" resultMap="statusMap"/>

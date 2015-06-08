@@ -22,8 +22,8 @@ public class HasServiceOrderDetail implements ServiceOrderDetail {
 	}
 
 	@Override
-	public int update(OrderDetail bean) {
-		return dao.update(bean);
+	public int update(String idPedido,int i, int idEstado) {
+		return dao.update(idPedido,i,idEstado);
 	}
 
 	@Override

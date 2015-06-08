@@ -1,6 +1,8 @@
 package com.pasteleria.daos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -72,8 +74,8 @@ public class SqlServerOrderDetailDAO implements OrderDetailDAO {
 						salida=session.insert("orderDetailxml.sql_insert",obj);
 						
 						if(salida<=0){
-							session.rollback();
 							System.out.println("error en orderDetail");
+							session.rollback();
 							return -1;
 						}
 					}
@@ -97,9 +99,25 @@ public class SqlServerOrderDetailDAO implements OrderDetailDAO {
 	
 	
 	@Override
-	public int update(OrderDetail bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(String idPedido,int i, int idEstado) {
+		int salida=0;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("idPedido", idPedido);
+		map.put("estado", idEstado);
+		map.put("indice", i);
+		
+		
+		try {
+			salida=session.update("orderDetailxml.sql_update",map);
+			session.commit();
+			System.out.println(salida);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return salida;
 	}
 
 	@Override

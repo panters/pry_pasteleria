@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.services.ServiceNavbar;
+import com.pasteleria.bean.User;
 /**
  * 
  * @author Pantera
@@ -43,8 +44,18 @@ public class LinkAction  extends ActionSupport{
 	}
 	
 	@Action(value="seguimiento",
-			results={@Result(name=SUCCESS,type="tiles",location="seguimiento")})
+			results={@Result(name="admin",type="tiles",location="seguimiento"),
+			@Result(name="cliente",type="tiles",location="seguimientoCustomer")})
 	public String seguimiento(){
+		
+		if (session.get("user")!=null) {
+			User u=(User) session.get("user");
+			if (u.getRol().getIdRol()==2) {
+				return "cliente";
+			}else{
+				return "admin";
+			}
+		}
 		return SUCCESS;
 	}
 	

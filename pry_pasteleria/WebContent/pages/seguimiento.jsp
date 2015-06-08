@@ -47,94 +47,51 @@
 
 function myColorChange(object) {
 	var x = $(object).val();
-	if (x == 2) {
-		$(object).removeClass('label label-warning');
-		$(object).addClass('label label-success');
-	} else {
-		$(object).removeClass('label label-success');
+	removerClase(object);
+	if (x == 1) {
 		$(object).addClass('label label-warning');
+	}if (x == 2) {
+		$(object).addClass('label label-success');
 	}if (x == 3) {
-		$(object).removeClass('label label-warning');
 		$(object).addClass('label label-danger');
+	}if (x == 4) {
+		$(object).addClass('label label-info');
 	}
 }
 
-function update(){
+function removerClase(object){
 
-	alert("Holas");
-	
-/* 	if ( $(this).hasClass('selected') ) {
-        $(this).removeClass('selected');
-	}else{
-	table.$('a.selected').removeClass('selected');
-	$(this).addClass('selected');
-	var currentRow=table.row(this).data();
-	alert("hola");}
-	
-	var dato1=currentRow.idPedidoCabe;
-	var dato2=currentRow.fechaPedido;
-
-	alert("hola");
-	
-	 $.ajax({
-		url: "EditStatus.action"
-	}); */
-	
-  //	table.ajax.reload(); 
+	$(object).removeClass('label label-warning');
+	$(object).removeClass('label label-success');
+	$(object).removeClass('label label-danger');
+	$(object).removeClass('label label-info');
 }
 
+function formatCombo(object) {
+	
+	var x = $(object).val();
+	if (x == 1) {
+		$(object).addClass('label label-warning');
+	}if (x == 2) {
+		$(object).addClass('label label-success');
+	}if (x == 3) {
+		$(object).addClass('label label-danger');
+	}if (x == 4) {
+		$(object).addClass('label label-info');
+	}
+}
 
-function ver(a){
+function formatCombo2(object,x) {
 	
-	/* $.ajax({
-		url: "listOrderDet?order.idPedidoCabe"
-	}); */
-
-	var table=$('#detalle').DataTable({
-        "processing": true,
-        "ajax": {
-        	"url":"listOrderDet.action",
-        	 "dataSrc":"orderDetail"
-        	},
-        	"bPaginate": false,
-            "bFilter": false,
-            "bInfo":false,
-        "columns": [
-                    { "data": "pedidoCabe.idPedidoCabe" },
-                    { "data": "producto.descripcion" },
-                    { "data": "precioUnidad" },						
-                    { "data": "dedicatoria" },
-                    { "data": "nombre_agasajado" },
-                    { "data": "fec_requerimiento" }
-                ] ,
-           "language": {
-           "lengthMenu": "Mostrar _MENU_ Registros por pagina",
-           "zeroRecords": "No se hallaron Registros ",
-           "info": "Mostrando pagina _PAGE_ de _PAGES_",
-           "infoEmpty": "No hay Registros disponibles",
-           "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-           "search":"Búsqueda:",
-           "loadingRecords": "Cargando...",    
-           "processing":     "Procesando...",
-           "paginate": { 
-                   "first": "Primero",        
-                   "last":   "Ultimo",       
-                   "next":   "siguiente",       
-                   "previous": "Anterior"    
-                  },
-       },
-       "lengthMenu": [
-                      [5,10, 25, 50, -1], 
-                      [5,10, 25, 50, "Todo"]
-                     ]
-       ,responsive:true
-         
-    });
-	
-	$('#detalle').fadeIn(1500);
-	$('.tableCriterios').hide();
-	$('#example').hide();
-	
+	if (x == 1) {
+		$(object).addClass('label label-warning');
+	}if (x == 2) {
+		$(object).addClass('label label-success');
+	}if (x == 3) {
+		$(object).addClass('label label-danger');
+	}if (x == 4) {
+		$(object).addClass('label label-info');
+	}
 }
 
 $(document).ready(function() {
@@ -155,21 +112,11 @@ $(document).ready(function() {
                     { "data": "usuario.nombre" },
                     { "data": "estado.descripcion" }
                 ] ,
-                "columnDefs":[
-								 {
-									  "targets": [5], 
-									  "data" :null,				  
-								      "defaultContent":"<select class='label label-warning' onchange='myColorChange(this)'><option value='1'>Pendiente</option>Cancelado<option value='2'>Finalizado</option><option value='3'>Aprobado</option></select>"
-								},  
+                "columnDefs":[							
     	                      {
-    	                    	  "targets": [6], // El objetivo de la columna de posición, desde cero.
+    	                    	  "targets": [5], // El objetivo de la columna de posición, desde cero.
     	                          "data":null, // La inclusión de datos
-    	                          "defaultContent":"<a  class='label label-warning verDetalle' id='verDetalle'>Ver</a>"
-    	                      },
-    	                      {
-    	                    	  "targets": [7], // El objetivo de la columna de posición, desde cero.
-    	                          "data":null, // La inclusión de datos
-    	                          "defaultContent":"<a href='#' onclick='update(this)'><span  class='glyphicon glyphicon-ok'></span></a>"
+    	                          "defaultContent":"<a  class='label label-default verDetalle' id='verDetalle'>VER</a>"
     	                      }
     	                    ] 
         ,"language": {
@@ -192,7 +139,17 @@ $(document).ready(function() {
                       [5,10, 25, 50, -1], 
                       [5,10, 25, 50, "Todo"]
                      ]
-       ,responsive:true
+       ,responsive:true,
+       "initComplete":function(){
+			$('#example tbody tr').each(function(){
+				var datos=$('#example').DataTable().row(this).data();
+				var cell=$(this).children('td').eq(4);
+				var label="<label>"+cell.text()+"</label>";
+				cell.html(label);
+				formatCombo2($(cell).children('label'),datos.estado.idEstado);
+				
+			});
+		}
          
     });
     
@@ -224,6 +181,18 @@ $(document).ready(function() {
 	                    { "data": "nombre_agasajado" },
 	                    { "data": "fec_requerimiento" }
 	                ] ,
+        "columnDefs":[   
+                   		{
+							  "targets": [6], 
+							  "data" :null,				  
+						      "defaultContent":""
+						},
+						{
+	                    	  "targets": [7],
+	                          "data":null,
+	                          "defaultContent":"<a class='glyphicon glyphicon-ok grabar' >Guardar</a>"
+	                    }
+					],	
 	           "language": {
 	           "lengthMenu": "Mostrar _MENU_ Registros por pagina",
 	           "zeroRecords": "No se hallaron Registros ",
@@ -245,12 +214,64 @@ $(document).ready(function() {
 	                      [5,10, 25, 50, "Todo"]
 	                     ]
 	       ,responsive:true
+	       , "initComplete":function(){
+				$('#detalle tbody tr').each(function(){
+					var datos=$('#detalle').DataTable().row(this).data();
+					var cell=$(this).children('td').eq(6);
+					var combo="<select onchange='myColorChange(this)'>"+
+					"<option value='1'>Pendiente</option>"+
+					"<option value='2'>Aprobado</option>"+
+					"<option value='3'>Cancelado</option>"+
+					"<option value='4'>Finalizado</option>"+		
+					"</select>";
+					cell.html(combo);
+					var combito=cell.children().eq(0);
+					combito.val(datos.estado.idEstado);
+					formatCombo(combito);
+				});
+			}
 	         
 	    });
 		
 		$('#detalle').fadeIn(1500);
 		$('.tableCriterios').hide();
 		$('#example').hide();
+		
+
+		
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	$('#detalle').on('click','.grabar',function(){
+		var row=$(this).parents('tr');
+		var datos=$('#detalle').DataTable().row(row).data();
+		var comboEstado=row.children('td').eq(6).children('select').val();
+	
+		
+		$.ajax({
+			type:'post',
+			url:'EditStatus',
+			datatype:'json',
+			data:{idPedido:datos.pedidoCabe.idPedidoCabe,indice:datos.indice,estado:comboEstado},
+			success:function(){
+				$('#detalle').DataTable().ajax.reload;
+				$.growl(
+            			{
+            				title:" <strong>!Cambios</strong>:",
+            				message:" <strong>Guardados</strong>",
+            				icon:"glyphicon glyphicon-thumbs-up"
+            			},{
+            				type:'success'
+            			}
+            		 );
+			}
+		});
 		
 	});
     
@@ -335,9 +356,7 @@ $(document).ready(function() {
 			                <th>Total</th>
 			                <th>Usuario</th>
 			                <th>Estado</th>
-			                <th>EstadoII</th>
-			                <th>Detalle</th>
-			                <th>Guardar</th>
+			                <th>Ver</th>
 			            </tr>
 			        </thead>
 			 
@@ -348,9 +367,7 @@ $(document).ready(function() {
 			                <th>Total</th>
 			                <th>Usuario</th>
 			                <th>Estado</th>
-			                <th>EstadoII</th>
-			                <th>Detalle</th>
-			                <th>Guardar</th>	              
+			                <th>Ver</th>	              
 			            </tr>
 			        </tfoot>
 			    </table>
@@ -358,26 +375,18 @@ $(document).ready(function() {
    <div class="container">
     <table id="detalle" class="table table-responsive table-striped table-bordered table-hover" cellspacing="0" width="100%">
 			        <thead>
-			            <tr>
+			            <tr>			            
 			                <th>Codigo</th>
 			                <th>Producto</th>
 			                <th>Precio</th>
 			                <th>Dedicatoria</th>
 			                <th>Agasajado</th>
-			                <th>Fecha Requerimiento</th>
+			                <th style=" width:30px;">Fecha Requerimiento</th>			 
+			                <th>Estado</th>
+			                <th>Guardar</th>
 			            </tr>
 			        </thead>
 			 
-			        <tfoot>
-			            <tr>
-			                <th>Codigo</th>
-			                <th>Producto</th>
-			                <th>Precio</th>
-			                <th>Dedicatoria</th>
-			                <th>Agasajado</th>
-			                <th>Fecha Requerimiento</th>            
-			            </tr>
-			        </tfoot>
 			    </table>
    </div>
 </div>

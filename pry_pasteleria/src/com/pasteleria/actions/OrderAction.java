@@ -24,6 +24,10 @@ public class OrderAction  extends ActionSupport{
 	private Order order;
 	private List<OrderDetail> orderDetail;
 	private String id;
+	private String idPedido;
+	private int indice;
+	private int estado;
+	
 	
 	@Action(value="listOrderDet",results={@Result(name=SUCCESS,type="json")})
 	public String listDet(){
@@ -88,13 +92,37 @@ public class OrderAction  extends ActionSupport{
 	@Action(value="EditStatus",results={@Result(name=SUCCESS,type="json")})
 	public String EditStatus(){
 		
-		new HasServiceOrder().update(order);
+		new HasServiceOrderDetail().update(idPedido,indice,estado);
 		
 		return SUCCESS;
 	}
 	
 	
 	
+	public String getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(String idPedido) {
+		this.idPedido = idPedido;
+	}
+
+	public int getIndice() {
+		return indice;
+	}
+
+	public void setIndice(int indice) {
+		this.indice = indice;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
 	public String getId() {
 		return id;
 	}

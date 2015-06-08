@@ -14,7 +14,7 @@ public interface OrderDetailDAO {
 	public OrderDetail find(OrderDetail bean);
 	public int create(OrderDetail bean);
 	public int createfromList(String idPedido,List<OrderDetail> details);
-	public int update(OrderDetail bean);
+	public int update(String idPedido,int i, int idEstado);
 	public int delete(OrderDetail bean);
 	
 }

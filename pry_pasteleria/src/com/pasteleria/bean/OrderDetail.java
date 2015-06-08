@@ -19,6 +19,7 @@ public class OrderDetail implements Serializable{
 	private String nombre_agasajado;
 	private String fec_requerimiento;
 	private Status estado;
+	private int indice;
 	
 	
 	//Sobrescribimos el Metodo Equals
@@ -37,6 +38,18 @@ public class OrderDetail implements Serializable{
 	
 	
 	
+	public int getIndice() {
+		return indice;
+	}
+
+
+
+	public void setIndice(int indice) {
+		this.indice = indice;
+	}
+
+
+
 	public Status getEstado() {
 		return estado;
 	}

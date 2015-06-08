@@ -43,6 +43,11 @@
 		<put-attribute name="body" 	 value="/pages/seguimiento.jsp"/>
 	</definition>
 	
+	<definition name="seguimientoCustomer" extends="layout">
+		<put-attribute name="title"  value="Seguimiento Pedidos"/>
+		<put-attribute name="body" 	 value="/pages/seguimientoCustomer.jsp"/>
+	</definition>
+	
 	<definition name="armar" extends="layout">
 		<put-attribute name="title"  value="Arma tu Torta"/>
 		<put-attribute name="body"   value="/pages/armatutorta.jsp"/>

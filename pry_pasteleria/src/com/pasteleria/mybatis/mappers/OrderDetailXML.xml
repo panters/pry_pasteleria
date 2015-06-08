@@ -15,14 +15,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	-->
 	
 	<insert id="sql_insert" parameterType="orderDetail" statementType="CALLABLE">
-		exec registrar_detalle #{pedidoCabe.idPedidoCabe},#{producto.idProducto},#{precioUnidad},#{dedicatoria},#{nombre_agasajado},#{fec_requerimiento};
+		exec registrar_detalle #{pedidoCabe.idPedidoCabe},#{producto.idProducto},#{precioUnidad},#{dedicatoria},#{nombre_agasajado},#{fec_requerimiento},1;
 	</insert>
 	
-	<!--
-	<update id="sql_update" parameterType="int" statementType="CALLABLE">
-		exec sp_modifica_cobertura #{idCobertura},#{descripcion};
+	
+	<update id="sql_update" parameterType="map" statementType="CALLABLE">
+		exec sp_editar_pedido #{idPedido},#{estado},#{indice};
 	</update>
 	
+	<!--
 	<delete id="sql_delete" parameterType="int" statementType="CALLABLE">
 		exec sp_elimina_cobertura #{idCobertura};
 	</delete>
