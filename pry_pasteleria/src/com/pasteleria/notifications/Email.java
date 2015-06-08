@@ -8,6 +8,7 @@ package com.pasteleria.notifications;
  *
  * @author Sanlegas
  */
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -23,7 +24,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class Email {
+public class Email implements Runnable{
     
 	private ResourceBundle rb=ResourceBundle.getBundle("com/pasteleria/resources/configMail");
 	
@@ -39,6 +40,7 @@ public class Email {
     private String usuario;
     private String idpedido;
     
+    //Constructores
     public Email(String rutaArchivo, String nombreArchivo, String destinatario,String usuario,String idpedido) {
          this.rutaArchivo = rutaArchivo;
         this.nombreArchivo = nombreArchivo;
@@ -59,6 +61,14 @@ public class Email {
 
     
     
+   //Metodo implementado de la Interfaz Runable
+	@Override
+	public void run() {	
+		boolean sendMail=sendMail();
+		System.out.println("Email enviado: "+sendMail);
+	}
+    
+	//Metodo que envia el Email
     public boolean sendMail(){
         try
         {
@@ -107,17 +117,22 @@ public class Email {
         }        
     }
     
+    
+    //Metodo de plantilla de email
+    
     public String customMessage(String usuario,String idPedido){
     	
+    	Date date=new Date();
+    	SimpleDateFormat formato=new SimpleDateFormat("dd-MM-YYYY");
+    	
     	String mensaje="Estimado Cliente "+usuario+"\n"+
-    				   "Su pedido ha sido registrado con el codigo: "+idPedido+" "+new Date()+
+    				   "Su pedido ha sido registrado con el codigo: "+idPedido+" con fecha: "+String.valueOf(formato.format(date))+
     				   "\n"+"Saludos"+
     				   "\n\n"+"Tortas Encantadas"+"\n"+"Telefono:954191116"+
     				   "\n"+"Av.Carlo izaguirre N°3040";
     				   ;
     	return mensaje;
     }
-    
     
     
     public static void main(String[] args){
@@ -132,5 +147,7 @@ public class Email {
         }
         
     }
+
+
 
 }

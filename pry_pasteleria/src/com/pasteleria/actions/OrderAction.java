@@ -74,13 +74,15 @@ public class OrderAction  extends ActionSupport{
 			this.order.setIdPedidoCabe(new HasServiceOrder().create(this.order));
 			int salida=new HasServiceOrderDetail().createfromList(this.order.getIdPedidoCabe(),this.orderDetail);
 			if (salida>0) {
-				//Envio de Notificación Vía email
-				boolean sendEmail=new Email(u.getEmail(),
+				//Creamos un objeto Email que implementa de Runable
+				Email email=new Email(u.getEmail(),
 											u.getNombre()+" "
 									 		+u.getApe_pa()+" "
-									 		+u.getApe_ma(),this.order.getIdPedidoCabe()).sendMail();
+					
+									 		+u.getApe_ma(),this.order.getIdPedidoCabe());
+				//Enviamos el email con un Hilo para que proceso no afecte al tiempo de registro del Pedido
+				new Thread(email).start();
 				System.out.println("Registro correcto");
-				System.out.println("Email Enviado: "+sendEmail);
 			}
 			
 			ActionContext.getContext().getSession().remove("cart");
@@ -99,6 +101,7 @@ public class OrderAction  extends ActionSupport{
 		
 		return SUCCESS;
 	}
+	
 	
 	
 	
