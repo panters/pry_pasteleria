@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	-->
 	
 	<insert id="sql_insert" parameterType="orderDetail" statementType="CALLABLE">
-		exec registrar_detalle #{pedidoCabe.idPedidoCabe},#{producto.idProducto},#{precioUnidad},#{dedicatoria},#{nombre_agasajado},#{fec_requerimiento},1;
+		exec registrar_detalle #{pedidoCabe.idPedidoCabe},#{producto.idProducto},#{precioUnidad},#{dedicatoria},#{nombre_agasajado},#{fec_requerimiento};
 	</insert>
 	
 	

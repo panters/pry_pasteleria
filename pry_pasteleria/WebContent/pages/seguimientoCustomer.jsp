@@ -108,13 +108,12 @@ $(document).ready(function() {
         "columns": [
                     { "data": "idPedidoCabe" },
                     { "data": "fechaPedido" },
-                    { "data": "total" },						
-                    { "data": "usuario.nombre" },
+                    { "data": "total" },		
                     { "data": "estado.descripcion" }
                 ] ,
                 "columnDefs":[							
     	                      {
-    	                    	  "targets": [5], // El objetivo de la columna de posición, desde cero.
+    	                    	  "targets": [4], // El objetivo de la columna de posición, desde cero.
     	                          "data":null, // La inclusión de datos
     	                          "defaultContent":"<a  class='label label-default verDetalle' id='verDetalle'>VER</a>"
     	                      }
@@ -143,7 +142,7 @@ $(document).ready(function() {
        "initComplete":function(){
 			$('#example tbody tr').each(function(){
 				var datos=$('#example').DataTable().row(this).data();
-				var cell=$(this).children('td').eq(4);
+				var cell=$(this).children('td').eq(3);
 				var label="<label>"+cell.text()+"</label>";
 				cell.html(label);
 				formatCombo2($(cell).children('label'),datos.estado.idEstado);
@@ -170,7 +169,7 @@ $(document).ready(function() {
 	        	"url":"listOrderDet.action?id="+idPedidoCabecera,
 	        	 "dataSrc":"orderDetail"
 	        	},
-	        	"bPaginate": false,
+	        	"bPaginate":true,
 	            "bFilter": false,
 	            "bInfo":false,
 	        "columns": [
@@ -247,10 +246,7 @@ $(document).ready(function() {
      $('#mySelect').on('change',function(){
     	 jQuery("#example tbody>tr").hide();
          jQuery("#example td:contiene-palabra('" + jQuery(this).val() + "')").parent('tr').show();
-    	 
-         /*         var selectedValue = $(this).val();
-        $('#example').dataTable().fnFilter($(this).val()); */
-        
+    	
      }); 
     <!---->  
    
@@ -266,13 +262,13 @@ $(document).ready(function() {
   
    <div class="tableCriterios">
 	<div class="campos">
-	<label>&nbsp;&nbsp;Codigo de Pedido:</label> 
+	<label>&nbsp;&nbsp;Buscar Pedido:</label> 
 	<input type="text" class="texto-gris" id="buscador" size="10"/>
 	
 	</div>
 	<div class="campos">
 		<label>&nbsp;Estado:</label> <select id="mySelect">
-			<option>--Seleccione--</option>
+			<option value="0">--Seleccione--</option>
 			<option>Pendiente</option>
 			<option>Cancelado</option>
 			<option>Finalizado</option>
@@ -295,7 +291,6 @@ $(document).ready(function() {
 			                <th>Codigo</th>
 			                <th>Fecha Pedido</th>
 			                <th>Total</th>
-			                <th>Usuario</th>
 			                <th>Estado</th>
 			                <th>Ver</th>
 			            </tr>
@@ -306,7 +301,6 @@ $(document).ready(function() {
 			                <th>Codigo</th>
 			                <th>Feha de Pedido</th>
 			                <th>Total</th>
-			                <th>Usuario</th>
 			                <th>Estado</th>
 			                <th>Ver</th>	              
 			            </tr>

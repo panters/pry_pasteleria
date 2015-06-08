@@ -8,6 +8,7 @@ package com.pasteleria.notifications;
  *
  * @author Sanlegas
  */
+import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -109,7 +110,7 @@ public class Email {
     public String customMessage(String usuario,String idPedido){
     	
     	String mensaje="Estimado Cliente "+usuario+"\n"+
-    				   "Su pedido ha sido registrado con el codigo: "+idPedido+
+    				   "Su pedido ha sido registrado con el codigo: "+idPedido+" "+new Date()+
     				   "\n"+"Saludos"+
     				   "\n\n"+"Tortas Encantadas"+"\n"+"Telefono:954191116"+
     				   "\n"+"Av.Carlo izaguirre N°3040";

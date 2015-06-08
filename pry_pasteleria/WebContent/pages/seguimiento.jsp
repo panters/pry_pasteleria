@@ -102,8 +102,8 @@ $(document).ready(function() {
         	"url":"listOrder.action",
         	 "dataSrc":"pedidos"
         	},
-        	"bPaginate": false,
-            "bFilter": false,
+        	"bPaginate":true,
+            "bFilter":false,
             "bInfo":false,
         "columns": [
                     { "data": "idPedidoCabe" },
@@ -152,12 +152,14 @@ $(document).ready(function() {
 		}
          
     });
+  
     
   	setInterval(function(){
   		//alert('updating');
   		table.ajax.reload;
   	},2000);
     
+  	
   	
 	$('#example').on('click','.verDetalle',function(){
 		var row=$(this).parents('tr');
@@ -235,17 +237,11 @@ $(document).ready(function() {
 		
 		$('#detalle').fadeIn(1500);
 		$('.tableCriterios').hide();
-		$('#example').hide();
+		$('.lstPedidos').hide();
 		
 
 		
 	});
-	
-	
-	
-	
-	
-	
 	
 	
 	$('#detalle').on('click','.grabar',function(){
@@ -275,6 +271,31 @@ $(document).ready(function() {
 		
 	});
     
+	/* Actualizando el Style del Estado del DataTable*/
+    $('#example_length select').change(function(){
+    	console.log('Change Number Rows');
+    	updateStyles();
+    });
+	  
+	
+	  $('#example')
+      .on( 'order.dt',  function () { console.log('Order' );updateStyles();} )
+      .on( 'search.dt', function () {console.log('Search' );updateStyles();} )
+      .on( 'page.dt',   function () { console.log('Page' );updateStyles();} )
+      .dataTable();
+	
+	  function updateStyles(){
+			$('#example tbody tr').each(function(){
+				var datos=$('#example').DataTable().row(this).data();
+				var cell=$(this).children('td').eq(4);
+				var label="<label>"+cell.text()+"</label>";
+				cell.html(label);
+				formatCombo2($(cell).children('label'),datos.estado.idEstado);
+				
+			});
+		}
+	
+	  
     /*  Evento Doble click */
     $('#example tbody').on( 'dblclick', 'tr', function () {
    		 
@@ -347,7 +368,7 @@ $(document).ready(function() {
    </div>
    
    <p/>
-   <div class="container">
+   <div class="container lstPedidos">
     <table id="example" class="table table-responsive table-striped table-bordered table-hover" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
@@ -391,151 +412,3 @@ $(document).ready(function() {
    </div>
 </div>
 
-
-<%-- <div id="lstPedidos" class="panel panel-primary"
- style="width: 80%; margin: 0 10% 10%;">
-<div class="panel-heading">
-	<h4 class="panel-title">Listado de Pedidos</h4>
-</div>
-<div class="panel-body">
-<div class="tableCriterios">
-	<div class="campos">
-		<label>&nbsp;&nbsp;Codigo de Pedido:</label> 
-		<input type="text"	size="20" />
-	</div>
-	<div class="campos">
-		<label>&nbsp;Estado:</label> <select>
-			<option>--Seleccione--</option>
-			<option>Pendiente</option>
-			<option>Cancelado</option>
-			<option>Finalizado</option>
-		</select>
-	</div>
-	<div class="campos">
-		<label>&nbsp;</label>
-	</div>
-	<div class="campos">
-		<input type="submit" class="btn btn-primary" value="Consultar" />
-	</div>
-</div>
-
-<br></br> --%>
-<%-- 
-<div class="divcenter">
-<div class="table-responsive">
-	<table class="table table-striped table-hover tablecenter">
-		<thead>
-			<tr class="info">
-				<th>Pedido</th>
-				<th>Fecha Solicitud</th>
-				<th>Monto Total</th>
-				<th>Estado</th>
-				<th colspan="2">Accion</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="info">
-				<td>P001891</td>
-				<td>10/10/2015</td>
-				<td>S/.120.00</td>
-				<td><span class="label label-success">Pendiente</span></td>
-				<td><a href="#" class="label label-warning" onclick="ver(this)">Ver</a></td>
-				<td><a href="#" class="label label-danger" onclick="eliminar(this)">Anular</a></td>
-			</tr>
-		</tbody>
-		<tfoot>
-	   </tfoot>
-	</table>
-</div>
-</div> --%>
-
-<%-- 
-<div id="detalle" class="panel panel-primary" style="width: 80%; margin: 0 10% 10%;">
-	<div class="panel-heading">
-		<h4 class="panel-title">Detalle de Pedido</h4>
-	</div>
-	<div class="panel-body">
-	<div class="table-responsive">
-		<table>
-			<tr>
-				<td><label>&nbsp;&nbsp;Codigo de Pedido:&nbsp;</label></td>
-				<td><input type="text" size="20" disabled="disabled" /></td>
-				<td><label>&nbsp;Estado:</label></td>
-				<td><select>
-						<option>--Seleccione--</option>
-						<option>Pendiente</option>
-						<option>Cancelado</option>
-						<option>Finalizado</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td><label>&nbsp;&nbsp;Fecha Solicitud:</label></td>
-				<td><input type="text" size="20" disabled="disabled" /></td>
-				<td><label>&nbsp;&nbsp;Dirección Entrega:&nbsp;</label></td>
-				<td><input type="text" size="20" /></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
-		</table>
-	</div>
-	<div class="table-responsive">
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr class="info">
-					<th>#</th>
-					<th>Producto</th>
-					<th>Descripción</th>
-					<th>Cantidad</th>
-					<th>Precio Unit</th>
-					<th>Agasajado</th>
-					<th>Dedicatoria</th>
-					<th>Fecha entrega</th>
-					<th>Importe</th>
-					<th>Estado</th>
-					<th colspan="2">Acción</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="info">
-					<td>1</td>
-					<td>P001891</td>
-					<td>colum content</td>
-					<td>2</td>
-					<td>S/30.00</td>
-					<td>colum content</td>
-					<td>colum content</td>
-					<td>10/10/2015</td>
-					<td>S/.120.00</td>
-					<td><select class="label label-warning"
-						onchange="myColorChange(this)">
-							<option value="1">Proceso</option>
-							<option value="2">Despachado</option>
-					</select></td>
-					<td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
-					<td><a href="#" onclick="eliminar(this)"><span class="glyphicon glyphicon-trash"></span></a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-		
-		<div style="text-align: right;">
-			<div style="display: inline-block;">
-				<s:submit cssClass="btn btn-primary" value="Guardar" />
-			</div>
-			<div style="display: inline-block;">
-				<a class="btn btn-default" href="#" onclick="ocultar()" >Cancelar</a>
-			</div>
-		</div>
-		
-	</div>
-</div> --%>
