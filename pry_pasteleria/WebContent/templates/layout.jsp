@@ -108,10 +108,17 @@
 	  });
 	
 	//Evita el doble click en los campos de fecha del carrito     
-	  $('body').delegate(".input-group.date", "dblclick", function (e) {
+	  $('body').delegate(".input-group.date #fechita", "dblclick", function (e) {
 			e.preventDefault();
-			alert('Escritura deshabilitada, utilize el DatePicker para la fecha');
-		});
+			//alert('Doble Click deshabilitado-previene el registro de fechas anteriores');
+	  });
+	
+	//Evita el doble click en los campos de fecha del carrito     
+	  $('body').delegate(".input-group.date #fechita", "click", function (e) {
+			e.preventDefault();
+			//alert(' Click deshabilitado-previene el registro de fechas anteriores');
+	  });
+	
 	
        $('#detalle').hide();
 	 
