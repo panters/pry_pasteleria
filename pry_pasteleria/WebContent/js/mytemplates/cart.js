@@ -14,6 +14,7 @@ $(document).ready(function(){
 		alert('Escritura deshabilitada, utilize los indicadores para cambiar la cantidad');
 	});
 	
+	
 	$('#continuarSteptwo').attr('disabled',true);
 	
 	var logueado='false';
@@ -170,7 +171,7 @@ $(document).ready(function(){
 	    '<td>'+
 		'<div class="form-group has-feedback">'+
 		'<div class="input-group date">'+
-		'<input type="text" class="form-control" name="orderDetail['+j+'].fec_requerimiento" pattern="\\d{1,2}/\\d{1,2}/\\d{4}" required="true" />'+
+		'<input type="text" class="form-control" id="fechita" name="orderDetail['+j+'].fec_requerimiento" pattern="\\d{1,2}/\\d{1,2}/\\d{4}" required="true" />'+
 			'<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>'+
 			'</span>'+
 		'</div>'+

@@ -133,7 +133,7 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
     public static void main(String[] args){
         
       
-        Email e = new Email("C:\\Users\\Pantera\\Downloads\\emblema.jpg","adjunto.jpg","leonxandercs@gmail.com","Alexander Chavez","P00001");
+        Email e = new Email("C:\\Users\\Pantera\\Downloads\\emblema.jpg","adjunto.jpg","lmhernandez21187@gmail.com ","Luis Hernandez Montenegro","P00021");
   
         if (e.sendMail()){
         	System.out.println("Envio correcto");

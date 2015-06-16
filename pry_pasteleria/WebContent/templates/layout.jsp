@@ -101,7 +101,18 @@
 		    });
 		});
 	
-       
+	//Evita la escritura en los campos de fecha del carrito
+	  $('body').delegate(".input-group.date", "keypress", function (e) {
+			e.preventDefault();
+			alert('Escritura deshabilitada, utilize el DatePicker para la fecha');
+	  });
+	
+	//Evita el doble click en los campos de fecha del carrito     
+	  $('body').delegate(".input-group.date", "dblclick", function (e) {
+			e.preventDefault();
+			alert('Escritura deshabilitada, utilize el DatePicker para la fecha');
+		});
+	
        $('#detalle').hide();
 	 
  });

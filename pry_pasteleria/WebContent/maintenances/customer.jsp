@@ -23,7 +23,7 @@
 $(document).ready(function() {
 	
 	
-    var table=$('#example').DataTable( {
+    var table=$('#example').DataTable({
        // "processing": true,
         "ajax": {
         	"url":"listCustomer.action",
