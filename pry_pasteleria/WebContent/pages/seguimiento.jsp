@@ -375,7 +375,7 @@ $(document).ready(function() {
 			                <th>Codigo</th>
 			                <th>Fecha Pedido</th>
 			                <th>Total</th>
-			                <th>Usuario</th>
+			                <th>Cliente</th>
 			                <th>Estado</th>
 			                <th>Ver</th>
 			            </tr>
@@ -386,7 +386,7 @@ $(document).ready(function() {
 			                <th>Codigo</th>
 			                <th>Feha de Pedido</th>
 			                <th>Total</th>
-			                <th>Usuario</th>
+			                <th>Cliente</th>
 			                <th>Estado</th>
 			                <th>Ver</th>	              
 			            </tr>

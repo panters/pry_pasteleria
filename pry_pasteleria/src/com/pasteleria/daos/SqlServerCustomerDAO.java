@@ -1,6 +1,8 @@
 package com.pasteleria.daos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -56,6 +58,37 @@ public class SqlServerCustomerDAO implements CustomerDAO {
 			session.close();
 		}
 		return salida;
+	}
+
+	@Override
+	public int register(String username, String apellidop, String apellidom,
+			String documento, String nacimiento, String sexo, String email,
+			String estadocivil, String telefono, String celular, String password) {
+		int salida=0;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("apellidop", apellidop);
+		map.put("apellidom", apellidom);
+		map.put("documento", documento);
+		map.put("nacimiento", nacimiento);
+		map.put("sexo", sexo);
+		map.put("email", email);
+		map.put("estadocivil", estadocivil);
+		map.put("telefono", telefono);
+		map.put("celular", celular);
+		map.put("password", password);
+		
+		try {
+			salida=session.insert("customerxml.sql_register",map);
+			session.commit();
+			System.out.println(salida);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return salida;	
 	}
 
 	@Override

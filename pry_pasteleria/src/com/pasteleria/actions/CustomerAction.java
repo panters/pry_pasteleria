@@ -1,11 +1,13 @@
 package com.pasteleria.actions;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Customer;
 import com.pasteleria.services.ServiceCustomer;
@@ -16,6 +18,19 @@ public class CustomerAction extends ActionSupport {
 
 	private List<Customer> clientes;
 	private Customer cliente;
+	
+	private String username;
+	private String apellidop;
+	private String apellidom;
+	private String documento;
+	private String nacimiento;
+	private String sexo;
+	private String email;
+	private String estadocivil;
+	private String telefono;
+	private String celular;
+	private String password;
+	
 	
 	@Action(value="listCustomer",results={@Result(name="success",type="json")})
 	public String list(){
@@ -34,11 +49,16 @@ public class CustomerAction extends ActionSupport {
 	@Action(value="saveCustomer",results={
 			@Result(name="success",type="json")})
 	public String save(){
+		Map<String, Object> session=ActionContext.getContext().getSession();
+	if(session.get("user")!=null){	
 		if (cliente.getIdUsuario().equals("nuevo")) {
 			new ServiceCustomer().create(cliente);
 		}else{
 			new ServiceCustomer().update(cliente);
 		}
+	}else{
+		new ServiceCustomer().register(username, apellidop, apellidom, documento, nacimiento, sexo, email, estadocivil, telefono, celular, password);  
+	  }	
 		return SUCCESS;
 	}
 	
@@ -48,8 +68,7 @@ public class CustomerAction extends ActionSupport {
 		new ServiceCustomer().delete(cliente);
 		return SUCCESS;
 	}
-	
-	
+
 	public List<Customer> getClientes() {
 		return clientes;
 	}
@@ -57,14 +76,101 @@ public class CustomerAction extends ActionSupport {
 	public void setClientes(List<Customer> clientes) {
 		this.clientes = clientes;
 	}
-	
+
 	public Customer getCliente() {
 		return cliente;
 	}
-	
+
 	public void setCliente(Customer cliente) {
 		this.cliente = cliente;
 	}
-		
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getApellidop() {
+		return apellidop;
+	}
+
+	public void setApellidop(String apellidop) {
+		this.apellidop = apellidop;
+	}
+
+	public String getApellidom() {
+		return apellidom;
+	}
+
+	public void setApellidom(String apellidom) {
+		this.apellidom = apellidom;
+	}
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+
+	public String getNacimiento() {
+		return nacimiento;
+	}
+
+	public void setNacimiento(String nacimiento) {
+		this.nacimiento = nacimiento;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEstadocivil() {
+		return estadocivil;
+	}
+
+	public void setEstadocivil(String estadocivil) {
+		this.estadocivil = estadocivil;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 }

@@ -1,12 +1,62 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%@taglib uri="/struts-jquery-tags" prefix="sj"%>
 
 <link href="css/styles_reg.css" media="all" rel="stylesheet">
+
+
+<script>
+$(document).ready(function(){
+	
+	$('#registrar').click(function(){
+	
+		var username1=$('#username').val();
+		var apellidop1=$('#apellidop').val();
+		var apellidom1=$('#apellidom').val();
+		var documento1=$('#documento').val();
+		var nacimiento1=$('#nacimiento').val();
+		var sexo1=$('input:radio[name=sexo]:checked').val();
+		var email1=$('#email').val();
+		var estadocivil1=$('input:radio[name=estado]:checked').val();
+		var telefono1=$('#telefono').val();
+		var celular1=$('#celular').val();
+		var password1=$('#password').val();
+		
+		if($('#username').val().length<1){
+			alert("Debe ingresar datos");
+		}else{
+				
+	 	 $.ajax({			
+			type:'post',
+			url:'saveCustomer',
+			datatype:'json',
+			data:{username:username1,apellidop:apellidop1,apellidom:apellidom1,documento:documento1,nacimiento:nacimiento1,
+				sexo:sexo1,email:email1,estadocivil:estadocivil1,telefono:telefono1,celular:celular1,password:password1},
+			success:function(){
+				$.growl(
+						{
+					    title:"<strong>!Usted ha sido</strong>:",
+					    message:"<strong>Registrado</strong>",
+					    icon:"glyphicon glyphicon-thumbs-up"
+			        	},{
+			        		type:'success'
+			        	}
+			       );				
+				$(location).attr('href','logueo.action');				
+			}
+		});
+		}
+		
+	});	
+	
+});
+
+
+</script>
 
 <div class="form-header">
 	<h1>REGISTRO DE CLIENTE</h1>
 </div>
 <form class="form animate-form" id="form" onsubmit="return false;">
-
 
 	<table width="800" id="table_registro">
 
@@ -63,7 +113,7 @@
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-user"></div>
 					</div>
-					<input class="form-control" id="email" name="text"
+					<input class="form-control" id="apellidop" name="text"
 						placeholder="Apellido Paterno" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
@@ -74,18 +124,38 @@
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-user"></div>
 					</div>
-					<input class="form-control" id="email" name="text"
+					<input class="form-control" id="apellidom" name="text"
 						placeholder="Apellido Materno" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
+                
+                  
+				<div class="form-group submit">
+					<a href="logueo.action" style="background-color: #7E506C;">CANCELAR</a>
+				</div> <!------------------------------------------>
+			</td>
+			<td width="80px"></td>
+			<td width="400px">
 
-				<div class="form-group has-feedback">
+                <div class="form-group has-feedback">
+					<div class="input-group">
+						<div class="radio">
+							Seleccione Estado Civil:&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label><input type="radio" name="estado" value="C">Casado</label>
+							&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio"
+								name="estado" value="S">Soltero</label>
+						</div>
+					</div>
+				</div>
+
+                <div class="form-group has-feedback">
 					<label class="control-label sr-only" for="email">Documento
 						DNI</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-file"></div>
 					</div>
-					<input class="form-control" id="email" name="text"
+					<input class="form-control" id="documento" name="text"
 						placeholder="Documento DNI" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
@@ -95,19 +165,12 @@
 						<div class="radio">
 							Seleccione Sexo:&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label><input type="radio" name="optradio">Masculino</label>
+							<label><input type="radio" name="sexo" value="M">Masculino</label>
 							&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio"
-								name="optradio">Femenino</label>
+								name="sexo" value="F">Femenino</label>
 						</div>
 					</div>
 				</div>
-
-				<div class="form-group submit">
-					<a href="logueo.action" style="background-color: #7E506C;">CANCELAR</a>
-				</div> <!------------------------------------------>
-			</td>
-			<td width="80px"></td>
-			<td width="400px">
 
 
 				<div class="form-group has-feedback">
@@ -115,7 +178,7 @@
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-phone-alt"></div>
 					</div>
-					<input class="form-control" id="email" name="number"
+					<input class="form-control" id="telefono" name="number"
 						placeholder="Telefono" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
@@ -125,13 +188,13 @@
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-earphone"></div>
 					</div>
-					<input class="form-control" id="email" name="number"
+					<input class="form-control" id="celular" name="number"
 						placeholder="Celular" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
 
 
-				<div class="form-group has-feedback">
+ 				<div class="form-group has-feedback">
 					<label class="control-label sr-only" for="nacimiento">Fecha
 						Nacimiento</label>
 					<div class="input-group-addon">
@@ -140,81 +203,29 @@
 					<input class="form-control" id="nacimiento" name="text"
 						placeholder="Fecha Nacimiento" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
-				</div>
-
-				<div class="form-group has-feedback">
-					<label class="control-label sr-only" for="password">Departamento</label>
+				</div> 
+				
+				
+<%-- 			    <div class="form-group has-feedback">
+			      <label class="control-label sr-only" for="nacimiento">Fecha
+						Nacimiento</label>
 					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-list-alt"></div>
+						<div class="glyphicon glyphicon-calendar"></div>
 					</div>
-					<select class="form-control">
-						<option value="0">Seleccione Departamento</option>
-						<option value="1">Lima</option>
-						<option value="2">Anchash</option>
-						<option value="3">Apurimac</option>
-						<option value="4">Cuzco</option>
-						<option value="5">Cajamarca</option>
-					</select>
-				</div>
-
-				<div class="form-group has-feedback">
-					<label class="control-label sr-only" for="password">Provincia</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-list-alt"></div>
-					</div>
-					<select class="form-control">
-						<option value="0">Seleccione Provincia</option>
-						<option value="1">Lima</option>
-						<option value="2">Anchash</option>
-						<option value="3">Apurimac</option>
-						<option value="4">Cuzco</option>
-						<option value="5">Cajamarca</option>
-					</select>
-				</div>
-
-				<div class="form-group has-feedback">
-					<label class="control-label sr-only" for="password">Distrito</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-list-alt"></div>
-					</div>
-					<select class="form-control">
-						<option value="0">Seleccione Distrito</option>
-						<option value="1">Lima</option>
-						<option value="2">Anchash</option>
-						<option value="3">Apurimac</option>
-						<option value="4">Cuzco</option>
-						<option value="5">Cajamarca</option>
-					</select>
-				</div>
-
-				<div class="form-group has-feedback">
-					<label class="control-label sr-only" for="email">Dirección</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-home"></div>
-					</div>
-					<input class="form-control" id="email" name="text"
-						placeholder="Direccion" type="text"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
-				</div>
-
-
-				<div class="form-group has-feedback">
-					<div class="input-group">
-						<div class="radio">
-							<h4>&nbsp;&nbsp;&nbsp;&nbsp;</h4>
-						</div>
-					</div>
-				</div>
-
+					<input class="form-control input-group date" id="nacimiento" name="text"  
+					      placeholder="Fecha Nacimiento" type="text">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+				</div> --%>
+				
 				<div class="form-group submit">
-					<input class="btn btn-lg" type="submit" value="REGISTRAR"
-						style="background-color: #A1477E;">
+					<a href="#" id="registrar" style="background-color: #A1477E;">REGISTRAR</a>
 				</div>
 
 			</td>
 		</tr>
 
 	</table>
+	
 </form>
 <div>
 	<h1></h1>

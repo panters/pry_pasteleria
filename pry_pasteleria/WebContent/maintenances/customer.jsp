@@ -279,9 +279,9 @@ $(document).ready(function() {
 	    	<div class="form-group">
 	    		<s:textfield label="Fecha Nacimiento :" name="cliente.fec_nacimiento" id="fec_nacimiento" cssClass="form-control"/>
 	    	</div>
-	    	<div class="form-group">
+        	<div class="form-group">
 	    		<s:textfield label="Sexo:" name="cliente.sexo" id="sexo" cssClass="form-control"/>
-	    	</div>
+	    	</div> 	    		    		    	
 	    	<div class="form-group">
 	    		<s:textfield label="Email:" name="cliente.email" id="email" cssClass="form-control"/>
 	    	</div>

@@ -25,6 +25,13 @@ public class ServiceCustomer implements CustomerDAO {
 	public int create(Customer bean) {
 		return dao.create(bean);
 	}
+	
+	@Override
+	public int register(String username, String apellidop, String apellidom,
+			String documento, String nacimiento, String sexo, String email,
+			String estadocivil, String telefono, String celular, String password) {
+		return dao.register(username, apellidop, apellidom, documento, nacimiento, sexo, email, estadocivil, telefono, celular, password);
+	}
 
 	@Override
 	public int update(Customer bean) {
