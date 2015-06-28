@@ -106,18 +106,22 @@ $(document).ready(function() {
             "bFilter": false,
             "bInfo":false,
         "columns": [
-                    { "data": "idPedidoCabe" },
-                    { "data": "fechaPedido" },
-                    { "data": "total" },		
-                    { "data": "estado.descripcion" }
-                ] ,
-                "columnDefs":[							
-    	                      {
-    	                    	  "targets": [4], // El objetivo de la columna de posición, desde cero.
-    	                          "data":null, // La inclusión de datos
-    	                          "defaultContent":"<a  class='label label-default verDetalle' id='verDetalle'>VER</a>"
-    	                      }
-    	                    ] 
+					{ "data": "idPedidoCabe" },
+					{ "data": "fechaPedido" },
+					{ "data": "total" },
+					{ "data": "cliente.nombre" },
+					{ "data": "montoPagado" },     
+					{ "data": "estadoPago.desEstadoPago" },
+					{ "data": "estado.descripcion" }
+					
+					] ,
+					"columnDefs":[							
+					          {
+					        	  "targets": [7], // El objetivo de la columna de posición, desde cero.
+					              "data":null, // La inclusión de datos
+					              "defaultContent":"<a  class='label label-default verDetalle' id='verDetalle'>VER</a>"
+					          }
+        ] 
         ,"language": {
            "lengthMenu": "Mostrar _MENU_ Registros por pagina",
            "zeroRecords": "No se hallaron Registros ",
@@ -142,7 +146,7 @@ $(document).ready(function() {
        "initComplete":function(){
 			$('#example tbody tr').each(function(){
 				var datos=$('#example').DataTable().row(this).data();
-				var cell=$(this).children('td').eq(3);
+				var cell=$(this).children('td').eq(6);
 				var label="<label>"+cell.text()+"</label>";
 				cell.html(label);
 				formatCombo2($(cell).children('label'),datos.estado.idEstado);
@@ -169,7 +173,7 @@ $(document).ready(function() {
 	        	"url":"listOrderDet.action?id="+idPedidoCabecera,
 	        	 "dataSrc":"orderDetail"
 	        	},
-	        	"bPaginate":true,
+	        	"bPaginate":false,
 	            "bFilter": false,
 	            "bInfo":false,
 	        "columns": [
@@ -261,14 +265,14 @@ $(document).ready(function() {
    </div>
   
    <div class="tableCriterios">
-	<div class="campos">
-	<label>&nbsp;&nbsp;Buscar Pedido:</label> 
-	<input type="text" class="texto-gris" id="buscador" size="10"/>
-	
+	<div class="campos"  >
+		<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Codigo de Pedido:</label> 
+		<input type="text" class="texto-gris" id="buscador" size="10"/>
 	</div>
 	<div class="campos">
 		<label>&nbsp;Estado:</label> <select id="mySelect">
-			<option value="0">--Seleccione--</option>
+			<option>--Seleccione--</option>
 			<option>Pendiente</option>
 			<option>Cancelado</option>
 			<option>Finalizado</option>
@@ -291,17 +295,23 @@ $(document).ready(function() {
 			                <th>Codigo</th>
 			                <th>Fecha Pedido</th>
 			                <th>Total</th>
-			                <th>Estado</th>
+			                <th>Cliente</th>
+			                <th>Monto Pagado</th>
+			                <th>Estado Pago</th>
+			                <th>Estado Pedido</th>
 			                <th>Ver</th>
 			            </tr>
-			        </thead>
+			        </tshead>
 			 
 			        <tfoot>
 			            <tr>
 			                <th>Codigo</th>
-			                <th>Feha de Pedido</th>
+			                <th>Fecha Pedido</th>
 			                <th>Total</th>
-			                <th>Estado</th>
+			                <th>Cliente</th>
+			                <th>Monto Pagado</th>
+			                <th>Estado Pago</th>
+			                <th>Estado Pedido</th>
 			                <th>Ver</th>	              
 			            </tr>
 			        </tfoot>

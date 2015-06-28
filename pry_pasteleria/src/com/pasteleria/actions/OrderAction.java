@@ -9,6 +9,9 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.pasteleria.bean.Customer;
+import com.pasteleria.bean.Employed;
+import com.pasteleria.bean.FormaCompra;
 import com.pasteleria.bean.Order;
 import com.pasteleria.bean.OrderDetail;
 import com.pasteleria.bean.User;
@@ -28,6 +31,7 @@ public class OrderAction  extends ActionSupport{
 	private String idPedido;
 	private int indice;
 	private int estado;
+	private String idcliente;
 	
 	
 	@Action(value="listOrderDet",results={@Result(name=SUCCESS,type="json")})
@@ -66,12 +70,39 @@ public class OrderAction  extends ActionSupport{
 			this.order=new Order();
 			//Recuperams el  Usuairo Logueado
 			User u=(User) session.get("user");
-
+			Employed employed=new Employed();
+			Customer customer=new Customer();
+			
 			//Asignamos el id al Cliente que registra el pedido(en observación)
-			this.order.setUsuario(u);
+			 
+			if (u.getRol().getIdRol()==2) {
+				employed.setIdUsuario("E0000");
+				customer.setIdUsuario(u.getIdUsuario());
+				this.order.setFormaCompra(new FormaCompra(1));
+				
+				System.out.println("Asignaod "+this.idcliente);
+			}else{
+				
+				employed.setIdUsuario(u.getIdUsuario());
+				customer.setIdUsuario(this.idcliente);
+				this.order.setFormaCompra(new FormaCompra(2));
+				System.out.println("Asignaod "+this.idcliente);
+				
+			}
+			
+			double total=0;
+			for (OrderDetail oj : (List<OrderDetail>)session.get("cart")) {
+				total+=oj.getSubTotal();
+			}
+			
+			this.order.setCliente(customer);
+			this.order.setEmpleado(employed);
+			this.order.setTotal(total);
 			
 			//Registramos el pedido y obtenemos el Codigo del Pedido Generado
 			this.order.setIdPedidoCabe(new HasServiceOrder().create(this.order));
+			
+			
 			int salida=new HasServiceOrderDetail().createfromList(this.order.getIdPedidoCabe(),this.orderDetail);
 			if (salida>0) {
 				//Creamos un objeto Email que implementa de Runable
@@ -105,6 +136,14 @@ public class OrderAction  extends ActionSupport{
 	
 	
 	
+	public String getIdcliente() {
+		return idcliente;
+	}
+
+	public void setIdcliente(String idcliente) {
+		this.idcliente = idcliente;
+	}
+
 	public String getIdPedido() {
 		return idPedido;
 	}

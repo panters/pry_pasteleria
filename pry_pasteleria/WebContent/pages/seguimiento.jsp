@@ -97,24 +97,27 @@ function formatCombo2(object,x) {
 $(document).ready(function() {
 
   var table=$('#example').DataTable({
-        "processing": true,
+        //"processing": true,
         "ajax": {
         	"url":"listOrder.action",
         	 "dataSrc":"pedidos"
         	},
-        	"bPaginate":true,
-            "bFilter":false,
+        	"bPaginate": false,
+            "bFilter": false,
             "bInfo":false,
         "columns": [
                     { "data": "idPedidoCabe" },
                     { "data": "fechaPedido" },
-                    { "data": "total" },						
-                    { "data": "usuario.nombre" },
+                    { "data": "total" },
+                    { "data": "cliente.nombre" },
+                    { "data": "montoPagado" },     
+                    { "data": "estadoPago.desEstadoPago" },
                     { "data": "estado.descripcion" }
+                    
                 ] ,
                 "columnDefs":[							
     	                      {
-    	                    	  "targets": [5], // El objetivo de la columna de posición, desde cero.
+    	                    	  "targets": [7], // El objetivo de la columna de posición, desde cero.
     	                          "data":null, // La inclusión de datos
     	                          "defaultContent":"<a  class='label label-default verDetalle' id='verDetalle'>VER</a>"
     	                      }
@@ -143,7 +146,7 @@ $(document).ready(function() {
        "initComplete":function(){
 			$('#example tbody tr').each(function(){
 				var datos=$('#example').DataTable().row(this).data();
-				var cell=$(this).children('td').eq(4);
+				var cell=$(this).children('td').eq(6);
 				var label="<label>"+cell.text()+"</label>";
 				cell.html(label);
 				formatCombo2($(cell).children('label'),datos.estado.idEstado);
@@ -236,11 +239,15 @@ $(document).ready(function() {
 	    });
 		
 		$('#detalle').fadeIn(1500);
+		$('#volverdiv').show();
 		$('.tableCriterios').hide();
 		$('.lstPedidos').hide();
 		
-
-		
+	});
+	
+	$('#volver').click(function(){
+		 $('#detalle').hide();
+		 window.location.href="seguimiento.action";		 
 	});
 	
 	
@@ -287,7 +294,7 @@ $(document).ready(function() {
 	  function updateStyles(){
 			$('#example tbody tr').each(function(){
 				var datos=$('#example').DataTable().row(this).data();
-				var cell=$(this).children('td').eq(4);
+				var cell=$(this).children('td').eq(6);
 				var label="<label>"+cell.text()+"</label>";
 				cell.html(label);
 				formatCombo2($(cell).children('label'),datos.estado.idEstado);
@@ -343,12 +350,11 @@ $(document).ready(function() {
    <div class="panel panel-heading">
      <h1 class="panel-title">LISTADO DE PEDIDOS</h1>
    </div>
-  
    <div class="tableCriterios">
-	<div class="campos">
-	<label>&nbsp;&nbsp;Codigo de Pedido:</label> 
-	<input type="text" class="texto-gris" id="buscador" size="10"/>
-	
+	<div class="campos"  >
+		<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Codigo de Pedido:</label> 
+		<input type="text" class="texto-gris" id="buscador" size="10"/>
 	</div>
 	<div class="campos">
 		<label>&nbsp;Estado:</label> <select id="mySelect">
@@ -376,18 +382,22 @@ $(document).ready(function() {
 			                <th>Fecha Pedido</th>
 			                <th>Total</th>
 			                <th>Cliente</th>
-			                <th>Estado</th>
+			                <th>Monto Pagado</th>
+			                <th>Estado Pago</th>
+			                <th>Estado Pedido</th>
 			                <th>Ver</th>
 			            </tr>
-			        </thead>
+			        </tshead>
 			 
 			        <tfoot>
 			            <tr>
 			                <th>Codigo</th>
-			                <th>Feha de Pedido</th>
+			                <th>Fecha Pedido</th>
 			                <th>Total</th>
 			                <th>Cliente</th>
-			                <th>Estado</th>
+			                <th>Monto Pagado</th>
+			                <th>Estado Pago</th>
+			                <th>Estado Pedido</th>
 			                <th>Ver</th>	              
 			            </tr>
 			        </tfoot>
@@ -407,8 +417,10 @@ $(document).ready(function() {
 			                <th>Guardar</th>
 			            </tr>
 			        </thead>
-			 
-			    </table>
+   </table>
+   		<div hidden="true" id="volverdiv" style="text-align:right;margin-right:0px;">
+		   <a id="volver" class="btn btn-primary" href="#">Volver</a>
+		</div>
    </div>
 </div>
 

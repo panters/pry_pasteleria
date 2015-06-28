@@ -26,6 +26,7 @@ public class LoginAction  extends ActionSupport{
 	private String email;
 	private String password;
 	private String logged;
+	private int rol;
 	
 	public Map<String, Object> session=(Map<String, Object>)ActionContext.getContext().getSession();
 	
@@ -61,12 +62,24 @@ public class LoginAction  extends ActionSupport{
 	
 	@Action(value="isLogged",results={@Result(name=SUCCESS,type="json")})
 	public String isLogged(){
-		if (session.get("user")!=null)
+		if (session.get("user")!=null){
 			this.logged="true";
+			this.rol=((User)session.get("user")).getRol().getIdRol();
+	}		
 		else
 			this.logged="false";
 			System.out.println(logged);
 		return SUCCESS;
+	}
+	
+	
+
+	public int getRol() {
+		return rol;
+	}
+
+	public void setRol(int rol) {
+		this.rol = rol;
 	}
 
 	public String getEmail() {

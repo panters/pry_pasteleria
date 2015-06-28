@@ -70,7 +70,7 @@ background-color: white;
 		<tr class="visible-xs">
 			<td class="text-center"><strong>Total S/.</strong><strong class="txtTotal">0.00</strong></td>
 		</tr>
-		<tr>
+		<tr>		    
 			<td><a  href="catalogo.action" class="btn btn-primary">Agregar Productos</a></td>
 			<td colspan="2" class="hidden-xs"></td>
 			<td class="hidden-xs text-center"><strong id="TotalPedido">Total S/.</strong><strong class="txtTotal">0.00</strong></td>
@@ -80,7 +80,49 @@ background-color: white;
   </table> 
 </div>
 		
+<!------------------------------------------------------------------- -- -->
+<div class="modal fade" id="myModalBusqueda" role="dialog" ria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+  <s:form id="form" action="saveCustomer"  theme="bootstrap" cssClass="well form-vertical">
+    <div class="modal-header">
+    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    	<h4>Buscar Cliente</h4>
+    </div>
 
+	       <div class="modal-body">
+	         <table id="view" class="table table-striped table-hover dt-responsive" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			                <th>Codigo</th>
+			                <th>Nombre</th>
+			                <th>A.Paterno</th>
+			                <th>A.Materno</th>
+			                <th>Dni</th>
+<!-- 				        <th>Nacimiento</th>
+			                <th>Sexo</th>
+			                <th>Email</th>
+     		                <th>E.Civil</th>
+			                <th>Telefono</th>
+			                <th>Celular</th> -->
+			            </tr>
+			        </thead>
+			        
+			    </table>
+	       
+	       </div>
+
+
+      <div class="modal-footer">
+  	  <div style="text-align:left;">
+  	  </div>
+   	  	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </s:form>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+</div>
 <!------------------------------------------------------------------- -- -->
 <div class="container" id="setptwo">
 <s:form id="formRegPedido" theme="bootstrap" action="registerOrder" acceptcharset="UTF-8" method="post">
@@ -97,9 +139,10 @@ background-color: white;
   <tbody>
   </tbody>
 </table>  
-
+<s:hidden id="cliente" name="idcliente"/>
  <div style="text-align:right;margin-right:0px;">
    <a id="volver" class="btn btn-primary" href="#">Volver</a>
+   <a class="btn btn-success" href="#" id="btnbuscar">Asignar Cliente</a>
   <s:submit id="regPedido" cssClass="btn btn-success" value="Realizar Pedido"/>
 </div>
 

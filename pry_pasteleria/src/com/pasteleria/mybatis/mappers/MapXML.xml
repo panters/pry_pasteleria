@@ -75,12 +75,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="descripcion" column="descripcion" javaType="string"/>
 	</resultMap>
 	
+	<resultMap type="com.pasteleria.bean.FormaCompra" id="formaCompraMap">
+		<id property="idforcom" column="idforcom" />
+		<result property="desforcom" column="desforcom" />	
+	</resultMap>
+	
+	<resultMap type="com.pasteleria.bean.EstadoPago" id="estadoPagoMap">
+		<id property="idEstadoPago" column="idEstadoPago" />
+		<result property="desEstadoPago" column="desEstadoPago" />
+	</resultMap>
+	
 	<resultMap type="com.pasteleria.bean.Order" id="orderMap">
 		<id property="idPedidoCabe" column="idPedidoCabe" javaType="string" />
 		<result property="fechaPedido" column="fechaPedido" javaType="string"/>
 		<result property="fechaFinPedido" column="fechaFinPedido" javaType="string"/>
-		<result property="total" column="total" javaType="double"/>
-		<association property="usuario" resultMap="userMap"/>
+		<result property="total" column="montotal" javaType="double"/>
+		<result property="montoPagado" column="monpagado" javaType="double"/>
+		<association property="cliente" resultMap="customerMap"/>
+		<association property="empleado" resultMap="employedMap"/>
+		<association property="estadoPago" resultMap="estadoPagoMap"/>
+		<association property="formaCompra" resultMap="formaCompraMap" />
 		<association property="estado" resultMap="statusMap" />
 	</resultMap>
 	
@@ -96,3 +110,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 </mapper>
+
+
+
+
+

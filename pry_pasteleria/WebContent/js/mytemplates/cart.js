@@ -14,13 +14,76 @@ $(document).ready(function(){
 		alert('Escritura deshabilitada, utilize los indicadores para cambiar la cantidad');
 	});
 	
+	//---------------------------------------
+	 function verNuevo(){
+		 var moda=$('#myModalBusqueda');
+		 $('#myModalBusqueda').modal('show');
+		 
+		   var table=$('#view').DataTable({
+		        //"processing": true,
+		        "ajax": {
+		        	"url":"listCustomer.action",
+		        	 "dataSrc":"clientes"
+		        	},
+		        "columns": [
+		                    { "data": "idUsuario" },
+		                    { "data": "nombre" },
+		                    { "data": "ape_pa" },
+		                    { "data": "ape_ma" },
+		                    { "data": "dni" }
+		                ]
+		        	,  "language": {
+		           "lengthMenu": "Mostrar _MENU_ Registros por pagina",
+		           "zeroRecords": "No se hallaron Registros ",
+		           "info": "Mostrando pagina _PAGE_ de _PAGES_",
+		           "infoEmpty": "No hay Registros disponibles",
+		           "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+		           "search":"B&uacute;squeda:",
+		           "loadingRecords": "Cargando...",    
+		           "processing":     "Procesando...",
+		           "paginate": { 
+		                   "first": "Primero",        
+		                   "last":   "Ultimo",       
+		                   "next":   "siguiente",       
+		                   "previous": "Anterior"    
+		                  },
+		      		 }
+		        	,"lengthMenu": [
+				              [5,10, 25, 50, -1], 
+				              [5,10, 25, 50, "Todo"]
+				             ]
+		       ,responsive:true,
+		        	
+		       "bDestroy": true
+		    });
+	 };
+	
+	$('#btnbuscar').click(function(){
+	     verNuevo();
+	});
+	
+	$('#view').on('click','tr',function(){	
+		var datos=$('#view').DataTable().row(this).data();
+		$('#myModalBusqueda').modal('toggle');
+        $('#cliente').val(datos.idUsuario);
+      });
+	
+	
+	
+	//----------------------------------------
+	
 	
 	$('#continuarSteptwo').attr('disabled',true);
 	
 	var logueado='false';
+	var rol=0;
 	//Cosultamos al servidor si el usuario esta logueado
 	$.get("isLogged.action",function(data){
 		logueado=data.logged;
+		rol=data.rol;
+		if(rol==2){
+			$('#btnbuscar').hide();
+		}	
 	});
 	
 	//Registro del Pedido
@@ -198,10 +261,12 @@ $(document).ready(function(){
 			total=Math.round(total * 100) / 100;
 			$('.txtTotal').text(total);//setteamos el total al campo para que se muestre
 			
-			lista=data.currentOrder;		
+			lista=data.currentOrder;
+			
 			
 			if (lista.length<1 || lista==null) {
 				$('#continuarSteptwo').attr('disabled',true);
+				// $('#btnbuscar').hide();
 			}else{
 				$('#continuarSteptwo').attr('disabled',false);
 			}

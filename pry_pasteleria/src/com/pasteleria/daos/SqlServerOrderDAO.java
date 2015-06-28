@@ -56,15 +56,18 @@ public class SqlServerOrderDAO implements OrderDAO {
 	public String create(Order bean) {
 		SqlSession session=SQL_SESSION_FACTORY.openSession();
 		String idPedidoCabe=null;
-		Map<String,String> map=new HashMap<String,String>();
+		Map<String,Object> map=new HashMap<String,Object>();
 		try {
 			//Parametros para registrar el Pedido
-			map.put("idUsuario",bean.getUsuario().getIdUsuario());
+			map.put("idCliente",bean.getCliente().getIdUsuario());
+			map.put("idEmpleado",bean.getEmpleado().getIdUsuario());
+			map.put("total", bean.getTotal());
+			map.put("formaCompra", bean.getFormaCompra().getIdforcom());
 			map.put("idPedidoCabe",idPedidoCabe);
 			//Registramos el Pedido
 			session.selectOne("orderxml.sql_insert",map);
 			//Obteemos el idPedidoGenerado
-			idPedidoCabe=map.get("idPedidoCabe");
+			idPedidoCabe=map.get("idPedidoCabe").toString();
 			//confirmamos los cambios
 			session.commit();			
 			System.out.println(idPedidoCabe);

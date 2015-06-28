@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
     
     <select id="sql_select" resultMap="mapxml.orderMap" statementType="PREPARED">
-		 select * from Pedidos where idUsuario=#{idUsuario};
+		 select * from Pedidos where idCliente=#{idUsuario};
 	</select>
 	
 	<select id="sql_find" parameterType="string" resultMap="mapxml.orderMap" statementType="PREPARED" resultType="string">
@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="sql_insert" parameterType="map" statementType="CALLABLE" resultType="string" >
-		exec registrar_pedido #{idUsuario},#{idPedidoCabe,jdbcType=VARCHAR, javaType=java.lang.String,mode=OUT};
+		exec registrar_pedido #{idCliente},#{idEmpleado},#{total},#{formaCompra},#{idPedidoCabe,jdbcType=VARCHAR, javaType=java.lang.String,mode=OUT};
 	</select>	
 	
 	<update id="sql_update" parameterType="order" statementType="CALLABLE">
