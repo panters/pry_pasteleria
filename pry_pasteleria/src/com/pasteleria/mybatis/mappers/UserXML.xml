@@ -8,5 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from BUSCA_USUARIO where login=#{login} and  password=#{password}
 </select>
 
+<select id="sql_recover" parameterType="map" resultMap="mapxml.userMap" statementType="PREPARED">
+	select * from BUSCA_USUARIO where login=#{login}
+</select>
+
 </mapper>
 

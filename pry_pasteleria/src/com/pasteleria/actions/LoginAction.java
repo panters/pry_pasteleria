@@ -10,6 +10,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.User;
+import com.pasteleria.notifications.Email;
 import com.pasteleria.services.ServiceNavbar;
 import com.pasteleria.services.ServiceUser;
 
@@ -72,6 +73,23 @@ public class LoginAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	
+	@Action(value="enviarClave",
+			results={@Result(name=SUCCESS,type="tiles",location="login"),
+			@Result(name=ERROR,type="tiles",location="recoverPwd")
+			})
+	public String recuperarClave(){
+		
+		User u=new ServiceUser().find(email);
+		if(u!=null){
+			Email e=new Email(this.email, "Tu claves es <strong>"+u.getPassword()+"</strong>",true);
+			new Thread(e).start();
+		}else{
+			addActionError("Usuario no registrado");
+			return ERROR;
+		}
+		return SUCCESS;
+	}
 	
 
 	public int getRol() {

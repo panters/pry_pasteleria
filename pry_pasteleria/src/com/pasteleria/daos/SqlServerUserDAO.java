@@ -33,4 +33,22 @@ public class SqlServerUserDAO implements UserDAO {
 		return user;
 	}
 
+	@Override
+	public User find(String login) {
+		
+		SqlSession session=FACTORY.openSession();
+		User user=null;
+		try {
+			Map<String, String> map=new HashMap<String,String>();
+			map.put("login",login);
+			user=(User) session.selectOne("userxml.sql_recover",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return user;
+	}
+
 }

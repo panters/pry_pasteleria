@@ -15,4 +15,10 @@ public class ServiceUser implements UserDAO {
 		return dao.find(login, pasword);
 	}
 
+
+	@Override
+	public User find(String login) {
+		return dao.find(login);
+	}
+
 }

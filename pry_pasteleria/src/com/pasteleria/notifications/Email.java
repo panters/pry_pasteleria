@@ -32,6 +32,8 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
     
     private String destinatario;
     private String asunto;
+    private String body;
+    private boolean recuperarClave=false;
     
     private String usuario;
     private String idpedido;
@@ -55,11 +57,15 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
         this.asunto=asunto;
     }    
 
-    
+    public Email(String destinatario,String body,boolean recuperarClave){
+    	this.destinatario=destinatario;
+    	this.body=body;
+    	this.recuperarClave=recuperarClave;
+    }
     
    //Metodo implementado de la Interfaz Runable
 	@Override
-	public void run() {	
+	public void run(){	
 		boolean sendMail=sendMail();
 		System.out.println("Email enviado: "+sendMail);
 	}
@@ -80,27 +86,43 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
             //texto.setText(customMessage(usuario,idpedido));
 
             BodyPart adjunto = new MimeBodyPart();
-            if (!rutaArchivo.equals("") || rutaArchivo!=null || rutaArchivo.length()<1){
-                 adjunto.setDataHandler(
+            
+            if ( rutaArchivo!=null ){
+            	
+            	if(!rutaArchivo.equals("") || rutaArchivo.length()<1){
+            		adjunto.setDataHandler(
                     new DataHandler(new FileDataSource(rutaArchivo)));
-                adjunto.setFileName(nombreArchivo);                
+                    adjunto.setFileName(nombreArchivo);  
+            	}
+                               
             }
 
             MimeMultipart multiParte = new MimeMultipart();
             multiParte.addBodyPart(texto);
-            if (!rutaArchivo.equals("")){
-                multiParte.addBodyPart(adjunto);
+            
+            if (rutaArchivo!=null){
+            	if(!rutaArchivo.equals("")){
+            		multiParte.addBodyPart(adjunto);
+            	}
             }
 
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(usuarioCorreo));
-            message.addRecipient(
-                Message.RecipientType.TO,
-                new InternetAddress(destinatario));
-                message.setSubject(asunto);
-            message.setContent(multiParte);
-            message.setText(customMessage(usuario, idpedido), "UTF-8", "html");
-
+            message.addRecipient(Message.RecipientType.TO,new InternetAddress(destinatario));
+            
+            
+            if (recuperarClave) {
+            	message.setSubject("Recupera tu Contrseña");
+            	message.setContent(multiParte);
+            	message.setText("<h4>Contraseña Recuperada</h4><p>"+this.body+"</p>", "UTF-8", "html");
+			}else{
+				
+				message.setSubject(asunto);
+	            message.setContent(multiParte);
+	            message.setText(customMessage(usuario, idpedido), "UTF-8", "html");
+			}
+            
+           
             Transport t = session.getTransport("smtp");
             t.connect(usuarioCorreo, password);
             t.sendMessage(message, message.getAllRecipients());
@@ -133,8 +155,9 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
     public static void main(String[] args){
         
       
-        Email e = new Email("C:\\Users\\Pantera\\Downloads\\emblema.jpg","adjunto.jpg","lmhernandez21187@gmail.com ","Luis Hernandez Montenegro","P00021");
-  
+        //Email e = new Email("C:\\Users\\Pantera\\Downloads\\emblema.jpg","adjunto.jpg","leonxandercs@gmail.com ","Luis Hernandez Montenegro","P00021");
+    	Email e=new Email("leonxandercs@gmail.com", "Tu claves es 123456",true);
+   
         if (e.sendMail()){
         	System.out.println("Envio correcto");
         }else{

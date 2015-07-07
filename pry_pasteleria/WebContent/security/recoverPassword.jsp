@@ -34,7 +34,7 @@ $.growl(
 			</td>
 			<td width="300px">
 				<div class="wrapper" id="colum2">
-					<s:form cssClass="form animate-form"
+					<s:form  action="enviarClave" cssClass="form animate-form"
 						id="form" onsubmit="return true;">
 						<div class="form-header">
 							<h3>RECUPERAR CONTRASEÑA</h3>
@@ -49,7 +49,7 @@ $.growl(
 							<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 						</div>
 						<div class="form-group submit">
-							<input class="btn btn-lg" type="submit" value="ENVIAR CLAVE">
+							<s:submit cssClass="btn btn-lg" value="ENVIAR CLAVE"/>
 						</div>
 					</s:form>
 				</div>

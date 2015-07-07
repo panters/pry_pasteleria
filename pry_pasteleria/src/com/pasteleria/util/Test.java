@@ -3,27 +3,15 @@ package com.pasteleria.util;
 
 import com.pasteleria.bean.*;
 import com.pasteleria.services.HasServiceOrder;
+import com.pasteleria.services.ServiceUser;
 
 public class Test {
 
 	
 	public static void main(String[] args) {
 	    User user=new User();
-	    user.setIdUsuario("E0002");
-		Order order=new Order();
-		order.setIdPedidoCabe("P00002");
-		//order.setUsuario(user.getIdUsuario());
-		order.setFechaPedido("05-06-2015");
-		order.setFechaFinPedido(null);
-		//order.setEstado();
-		
-		int orden=new HasServiceOrder().update(order);
-		System.out.println(orden);
-//		System.out.println(order.getIdPedidoCabe());
-//		System.out.println(order.getEstado().getIdEstado());
-		
-		
-		
+	    user=new ServiceUser().find("leonxandercs@gmail.com");
+		System.out.println(user.getPassword());
 		
 		
 		
