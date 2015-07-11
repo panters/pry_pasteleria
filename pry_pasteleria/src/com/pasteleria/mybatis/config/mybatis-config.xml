@@ -22,6 +22,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			type="com.pasteleria.bean.OrderDetail"/>
 	    <typeAlias alias="order"
 			type="com.pasteleria.bean.Order"/>
+		<typeAlias alias="insumo"
+		type="com.pasteleria.bean.Insumo"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -52,6 +54,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/pasteleria/mybatis/mappers/ProductXML.xml"/>
 		<mapper resource="com/pasteleria/mybatis/mappers/OrderXML.xml"/>
 		<mapper resource="com/pasteleria/mybatis/mappers/OrderDetailXML.xml"/>
+		<mapper resource="com/pasteleria/mybatis/mappers/InsumoXML.xml"/>
 	</mappers>
 
 </configuration>

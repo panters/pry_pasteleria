@@ -6,6 +6,7 @@ import com.pasteleria.interfaces.CustomerDAO;
 import com.pasteleria.interfaces.DoughDAO;
 import com.pasteleria.interfaces.EmployedDAO;
 import com.pasteleria.interfaces.FillingDAO;
+import com.pasteleria.interfaces.InsumoDAO;
 import com.pasteleria.interfaces.NavbarDAO;
 import com.pasteleria.interfaces.OrderDAO;
 import com.pasteleria.interfaces.OrderDetailDAO;
@@ -32,6 +33,7 @@ public abstract class Factory {
 	public abstract ProductDAO getProductDAO();
 	public abstract OrderDAO getOrderDAO();
 	public abstract OrderDetailDAO getOrderDetailDAO();
+	public abstract InsumoDAO getInsumoDAO();
 	
 	
 	public static Factory  getTipo(int tipo){

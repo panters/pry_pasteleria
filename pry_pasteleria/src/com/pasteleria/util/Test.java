@@ -1,7 +1,10 @@
 package com.pasteleria.util;
 
 
+import java.util.List;
+
 import com.pasteleria.bean.*;
+import com.pasteleria.daos.SqlServerInsumoDAO;
 import com.pasteleria.services.HasServiceOrder;
 import com.pasteleria.services.ServiceUser;
 
@@ -9,12 +12,10 @@ public class Test {
 
 	
 	public static void main(String[] args) {
-	    User user=new User();
-	    user=new ServiceUser().find("leonxandercs@gmail.com");
-		System.out.println(user.getPassword());
+	   
 		
-		
-		
+		List<Insumo> lst=new SqlServerInsumoDAO().list();
+		lst.forEach(x->{System.out.println(x.getDescripcion());});
 //        List<OrderDetail> listpd;
 //			
 //		listpd=new HasServiceOrderDetail().list("P00001");

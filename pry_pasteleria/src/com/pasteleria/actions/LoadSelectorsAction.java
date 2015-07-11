@@ -11,12 +11,14 @@ import com.pasteleria.bean.Category;
 import com.pasteleria.bean.Coverage;
 import com.pasteleria.bean.Dough;
 import com.pasteleria.bean.Filling;
+import com.pasteleria.bean.Insumo;
 import com.pasteleria.bean.Rol;
 import com.pasteleria.services.HasServiceRol;
 import com.pasteleria.services.ServiceCategory;
 import com.pasteleria.services.ServiceCoverage;
 import com.pasteleria.services.ServiceDough;
 import com.pasteleria.services.ServiceFilling;
+import com.pasteleria.services.ServiceInsumo;
 
 @ParentPackage(value="cloudedleopard")
 public class LoadSelectorsAction extends ActionSupport{
@@ -27,12 +29,20 @@ public class LoadSelectorsAction extends ActionSupport{
 	private List<Coverage> coberturas;
 	private List<Dough> masas;
 	private List<Filling> rellenos;
+	private List<Insumo> insumos;
 	
 	private Rol rol;
 	private Category categoria;
 	private Coverage cobertura;
 	private Dough masa;
 	private Filling relleno;
+	
+	@Action(value="listInsumos",results={@Result(name="success",type="json")})
+	public String listInsumos(){
+		this.insumos=new ServiceInsumo().list();
+		return SUCCESS;
+	}
+	
 	
 	@Action(value="listRol",results={@Result(name="success",type="json")})
 	public String list(){
@@ -117,17 +127,20 @@ public class LoadSelectorsAction extends ActionSupport{
 	public List<Rol> getRoles() {
 		return roles;
 	}
-
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
-
 	public Rol getRol() {
 		return rol;
 	}
-
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+	public List<Insumo> getInsumos() {
+		return insumos;
+	}
+	public void setInsumos(List<Insumo> insumos) {
+		this.insumos = insumos;
 	}
 	
 	
