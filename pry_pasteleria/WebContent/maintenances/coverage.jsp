@@ -194,7 +194,7 @@ $(document).ready(function() {
 		<div class="modal-body">
 	    		<s:hidden id="idCobertura" name="cobertura.idCobertura" />
 	    	<div class="form-group">
-		   		<s:textfield label="Cobertura :" name="cobertura.descripcion" id="descripcion" cssClass="form-control"/>
+		   		<s:textfield label="Cobertura :" name="cobertura.descripcion" id="descripcion" cssClass="form-control" onkeypress="return validarLetra(event)"/>
 	    	</div>
 	    	
 	    	

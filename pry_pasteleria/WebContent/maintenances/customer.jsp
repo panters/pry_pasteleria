@@ -283,16 +283,16 @@ $(document).ready(function() {
 		<div class="modal-body">
 	    		<s:hidden id="idUsuario" name="cliente.idUsuario" />
 	    	<div class="form-group">
-		   		<s:textfield label="Nombre :" name="cliente.nombre" id="nombre" cssClass="form-control"/>
+		   		<s:textfield label="Nombre :" name="cliente.nombre" id="nombre" cssClass="form-control" onkeypress="return validarLetra(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Apellido Paterno :" name="cliente.ape_pa" id="ape_pa" cssClass="form-control"/>
+	    		<s:textfield label="Apellido Paterno :" name="cliente.ape_pa" id="ape_pa" cssClass="form-control" onkeypress="return validarLetra(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Apellido Materno :" name="cliente.ape_ma" id="ape_ma" cssClass="form-control"/>
+	    		<s:textfield label="Apellido Materno :" name="cliente.ape_ma" id="ape_ma" cssClass="form-control" onkeypress="return validarLetra(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="DNI :" name="cliente.dni" id="dni" cssClass="form-control"/>
+	    		<s:textfield label="DNI :" name="cliente.dni" id="dni" cssClass="form-control" maxlength="8" onkeypress="return validarEntero(event)"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Fecha Nacimiento :" name="cliente.fec_nacimiento" id="fec_nacimiento" cssClass="form-control"/>
@@ -307,10 +307,10 @@ $(document).ready(function() {
 	    		<s:textfield label="Estado Civil:" name="cliente.estado_civil" id="estado_civil" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Telefono:" name="cliente.telefono" id="telefono" cssClass="form-control"/>
+	    		<s:textfield label="Telefono:" name="cliente.telefono" id="telefono" cssClass="form-control" maxlength="7" onkeypress="return validarEntero(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Celular:" name="cliente.celular" id="celular" cssClass="form-control"/>
+	    		<s:textfield label="Celular:" name="cliente.celular" id="celular" cssClass="form-control" maxlength="9" onkeypress="return validarEntero(event)"/>
 	    	</div>
    		 </div>
       <div class="modal-footer">
