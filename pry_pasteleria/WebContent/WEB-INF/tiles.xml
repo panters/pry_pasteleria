@@ -86,6 +86,10 @@
 		<put-attribute name="body" 	 value="/maintenances/rol.jsp"/>
 	</definition>
 	
+	<definition name="mdough" extends="layoutAdmin">
+		<put-attribute name="body" 	 value="/maintenances/dough.jsp"/>
+	</definition>
+	
 	<definition name="catalogoAdmin" extends="layoutAdmin">
 		<put-attribute name="body"   value="/pages/catalogoAdmin.jsp"/>		
 	</definition>

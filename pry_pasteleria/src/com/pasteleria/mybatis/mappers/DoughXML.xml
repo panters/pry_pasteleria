@@ -5,7 +5,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="doughxml">
 
 	<select id="sql_select" resultMap="mapxml.doughMap" statementType="PREPARED">
-		select * from Masa;
+		select idMasa as idMasa,descripcionMasa as descripcion from Masa;
 	</select>
+	
+	<select id="sql_find" parameterType="int" resultMap="mapxml.doughMap" statementType="PREPARED">
+		select * from masa where idMasa=#{idMasa}
+	</select>
+	
+	<insert id="sql_insert" parameterType="int" statementType="PREPARED">
+		insert into masa values(#{descripcion});
+	</insert>
+	
+	<update id="sql_update" parameterType="int" statementType="PREPARED">
+		update masa set descripcionMasa = #{descripcion} where idMasa = #{idMasa};
+	</update>
+	
+	<delete id="sql_delete" parameterType="int" statementType="PREPARED">
+		delete from masa where idMasa =  #{idMasa};
+	</delete>
 	
 </mapper>

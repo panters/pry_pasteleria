@@ -51,7 +51,7 @@ $(document).ready(function() {
            //Obtenemos Fila actual
            var currentRow=table.row(this).data();
            //Extraemos los datos con JSON
-           var dato1=currentRow.idRol;
+           var dato1=currentRow.idCobertura;
            var dato2=currentRow.descripcion;
            
            mostrarmodal(dato1,dato2);
@@ -64,9 +64,9 @@ $(document).ready(function() {
     function mostrarmodal(dato1,dato2){
     	  $('#myModalNuevo').on('show.bs.modal', function (event) {
 		  var modal = $(this);
-		  modal.find('.modal-header h4').text('Modificar Rol: ' + dato1);
+		  modal.find('.modal-header h4').text('Modificar Covetura: ' + dato1);
 	
-		  modal.find('.modal-body #idRol').val(dato1);
+		  modal.find('.modal-body #idCobertura').val(dato1);
 		  modal.find('.modal-body #descripcion').val(dato2);
 		});
     }
@@ -100,9 +100,9 @@ $(document).ready(function() {
 	  $('#delete').click(function(){
 	      	$('#borrame').remove();
 	      	var modal = $('#myModalNuevo');
-	      	var id=modal.find('.modal-body #idRol').val();
+	      	var id=modal.find('.modal-body #idCobertura').val();
 	      	var c1="<a id=\"borrame\" class=\"btn btn-primary \" ";
-	      	var str1 = "href=\"deleteRol?rol.idRol=";
+	      	var str1 = "href=\"deleteCoverage?cobertura.idCobertura=";
 	        var str2 = "\">Si</a>";
 	        var res = c1.concat(str1,id,str2);
 	      //  modal.modal('show');
@@ -140,7 +140,7 @@ $(document).ready(function() {
 	<section class="content-header">
 		 <h1>
             Mantenimiento 
-            <small>Rol</small>
+            <small>Cobertura</small>
           </h1>
           <ol class="breadcrumb">
           <a href="#" class="btn btn-primary" data-toggle="modal" id="btnNuevo">+ Nuevo</a>
@@ -186,7 +186,7 @@ $(document).ready(function() {
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
-  <s:form id="Registro" action="createRol" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="well form-vertical">
+  <s:form id="Registro" action="createCoverage" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="well form-vertical">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     	<h4>Registrar Cobertura</h4>

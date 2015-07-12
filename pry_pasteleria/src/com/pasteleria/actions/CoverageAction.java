@@ -39,7 +39,7 @@ public class CoverageAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	@Action(value="deleteCoverage",results={@Result(name="success",type="json")})
+	@Action(value="deleteCoverage",results={@Result(name="success",type="tiles",location="mcobertura")})
 	public String delete(){
 		new ServiceCoverage().delete(cobertura);
 		return SUCCESS;

@@ -158,7 +158,7 @@
               <ul class="treeview-menu">
                 <li><a href="mproduct.action"><i class="fa fa-circle-o"></i>Producto</a></li>
                 <li><a href="mcobertura.action"><i class="fa fa-circle-o"></i> Cobertura</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Masa</a></li>
+                <li><a href="mdough.action"><i class="fa fa-circle-o"></i> Masa</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> Relleno</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> Categoria</a></li>
                 <li><a href="mcustomer.action"><i class="fa fa-circle-o"></i> Clientes</a></li>
