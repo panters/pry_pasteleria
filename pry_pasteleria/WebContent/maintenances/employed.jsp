@@ -173,6 +173,7 @@ $(document).ready(function() {
 	        var res = c1.concat(str1,id,str2);
 	          
 	      	$("#conexionServer").before(res);
+	      	$("#modalEliminar").modal('show');
 	      });   
  
 	  
@@ -343,7 +344,7 @@ $(document).ready(function() {
   	  <div style="text-align:left;">
   	  		<s:submit cssClass="btn btn-primary" value="Guardar"/>&nbsp;&nbsp;
   	  		<s:reset  id="cleanForm" cssClass="btn btn-primary" value="Limpiar"/>
-   	  		<button  id="delete" type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Eliminar</button>&nbsp;&nbsp;
+   	  		<button  id="delete" type="button" class="btn btn-danger" data-toggle="modal">Eliminar</button>&nbsp;&nbsp;
    	  </div>
       	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
     </div>
@@ -355,7 +356,7 @@ $(document).ready(function() {
 <!-- -----------END MODAL NUEVO --------------- -->
 
 <!-- ------------Show Message Modal------------ -->
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" id="modalEliminar" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
     <div class="modal-header">

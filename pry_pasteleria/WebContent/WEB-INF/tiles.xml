@@ -67,7 +67,7 @@
 	</definition>
 	
 	<definition name="mcobertura" extends="layoutAdmin">
-		<put-attribute name="body" 	 value="/maintenances/mantenimientoCobertura.jsp"/>
+		<put-attribute name="body" 	 value="/maintenances/coverage.jsp"/>
 	</definition>
 	
 	<definition name="mcustomer" extends="layoutAdmin">

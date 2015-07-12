@@ -8,6 +8,7 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Coverage;
+import com.pasteleria.services.HasServiceRol;
 import com.pasteleria.services.ServiceCoverage;
 
 @ParentPackage(value="cloudedleopard")
@@ -17,6 +18,11 @@ public class CoverageAction extends ActionSupport{
 	private List<Coverage> coberturas;
 	private Coverage cobertura;
 	
+	@Action(value="listCoverage",results={@Result(name="success",type="json")})
+	public String list(){
+		coberturas=new ServiceCoverage().list();
+		return SUCCESS;
+	}
 	
 	@Action(value="findCoverage",results={@Result(name="success",type="json")})
 	public String find(){

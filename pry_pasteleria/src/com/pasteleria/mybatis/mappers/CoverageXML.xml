@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="coveragexml">
 
 	<select id="sql_select" resultMap="mapxml.coverageMap" statementType="PREPARED">
-		select * from Cobertura;
+		select idCobertura as idCobertura,descripcionCobertura as descripcion from Cobertura;
 	</select>
 	
 	<select id="sql_find" parameterType="int" resultMap="mapxml.coverageMap" statementType="PREPARED">
