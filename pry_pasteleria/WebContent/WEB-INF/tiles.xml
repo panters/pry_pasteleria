@@ -90,6 +90,14 @@
 		<put-attribute name="body" 	 value="/maintenances/dough.jsp"/>
 	</definition>
 	
+	<definition name="mfilling" extends="layoutAdmin">
+		<put-attribute name="body" 	 value="/maintenances/filling.jsp"/>
+	</definition>
+	
+	<definition name="mcategory" extends="layoutAdmin">
+		<put-attribute name="body" 	 value="/maintenances/category.jsp"/>
+	</definition>
+	
 	<definition name="catalogoAdmin" extends="layoutAdmin">
 		<put-attribute name="body"   value="/pages/catalogoAdmin.jsp"/>		
 	</definition>

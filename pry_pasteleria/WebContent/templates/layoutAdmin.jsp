@@ -159,8 +159,8 @@
                 <li><a href="mproduct.action"><i class="fa fa-circle-o"></i>Producto</a></li>
                 <li><a href="mcobertura.action"><i class="fa fa-circle-o"></i> Cobertura</a></li>
                 <li><a href="mdough.action"><i class="fa fa-circle-o"></i> Masa</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Relleno</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Categoria</a></li>
+                <li><a href="mfilling.action"><i class="fa fa-circle-o"></i> Relleno</a></li>
+                <li><a href="mcategory.action"><i class="fa fa-circle-o"></i> Categoria</a></li>
                 <li><a href="mcustomer.action"><i class="fa fa-circle-o"></i> Clientes</a></li>
                 <li><a href="memployed.action"><i class="fa fa-circle-o"></i> Empleados</a></li>
                 <li><a href="mrol.action"><i class="fa fa-circle-o"></i> Roles</a></li>

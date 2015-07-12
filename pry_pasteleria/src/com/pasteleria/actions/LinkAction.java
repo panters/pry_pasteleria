@@ -149,6 +149,16 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@Action(value="mfilling",results={@Result(name=SUCCESS,type="tiles",location="mfilling")})
+	public String mfilling(){
+		return SUCCESS;
+	}
+	
+	@Action(value="mcategory",results={@Result(name=SUCCESS,type="tiles",location="mcategory")})
+	public String mcategory(){
+		return SUCCESS;
+	}
+	
 	@Action(value="Admin",results={@Result(name=SUCCESS,location="/security/loginAdmin.jsp")})
 	public String loginAdmin(){
 		return SUCCESS;
