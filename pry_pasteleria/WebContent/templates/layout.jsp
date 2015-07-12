@@ -31,6 +31,9 @@
   	<!-- excite-bike start dot-luv
   	<sj:head jquerytheme="showcase" customBasepath="themes" locale="es" jqueryui="true"/>
   	-->
+  	
+  	<script src="js/jquery-ui.js"></script>
+  	
   	<script src="js/jquery.bootstrap-growl.js"></script>
 	<script src="js/bootstrap-growl.min.js"></script>	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.1/modernizr.min.js"></script>
@@ -39,13 +42,9 @@
 	<script src="js/datatables/dataTables.responsive.js"></script>
 	<script src="js/datatables/dataTables.bootstrap.js"></script>
 	
-	<script src="js/jquery-ui.js"></script>
-
-	
 	<link rel="stylesheet" type="text/css" href="css/datatables/jquery.dataTables.css">
 	<link rel="stylesheet" type="text/css" href="css/datatables/dataTables.responsive.css">
 	<link rel="stylesheet" type="text/css" href="css/datatables/dataTables.bootstrap.css">
-	
 	
 </head>		
 

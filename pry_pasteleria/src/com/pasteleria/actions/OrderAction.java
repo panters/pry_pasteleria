@@ -60,6 +60,7 @@ public class OrderAction  extends ActionSupport{
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Action(value="registerOrder",results={@Result(name=SUCCESS,type="json")})
 	public String registerOrder(){
 		

@@ -28,13 +28,17 @@ public class LoginAction  extends ActionSupport{
 	private String password;
 	private String logged;
 	private int rol;
+	private int a;
+	
 	
 	public Map<String, Object> session=(Map<String, Object>)ActionContext.getContext().getSession();
 	
 	@Action(value="ValidateUser",
 			results={@Result(name=SUCCESS,type="tiles",location="catalogo"),
 			@Result(name=ERROR,type="tiles",location="login"),
-			@Result(name="orderPending",type="tiles",location="carrito")
+			@Result(name="ERROR1",location="/security/loginAdmin.jsp"),
+			@Result(name="orderPending",type="tiles",location="carrito"),
+			@Result(name="admin",type="tiles",location="layoutAdmin")
 			})
 	public String validateUser()
 	{
@@ -42,21 +46,42 @@ public class LoginAction  extends ActionSupport{
 		
 		if (user!=null)
 		{
-			this.navbar=new ServiceNavbar().getNavBarWithRol(user.getRol().getIdRol());
-			session.put("navbar", this.navbar);
-			session.put("user", user);
-			addActionMessage(user.getNombre());
-			
-			if (session.get("cart")!=null) {
-				return "orderPending";
+			if((user.getRol().getIdRol()==3 || user.getRol().getIdRol()==4) && a==1 ){
+				session.put("user", user);
+				return "admin";
+			}
+			else if(user.getRol().getIdRol()==2 &&  a==2){
+				this.navbar=new ServiceNavbar().getNavBarWithRol(user.getRol().getIdRol());
+				session.put("navbar", this.navbar);
+				session.put("user", user);
+				addActionMessage(user.getNombre());
+				
+				if (session.get("cart")!=null) {
+					return "orderPending";
+				}
+			}
+			else{
+				if(a==2){
+					addActionError("Credenciales Incorrectas");
+					return ERROR;	
+				}else{
+					addActionError("Credenciales Incorrectas");
+					return "ERROR1";
+				}	
 			}
 			
 			return SUCCESS;
 		}
 		else
 		{
-			addActionError("Credenciales Incorrectas");
-			return ERROR;
+			if(a==2){
+				addActionError("Credenciales Incorrectas");
+				return ERROR;	
+			}else{
+				addActionError("Credenciales Incorrectas");
+				return "ERROR1";
+			}
+					
 		}
 		
 	}
@@ -127,6 +152,14 @@ public class LoginAction  extends ActionSupport{
 
 	public void setNavbar(String navbar) {
 		this.navbar = navbar;
+	}
+
+	public int getA() {
+		return a;
+	}
+
+	public void setA(int a) {
+		this.a = a;
 	}
 
 	

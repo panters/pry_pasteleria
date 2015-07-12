@@ -48,6 +48,7 @@
 							</div>
 							<input class="form-control" id="email" name="email"
 								placeholder="Correo Electrónico" type="text">
+								<s:hidden name="a" value="2"/>
 							<span	class="glyphicon glyphicon-ok form-control-feedback"></span>
 						</div>
 						<div class="form-group has-feedback">

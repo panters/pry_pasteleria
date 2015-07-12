@@ -31,14 +31,17 @@ public class LoadSelectorsAction extends ActionSupport{
 	private List<Filling> rellenos;
 	private List<Insumo> insumos;
 	
+	
 	private Rol rol;
 	private Category categoria;
 	private Coverage cobertura;
 	private Dough masa;
 	private Filling relleno;
 	
+	
+	
 	@Action(value="listInsumos",results={@Result(name="success",type="json")})
-	public String listInsumos(){
+	public String listInsumo(){
 		this.insumos=new ServiceInsumo().list();
 		return SUCCESS;
 	}
@@ -127,18 +130,25 @@ public class LoadSelectorsAction extends ActionSupport{
 	public List<Rol> getRoles() {
 		return roles;
 	}
+
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
+
 	public Rol getRol() {
 		return rol;
 	}
+
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
+
+
 	public List<Insumo> getInsumos() {
 		return insumos;
 	}
+
+
 	public void setInsumos(List<Insumo> insumos) {
 		this.insumos = insumos;
 	}

@@ -8,4 +8,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from rol;
 	</select>
 	
+	<select id="sql_find" parameterType="int" resultMap="mapxml.rolMap" statementType="PREPARED">
+		select * from rol where idRol=#{idRol};
+	</select>
+	
+	<insert id="sql_insert" parameterType="String" statementType="PREPARED">
+		insert into rol values(#{descripcion});
+	</insert>
+	
+	<update id="sql_update" parameterType="int" statementType="PREPARED">
+		update rol set descripcion = #{descripcion} where idRol = #{idRol};
+	</update>
+	
+	<delete id="sql_delete" parameterType="int" statementType="PREPARED">
+		delete rol where idRol =  #{idRol};
+	</delete>
+	
 </mapper>

@@ -200,14 +200,26 @@ $(document).ready(function() {
 } );
 
 </script>
-<div class="panel panel-primary">
-	<div class="panel panel-heading">
-		<h1 class="panel-title">LISTADO DE EMPLEADOS</h1>
-	</div>
-	<div>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="#" class="btn btn-primary" data-toggle="modal" id="btnNuevo">+ Nuevo</a>
-  	<p/>
+	<section class="content-header">
+		 <h1>
+            Mantenimiento 
+            <small>Empleado</small>
+          </h1>
+          <ol class="breadcrumb">
+          <a href="#" class="btn btn-primary" data-toggle="modal" id="btnNuevo">+ Nuevo</a>
+            <!-- <li style="font-size: 2em;"><a href="#" id="btnNuevo"><i class="fa fa-dashboard"></i>Nuevo</a></li> -->
+          </ol>
+    </section>    
+    
+    <section class="content">
+	<div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title"></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+    
 	<div class="container">
 	<!--<div class="table-responsive">  -->
 			<table id="example" class="table table-responsive table-striped table-bordered table-hover" cellspacing="0" width="100%">
@@ -253,11 +265,14 @@ $(document).ready(function() {
 			    </table>
 			   
 			<!--</div>-->
-		</div>
-	</div>
+
 </div>
 
-
+</div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
 
 <!-- -----------Modal Register New------------ -->
 

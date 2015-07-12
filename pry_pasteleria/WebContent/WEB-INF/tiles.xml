@@ -15,6 +15,10 @@
 		<put-attribute name="body"  value="/security/login.jsp"/>
 	</definition>	
 	
+	<definition name="layoutAdmin" template="/templates/layoutAdmin.jsp">
+		<put-attribute name="body"  value="/maintenances/home.jsp"/>
+	</definition>
+	
 	<!-- 
 	<definition name="menu" template="/templates/plantilla03.jsp">
 		<put-attribute name="cabecera" value="/templates/cabecera.jsp"/>				
@@ -27,7 +31,7 @@
 		<put-attribute name="title"  value="Login"/>
 		<put-attribute name="body"   value="/security/login.jsp"/>		
 	</definition>	
-	
+		
 	<definition name="singup" extends="layout">
 		<put-attribute name="title" value="Registro de Cliente"/>
 		<put-attribute name="body"  value="/security/singup.jsp"/>
@@ -37,9 +41,8 @@
 		<put-attribute name="title"  value="Catalogo de Tortas"/>
 		<put-attribute name="body"   value="/pages/catalogo.jsp"/>		
 	</definition>	
-	
-	<definition name="seguimiento" extends="layout">
-		<put-attribute name="title"  value="Seguimiento Pedidos"/>
+		
+	<definition name="seguimiento" extends="layoutAdmin">
 		<put-attribute name="body" 	 value="/pages/seguimiento.jsp"/>
 	</definition>
 	
@@ -63,39 +66,32 @@
 		<put-attribute name="body" 	 value="/security/recoverPassword.jsp"/>
 	</definition>
 	
-	<definition name="mproducto" extends="layout">
-		<put-attribute name="title"  value="Mantenimiento de Productos"/>
-		<put-attribute name="body" 	 value="/maintenances/mantenimientoProducto.jsp"/>
-	</definition>
-	
-	<definition name="mempleado" extends="layout">
-		<put-attribute name="title"  value="Mantenimiento de Empleados"/>
-		<put-attribute name="body" 	 value="/maintenances/mantenimientoEmpleado.jsp"/>
-	</definition>
-	
-	<definition name="mcliente" extends="layout">
-		<put-attribute name="title"  value="Mantenimiento de Cliente"/>
-		<put-attribute name="body" 	 value="/maintenances/mantenimientoCliente.jsp"/>
-	</definition>
-	
-	<definition name="mcobertura" extends="layout">
-		<put-attribute name="title"  value="Mantenimiento de Cobertura"/>
+	<definition name="mcobertura" extends="layoutAdmin">
 		<put-attribute name="body" 	 value="/maintenances/mantenimientoCobertura.jsp"/>
 	</definition>
 	
-	<definition name="mcustomer" extends="layout">
-		<put-attribute name="title"  value="Mantenimiento de Clientes"/>
+	<definition name="mcustomer" extends="layoutAdmin">
 		<put-attribute name="body" 	 value="/maintenances/customer.jsp"/>
 	</definition>
 	
-	<definition name="memployed" extends="layout">
-		<put-attribute name="title"  value="Mantenimiento de Empleados"/>
+	<definition name="memployed" extends="layoutAdmin">
 		<put-attribute name="body" 	 value="/maintenances/employed.jsp"/>
 	</definition>
 	
-	<definition name="mproduct" extends="layout">
-		<put-attribute name="title"  value="Mantenimiento de Productos"/>
+	<definition name="mproduct" extends="layoutAdmin">
 		<put-attribute name="body" 	 value="/maintenances/product.jsp"/>
+	</definition>
+	
+	<definition name="mrol" extends="layoutAdmin">
+		<put-attribute name="body" 	 value="/maintenances/rol.jsp"/>
+	</definition>
+	
+	<definition name="catalogoAdmin" extends="layoutAdmin">
+		<put-attribute name="body"   value="/pages/catalogoAdmin.jsp"/>		
+	</definition>
+	
+	<definition name="carritoAdmin" extends="layoutAdmin">
+		<put-attribute name="body"   value="/pages/carritoAdmin.jsp"/>
 	</definition>
 	
 </tiles-definitions>

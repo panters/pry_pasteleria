@@ -43,6 +43,12 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@Action(value="catalogoAdmin",
+			results={@Result(name=SUCCESS,type="tiles",location="catalogoAdmin")})
+	public String catalogoAdmin(){
+		return SUCCESS;
+	}
+	
 	@Action(value="seguimiento",
 			results={@Result(name="admin",type="tiles",location="seguimiento"),
 			@Result(name="cliente",type="tiles",location="seguimientoCustomer")})
@@ -51,10 +57,14 @@ public class LinkAction  extends ActionSupport{
 		if (session.get("user")!=null) {
 			User u=(User) session.get("user");
 			if (u.getRol().getIdRol()==2) {
+				System.out.println("usuario cliente");
 				return "cliente";
 			}else{
+				System.out.println("usuario empleado");
 				return "admin";
 			}
+		}else{
+			System.out.println("usuario null");
 		}
 		return SUCCESS;
 	}
@@ -71,6 +81,11 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@Action(value="carritoAdmin",
+			results={@Result(name=SUCCESS,type="tiles",location="carritoAdmin")})
+	public String carritoAdmin(){
+		return SUCCESS;
+	}
 	
 	@Action(value="singup",
 			results={@Result(name=SUCCESS,type="tiles",location="singup")})
@@ -121,6 +136,16 @@ public class LinkAction  extends ActionSupport{
 	
 	@Action(value="mproduct",results={@Result(name=SUCCESS,type="tiles",location="mproduct")})
 	public String mproduct(){
+		return SUCCESS;
+	}
+	
+	@Action(value="mrol",results={@Result(name=SUCCESS,type="tiles",location="mrol")})
+	public String mrol(){
+		return SUCCESS;
+	}
+	
+	@Action(value="Admin",results={@Result(name=SUCCESS,location="/security/loginAdmin.jsp")})
+	public String loginAdmin(){
 		return SUCCESS;
 	}
 }

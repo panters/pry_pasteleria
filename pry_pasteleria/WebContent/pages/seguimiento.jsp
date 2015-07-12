@@ -346,10 +346,23 @@ $(document).ready(function() {
 </script>
 
 
-<div class="panel panel-primary">
-   <div class="panel panel-heading">
-     <h1 class="panel-title">LISTADO DE PEDIDOS</h1>
-   </div>
+	<section class="content-header">
+		 <h1>
+            Seguimiento de Pedido
+          </h1>
+    </section>     
+	
+  	 
+	<section class="content">
+	<div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title"></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+   
+   
    <div class="tableCriterios">
 	<div class="campos"  >
 		<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -404,7 +417,7 @@ $(document).ready(function() {
 			    </table>
    </div>
    <div class="container">
-    <table id="detalle" class="table table-responsive table-striped table-bordered table-hover" cellspacing="0" width="100%">
+    <table id="detalle"  hidden="true" class="table table-responsive table-striped table-bordered table-hover" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>			            
 			                <th>Codigo</th>
@@ -421,6 +434,14 @@ $(document).ready(function() {
    		<div hidden="true" id="volverdiv" style="text-align:right;margin-right:0px;">
 		   <a id="volver" class="btn btn-primary" href="#">Volver</a>
 		</div>
+  
+  
    </div>
-</div>
-
+   
+   
+   
+</div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->

@@ -1,18 +1,6 @@
 <%@taglib uri="/struts-tags" prefix="s" %>
 <%@taglib uri="/struts-jquery-tags" prefix="sj"%>
 <%@taglib uri="/struts-bootstrap-tags" prefix="sb"%>
-<style type="text/css">
-    div.container {
-        width:95%;
-        margin: 0 auto 0 auto;
-        /*margin-top:5%;*/
-        margin-bottom:5%;    
-    }
-    .panel-primary{
-    	width: 80%;
-    	margin: 0 10% 10%;"
-    }
-</style>
 <script>
 //var categoriasArray;
 
@@ -225,15 +213,28 @@ $(document).ready(function() {
 } );
 
 </script>
-<div class="panel panel-primary">
-	<div class="panel panel-heading">
-		<h1 class="panel-title">LISTADO DE PRODUCTOS</h1>
-	</div>
+
+	<section class="content-header">
+		 <h1>
+            Mantenimiento 
+            <small>Producto</small>
+          </h1>
+          <ol class="breadcrumb">
+          <a href="#" class="btn btn-primary" data-toggle="modal" id="btnNuevo">+ Nuevo</a>
+            <!-- <li style="font-size: 2em;"><a href="#" id="btnNuevo"><i class="fa fa-dashboard"></i>Nuevo</a></li> -->
+          </ol>
+    </section>     
+
+  	 
+	<section class="content">
+	<div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title"></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
 	
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="#" class="btn btn-primary" data-toggle="modal" id="btnNuevo">+ Nuevo</a>
-  	<p/>
-	<div class="container">
 	<!--<div class="table-responsive">  -->
 			<table id="example" class="table table-responsive table-striped table-bordered table-hover" cellspacing="0" width="100%">
 			        <thead>
@@ -264,16 +265,13 @@ $(document).ready(function() {
 			            </tr>
 			        </tfoot>
 			    </table>
-			   
-			<!--</div>-->
-		</div>
-	
-</div>
 
 
-
-
-
+     </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
 <!-- -----------Modal Register New------------ -->
 
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">

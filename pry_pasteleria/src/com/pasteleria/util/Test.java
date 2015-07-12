@@ -6,6 +6,7 @@ import java.util.List;
 import com.pasteleria.bean.*;
 import com.pasteleria.daos.SqlServerInsumoDAO;
 import com.pasteleria.services.HasServiceOrder;
+import com.pasteleria.services.ServiceInsumo;
 import com.pasteleria.services.ServiceUser;
 
 public class Test {
@@ -14,7 +15,7 @@ public class Test {
 	public static void main(String[] args) {
 	   
 		
-		List<Insumo> lst=new SqlServerInsumoDAO().list();
+		List<Insumo> lst=new ServiceInsumo().list();
 		lst.forEach(x->{System.out.println(x.getDescripcion());});
 //        List<OrderDetail> listpd;
 //			

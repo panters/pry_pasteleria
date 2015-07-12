@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	    <typeAlias alias="order"
 			type="com.pasteleria.bean.Order"/>
 		<typeAlias alias="insumo"
-		type="com.pasteleria.bean.Insumo"/>
+			type="com.pasteleria.bean.Insumo"/>
 	</typeAliases>
 	
 	<environments default="development">
