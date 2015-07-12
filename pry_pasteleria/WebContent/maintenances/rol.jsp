@@ -38,48 +38,8 @@ $(document).ready(function() {
                      ],
         responsive:true
         
-    });
-    
-    
-    
-    /* Actualizando las Imagenes del DataTable*/
-    $('#example_length select').change(function(){
-    	console.log('Change Number Rows');
-    	updateImages();
-    });
-
-    $('#example')
-       .on( 'order.dt',  function () { console.log('Order' );updateImages();} )
-       .on( 'search.dt', function () {console.log('Search' );updateImages();} )
-       .on( 'page.dt',   function () { console.log('Page' );updateImages();} )
-       .dataTable();
-
-       function updateImages(){
-
-             setTimeout(function(){
-
-                   $("tr").each(function(){
-                       var k=$(this).children("td").eq(4);
-                   
-                        var j= $(k).html();
-                        var str=new String(j); 
-                        var contenido=str.substring(0,4);
-
-                        if(contenido=='<img'){
-                           console.log('ya tiene imagen');
-                        }else{
-                           console.log('No tiene imagen se Actualizara');
-                         //$(k).html("<img src='img/" + j + "' width=\'100\' heigth=\'100\'/>");
-                           $(k).html("<img  src='verImagen?imagenName="+j+"' width=\'95%\' height=\'110\' />");
-                        }
-					});
-                   
-              },500);
-       }
-       
-     /* Actualizando las Imagenes del DataTable */
-    
-    /*  Evento Doble click */
+    });    
+  
     $('#example tbody').on( 'dblclick', 'tr', function () {
    		 
        if ( $(this).hasClass('selected') ) {
@@ -93,38 +53,6 @@ $(document).ready(function() {
            //Extraemos los datos con JSON
            var dato1=currentRow.idRol;
            var dato2=currentRow.descripcion;
-           /* Esta manera es obtener data por las filas
-           pero no es muy optima ya que al colpasar
-           la tabla por el responsive no funciona y causa
-           un breakpoint*/
-           
-           /*var dato1=$(".selected td")[0].innerHTML;
-           var dato2=$(".selected td")[1].innerHTML;
-           var dato3=$(".selected td")[2].innerHTML;
-           var dato4=$(".selected td")[3].innerHTML;
-           var dato5=$(".selected td")[4].innerHTML;
-           var dato6=$(".selected td")[5].innerHTML;
-           var dato7=$(".selected td")[6].innerHTML;
-           var dato8=$(".selected td")[7].innerHTML;	
-           var dato9=$(".selected td")[8].innerHTML;*/
-           
-   	/* 	   $("#cbocategoria option").each(function(){
-   				if(dato6==$(this).text())
-  				 dato6=$(this).val();
-   		   });
-          
-   		   $('#cbocobertura option').each(function(){
-   				if(dato7==$(this).text())
- 				  dato7=$(this).val();
-   		   });
-		   $('#cbomasa option').each(function(){
-			   	if(dato8==$(this).text())
-	  			  dato8=$(this).val();
-		   });
-		   $('#cborelleno option').each(function(){
-			   	if(dato9==$(this).text())
-	  			   dato9=$(this).val();
-		   }); */
            
            mostrarmodal(dato1,dato2);
 	       $('#myModalNuevo').modal();	
@@ -152,11 +80,7 @@ $(document).ready(function() {
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
-		//modal.find('.modal-body #precio').val('S/.0.00');
-/* 		$('#cbocategoria').val(0);
-		$('#cbocobertura').val(0);
-		$('#cbomasa').val(0);
-		$('#cborelleno').val(0); */
+		
 		}
     
     function verNuevo(){
@@ -172,8 +96,6 @@ $(document).ready(function() {
 	    	limpiarfields();
 			verNuevo();
 	});
-	
-
 
 	  $('#delete').click(function(){
 	      	$('#borrame').remove();
@@ -183,10 +105,10 @@ $(document).ready(function() {
 	      	var str1 = "href=\"deleteRol?rol.idRol=";
 	        var str2 = "\">Si</a>";
 	        var res = c1.concat(str1,id,str2);
-	          
+	      //  modal.modal('show');
 	      	$("#conexionServer").before(res);
-	      });
-	  
+	      	$("#modalEliminar").modal('show');
+	      });	  
 	  
 	  $('#Registro').submit(function(event){
 			event.preventDefault();
@@ -204,7 +126,7 @@ $(document).ready(function() {
 							},{
 								type:'success'
 						   });
-						$('#myModalNuevo').modal('toggle');
+						$('#myModalNuevo').modal('hide');
 						table.ajax.reload();
 					}
 				 });
@@ -281,7 +203,7 @@ $(document).ready(function() {
   	  <div style="text-align:left;">
   	  		<s:submit cssClass="btn btn-primary" value="Guardar"/>&nbsp;&nbsp;
   	  		<s:reset  id="cleanForm" cssClass="btn btn-primary" value="Limpiar"/>
-   	  		<button  id="delete" type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Eliminar</button>&nbsp;&nbsp;
+   	  		<button  id="delete" type="button" class="btn btn-danger" data-toggle="modal">Eliminar</button>&nbsp;&nbsp;
    	  </div>
       	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
     </div>
@@ -293,7 +215,7 @@ $(document).ready(function() {
 <!-- -----------END MODAL NUEVO --------------- -->
 
 <!-- ------------Show Message Modal------------ -->
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" id="modalEliminar" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
     <div class="modal-header">

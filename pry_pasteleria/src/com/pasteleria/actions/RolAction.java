@@ -18,9 +18,6 @@ public class RolAction extends ActionSupport{
 	private List<Rol> roles;
 	private Rol rol;
 	
-	
-	
-	
 	@Action(value="listRol",results={@Result(name="success",type="json")})
 	public String list(){
 		roles=new HasServiceRol().list();
@@ -44,7 +41,7 @@ public class RolAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	@Action(value="deleteRol",results={@Result(name="success",type="json")})
+	@Action(value="deleteRol",results={@Result(name="success",type="tiles",location="mrol")})
 	public String delete(){
 		new HasServiceRol().delete(rol);
 		return SUCCESS;

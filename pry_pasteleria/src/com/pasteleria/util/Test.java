@@ -16,7 +16,7 @@ public class Test {
 	   
 		
 		List<Insumo> lst=new ServiceInsumo().list();
-		lst.forEach(x->{System.out.println(x.getDescripcion());});
+		
 //        List<OrderDetail> listpd;
 //			
 //		listpd=new HasServiceOrderDetail().list("P00001");

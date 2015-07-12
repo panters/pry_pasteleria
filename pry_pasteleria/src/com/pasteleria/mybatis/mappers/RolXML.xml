@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<delete id="sql_delete" parameterType="int" statementType="PREPARED">
-		delete rol where idRol =  #{idRol};
+		delete from rol where idRol =  #{idRol};
 	</delete>
 	
 </mapper>
