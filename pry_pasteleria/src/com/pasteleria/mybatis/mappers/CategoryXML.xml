@@ -5,7 +5,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="categoryxml">
 
 	<select id="sql_select" resultMap="mapxml.categoryMap" statementType="PREPARED">
-		select * from Categoria;
+		select idCategoria as idCategoria,descripcionCategoria as descripcion from Categoria;
 	</select>
+	
+	<select id="sql_find" parameterType="int" resultMap="mapxml.categoryMap" statementType="PREPARED">
+		select * from categoria where idCategoria=#{idCategoria}
+	</select>
+	
+	<insert id="sql_insert" parameterType="String" statementType="PREPARED">
+		insert into categoria values(#{descripcion});
+	</insert>
+	
+	<update id="sql_update" parameterType="int" statementType="PREPARED">
+		update categoria set descripcionCategoria = #{descripcion} where idCategoria = #{idCategoria};
+	</update>
+	
+	<delete id="sql_delete" parameterType="int" statementType="PREPARED">
+		delete from categoria where idCategoria =  #{idCategoria};
+	</delete>
 	
 </mapper>

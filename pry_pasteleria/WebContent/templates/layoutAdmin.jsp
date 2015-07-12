@@ -81,7 +81,7 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                  <img src="templateAdmin/dist/img/user1-128x128.jpg" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">${session.user.nombre}&nbsp;${session.user.ape_pa}&nbsp;${session.user.ape_ma}</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -131,7 +131,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+              <img src="templateAdmin/dist/img/user1-128x128.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p>${session.user.nombre}&nbsp;${session.user.ape_pa}</p>
@@ -140,18 +140,18 @@
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
+<%--           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..."/>
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> --%>
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
+            <li class="header">MENÚ DE NAVEGACIÓN</li>
             <li class="active treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Mantenimiento</span> <i class="fa fa-angle-left pull-right"></i>
@@ -160,8 +160,8 @@
                 <li><a href="mproduct.action"><i class="fa fa-circle-o"></i>Producto</a></li>
                 <li><a href="mcobertura.action"><i class="fa fa-circle-o"></i> Cobertura</a></li>
                 <li><a href="mdough.action"><i class="fa fa-circle-o"></i> Masa</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Relleno</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Categoria</a></li>
+                <li><a href="mfilling.action"><i class="fa fa-circle-o"></i> Relleno</a></li>
+                <li><a href="mcategory.action"><i class="fa fa-circle-o"></i> Categoria</a></li>
                 <li><a href="mcustomer.action"><i class="fa fa-circle-o"></i> Clientes</a></li>
                 <li><a href="memployed.action"><i class="fa fa-circle-o"></i> Empleados</a></li>
                 <li><a href="mrol.action"><i class="fa fa-circle-o"></i> Roles</a></li>

@@ -6,4 +6,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="sql_select" resultMap="mapxml.fillingMap" statementType="PREPARED">
 		select * from Relleno;
 	</select>
+	
+	<select id="sql_find" parameterType="int" resultMap="mapxml.fillingMap" statementType="PREPARED">
+		select * from relleno where idRelleno=#{idRelleno}
+	</select>
+	
+	<insert id="sql_insert" parameterType="int" statementType="PREPARED">
+		insert into relleno values(#{descripcion});
+	</insert>
+	
+	<update id="sql_update" parameterType="int" statementType="PREPARED">
+		update relleno set descripcionRelleno = #{descripcion} where idRelleno = #{idRelleno};
+	</update>
+	
+	<delete id="sql_delete" parameterType="int" statementType="PREPARED">
+		delete from relleno where idRelleno =  #{idRelleno};
+	</delete>
+	
 </mapper>
