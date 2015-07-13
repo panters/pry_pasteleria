@@ -286,14 +286,14 @@ $(document).ready(function() {
 		<div class="modal-body">
 	    		<s:hidden id="idProducto" name="producto.idProducto" />
 	    	<div class="form-group">
-		   		<s:textfield label="Producto :" name="producto.descripcion" id="descripcion" cssClass="form-control"/>
+		   		<s:textfield label="Producto :" name="producto.descripcion" id="descripcion" cssClass="form-control" onkeypress="return validarLetra(event)"/>
 	    	</div>
 	    	
 	    	<div class="form-group">
-	    		<s:textfield label="Stock :" name="producto.stock" id="stock" cssClass="form-control"/>
+	    		<s:textfield label="Stock :" name="producto.stock" id="stock" cssClass="form-control" maxlength="3" onkeypress="return validarEntero(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Precio :" name="producto.precio" id="precio" cssClass="form-control"/>
+	    		<s:textfield label="Precio :" name="producto.precio" id="precio" cssClass="form-control" onkeypress="return validarPrecio(event)"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:file label="Imagen :" name="archivo"/>

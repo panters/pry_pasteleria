@@ -288,19 +288,20 @@ $(document).ready(function() {
 		<div class="modal-body">
 	    		<s:hidden id="idUsuario" name="empleado.idUsuario" />
 	    	<div class="form-group">
-		   		<s:textfield label="Nombre :" name="empleado.nombre" id="nombre" cssClass="form-control"/>
+		   		<s:textfield label="Nombre :" name="empleado.nombre" id="nombre" cssClass="form-control" onkeypress="return validarLetra(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Apellido Paterno :" name="empleado.ape_pa" id="ape_pa" cssClass="form-control"/>
+	    		<s:textfield label="Apellido Paterno :" name="empleado.ape_pa" id="ape_pa" cssClass="form-control" onkeypress="return validarLetra(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Apellido Materno :" name="empleado.ape_ma" id="ape_ma" cssClass="form-control"/>
+	    		<s:textfield label="Apellido Materno :" name="empleado.ape_ma" id="ape_ma" cssClass="form-control" onkeypress="return validarLetra(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="DNI :" name="empleado.dni" id="dni" cssClass="form-control"/>
+	    		<s:textfield label="DNI :" name="empleado.dni" id="dni" cssClass="form-control" maxlength="8" onkeypress="return validarEntero(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Fecha Nacimiento :" name="empleado.fec_nacimiento" id="fec_nacimiento" cssClass="form-control"/>
+	    		
+	    		<sj:datepicker label="Fecha Nacimiento :" name="empleado.fec_nacimiento" id="fec_nacimiento" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Sexo:" name="empleado.sexo" id="sexo" cssClass="form-control"/>
@@ -312,20 +313,20 @@ $(document).ready(function() {
 	    		<s:textfield label="Estado Civil:" name="empleado.estado_civil" id="estado_civil" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Telefono:" name="empleado.telefono" id="telefono" cssClass="form-control"/>
+	    		<s:textfield label="Telefono:" name="empleado.telefono" id="telefono" cssClass="form-control" maxlength="7" onkeypress="return validarEntero(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Celular:" name="empleado.celular" id="celular" cssClass="form-control"/>
+	    		<s:textfield label="Celular:" name="empleado.celular" id="celular" cssClass="form-control" maxlength="9" onkeypress="return validarEntero(event)"/>
 	    	</div>
 	    	
 	    	<div class="form-group">
-	    		<s:textfield label="Fecha Ingreso:" name="empleado.fecha_ingreso" id="fecha_ingreso" cssClass="form-control"/>
+	    		<sj:datepicker label="Fecha Ingreso:" name="empleado.fecha_ingreso" id="fecha_ingreso" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Sueldo:" name="empleado.sueldo" id="sueldo" cssClass="form-control"/>
+	    		<s:textfield label="Sueldo:" name="empleado.sueldo" id="sueldo" cssClass="form-control" onkeypress="return validarPrecio(event)"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Fin Contrato:" name="empleado.fecha_salida" id="fecha_salida" cssClass="form-control"/>
+	    		<sj:datepicker label="Fin Contrato:" name="empleado.fecha_salida" id="fecha_salida" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:url id="URL_ListRoles" action="listRol"/>
