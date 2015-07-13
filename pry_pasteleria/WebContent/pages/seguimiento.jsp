@@ -110,7 +110,7 @@ $(document).ready(function() {
                     { "data": "fechaPedido" },
                     { "data": "total" },
                     { "data": "cliente.nombre" },
-                    { "data": "empleado.nombre" },
+                    { "data": "empleado.idEmpleado" },
                     { "data": "montoPagado" },     
                     { "data": "estadoPago.desEstadoPago" },
                     { "data": "estado.descripcion" }
@@ -155,15 +155,12 @@ $(document).ready(function() {
 			});
 		}
          
-    });
-  
+    }); 
     
   	setInterval(function(){
   		//alert('updating');
   		table.ajax.reload;
   	},2000);
-    
-  	
   	
 	$('#example').on('click','.verDetalle',function(){
 		var row=$(this).parents('tr');
