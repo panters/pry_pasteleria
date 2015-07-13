@@ -253,7 +253,7 @@ $(document).ready(function() {
 	$('#detalle').on('click','.grabar',function(){
 		var row=$(this).parents('tr');
 		var datos=$('#detalle').DataTable().row(row).data();
-		var comboEstado=row.children('td').eq(7).children('select').val();
+		var comboEstado=row.children('td').eq(6).children('select').val();
 	
 		
 		$.ajax({
@@ -261,17 +261,17 @@ $(document).ready(function() {
 			url:'EditStatus',
 			datatype:'json',
 			data:{idPedido:datos.pedidoCabe.idPedidoCabe,indice:datos.indice,estado:comboEstado},
-			success:function(){
-				$('#detalle').DataTable().ajax.reload;
+			success:function(data){
+				alert('actualizado');
 				$.growl(
-            			{
-            				title:" <strong>!Cambios</strong>:",
-            				message:" <strong>Guardados</strong>",
-            				icon:"glyphicon glyphicon-thumbs-up"
-            			},{
-            				type:'success'
-            			}
-            		 );
+						{
+							title:" <strong>Pedido: "+data.order.idPedidoCabe+"</strong> ",
+							message:"Registrado exitosamente..!",
+							icon:"glyphicon glyphicon-thumbs-up"
+						},{
+							type:'success'
+					   });
+				$('#detalle').DataTable().ajax.reload;
 			}
 		});
 		

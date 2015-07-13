@@ -132,7 +132,7 @@ public class OrderAction  extends ActionSupport{
 	
 	@Action(value="EditStatus",results={@Result(name=SUCCESS,type="json")})
 	public String EditStatus(){
-		
+		System.out.println("invocado actualizacion");
 		new HasServiceOrderDetail().update(idPedido,indice,estado);
 		
 		Order p=new HasServiceOrder().find(new Order(this.idPedido));
