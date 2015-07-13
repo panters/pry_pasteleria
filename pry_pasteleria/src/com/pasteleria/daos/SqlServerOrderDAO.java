@@ -48,8 +48,16 @@ public class SqlServerOrderDAO implements OrderDAO {
 
 	@Override
 	public Order find(Order bean) {
-		// TODO Auto-generated method stub
-		return null;
+			SqlSession session=SQL_SESSION_FACTORY.openSession();
+			Order list=null;
+			try {
+				list=(Order) session.selectOne("orderxml.sql_find", bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				session.close();
+			}	
+			return list;
 	}
 
 	@Override

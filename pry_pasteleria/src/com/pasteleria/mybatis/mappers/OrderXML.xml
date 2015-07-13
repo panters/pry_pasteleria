@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="sql_find" parameterType="string" resultMap="mapxml.orderMap" statementType="PREPARED" resultType="string">
-		select * from PedidoCabe where idPedidoCabe=#{idPedidoCabe}
+		select * from Pedidos where idPedidoCabe=#{idPedidoCabe}
 	</select>
 	
 	<select id="sql_insert" parameterType="map" statementType="CALLABLE" resultType="string" >

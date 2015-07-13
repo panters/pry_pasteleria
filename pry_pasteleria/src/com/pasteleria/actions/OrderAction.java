@@ -135,12 +135,24 @@ public class OrderAction  extends ActionSupport{
 		System.out.println("invocado actualizacion");
 		new HasServiceOrderDetail().update(idPedido,indice,estado);
 		
+		System.out.println("linea2");
+		
 		Order p=new HasServiceOrder().find(new Order(this.idPedido));
-		Customer customer=new ServiceCustomer().find(new Customer(p.getCliente().getIdUsuario()));
+		String id=p.getCliente().getIdCliente();
+		System.out.println(id);
+		System.out.println("linea3");
+		
+		Customer customer=new ServiceCustomer().find(new Customer(id));
+		System.out.println(customer.getIdUsuario()+"-"+customer.getNombre());
+		System.out.println("linea4");
+		
 		if(customer!=null){
+			System.out.println("dentro de notifiacion");
+			System.out.println(customer.getCelular()+customer.getEmail()+customer.getNombre()+
+					customer.getApe_pa()+customer.getApe_ma());
 			//Creamos un objeto Email que implementa de Runable
 			Notificaciones 	notifi=new Notificaciones(customer.getCelular(),customer.getEmail(),
-					customer.getNombre(),customer.getApe_pa(),customer.getApe_ma(),this.order.getIdPedidoCabe());
+					customer.getNombre(),customer.getApe_pa(),customer.getApe_ma(),p.getIdPedidoCabe());
 			//Enviamos el email con un Hilo para que proceso no afecte al tiempo de registro del Pedido
 			new Thread(notifi).start();
 		}

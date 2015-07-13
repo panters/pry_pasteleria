@@ -265,8 +265,8 @@ $(document).ready(function() {
 				alert('actualizado');
 				$.growl(
 						{
-							title:" <strong>Pedido: "+data.order.idPedidoCabe+"</strong> ",
-							message:"Registrado exitosamente..!",
+							title:" <strong>Pedido: "+datos.pedidoCabe.idPedidoCabe+"</strong> ",
+							message:"Cambios Grabados exitosamente..!",
 							icon:"glyphicon glyphicon-thumbs-up"
 						},{
 							type:'success'
