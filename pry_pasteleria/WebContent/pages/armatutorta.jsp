@@ -10,7 +10,7 @@
   .fruts{display: inline-block;}
   
    .drop-area {
-      background-color: #eea7eb;
+      background-color: #F9BC52;
   }
   
   
@@ -134,14 +134,37 @@ $(document).ready(function() {
 	});
 	
 	
+	  $("#btnSave").click(function() { 
+		  
+	        html2canvas($("#armador"), {
+	            onrendered: function(canvas) {
+	                theCanvas = canvas;
+	                document.body.appendChild(canvas);
+
+	                // Convert and download as image 
+	                Canvas2Image.saveAsPNG(canvas); 
+	                
+	                var img = canvas.toDataURL("image/png");
+	                //$('body').append('<img src="'+img+'"/>');
+	                
+	                //$("#img-out").append(canvas);
+	                // Clean up 
+	                //document.body.removeChild(canvas);
+	            }
+	        });
+	    });
+	
+	
+	
+	
   });
- </script>
+</script>
 
 
 
 
 <div style="margin-left:5%;margin-right:5%;">
-<div id="products">
+<div id="products" style="width:40%;">
   <h1 class="ui-widget-header">Ingredientes:</h1>
   <div id="catalog">
     <h2><a href="#">Masas</a></h2>
@@ -171,12 +194,14 @@ $(document).ready(function() {
   </div>
 </div>
  
-<div id="cart">
+<div id="cart" style="width:50%;">
   <h1 class="ui-widget-header">Arma Tu Torta&nbsp;&nbsp;&nbsp;&nbsp;S/.<label id="sum"style="font-size:40px;">0.00</label></h1>
   <div class="ui-widget-content">
       <div id="armador" class="placeholder" style="width:100%;height:100%;">Arrasta Aqui..!</div>
+      <div id="img-out"></div>
   </div>
   <button id="imprimir" class="btn btn-lg btn-primary">Enviar</button>
+  <input type="button" id="btnSave" value="Save PNG"/>
 </div>
 
 </div>

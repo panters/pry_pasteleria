@@ -42,6 +42,9 @@
 	<script src="js/datatables/dataTables.responsive.js"></script>
 	<script src="js/datatables/dataTables.bootstrap.js"></script>
 	
+	<script src="js/html2canvas.js"></script>
+	<script src="js/canvas2image.js"></script>
+	
 	<link rel="stylesheet" type="text/css" href="css/datatables/jquery.dataTables.css">
 	<link rel="stylesheet" type="text/css" href="css/datatables/dataTables.responsive.css">
 	<link rel="stylesheet" type="text/css" href="css/datatables/dataTables.bootstrap.css">
