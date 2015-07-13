@@ -47,7 +47,7 @@ public class VoipAsteriskManager
          **************************************************************************/
         
         originateAction = new OriginateAction();
-        originateAction.setChannel("SIP/2005");//chanel a llamar
+        originateAction.setChannel("SIP/2002");//chanel a llamar
         originateAction.setContext("users");
         originateAction.setExten("5656"); //extensión
         originateAction.setCallerId("Master Java");
@@ -148,7 +148,7 @@ public class VoipAsteriskManager
         VoipAsteriskManager asteriskManager;
 
         asteriskManager = new VoipAsteriskManager();
-        asteriskManager.run();
+        asteriskManager.run("954191116");
     }
     
     

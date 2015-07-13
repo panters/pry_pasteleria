@@ -16,8 +16,10 @@ import com.pasteleria.bean.Order;
 import com.pasteleria.bean.OrderDetail;
 import com.pasteleria.bean.User;
 import com.pasteleria.notifications.Email;
+import com.pasteleria.notifications.Notificaciones;
 import com.pasteleria.services.HasServiceOrder;
 import com.pasteleria.services.HasServiceOrderDetail;
+import com.pasteleria.services.ServiceCustomer;
 
 @ParentPackage(value="cloudedleopard")
 public class OrderAction  extends ActionSupport{
@@ -72,12 +74,14 @@ public class OrderAction  extends ActionSupport{
 			User u=(User) session.get("user");
 			Employed employed=new Employed();
 			Customer customer=new Customer();
-			
+			customer.setIdUsuario(u.getIdUsuario());
+			customer=new ServiceCustomer().find(customer);
 			//Asignamos el id al Cliente que registra el pedido(en observación)
 			 
 			if (u.getRol().getIdRol()==2) {
 				employed.setIdUsuario("E0000");
 				customer.setIdUsuario(u.getIdUsuario());
+				customer=new ServiceCustomer().find(customer);
 				this.order.setFormaCompra(new FormaCompra(1));
 				
 				System.out.println("Asignaod "+this.idcliente);
@@ -85,6 +89,7 @@ public class OrderAction  extends ActionSupport{
 				
 				employed.setIdUsuario(u.getIdUsuario());
 				customer.setIdUsuario(this.idcliente);
+				customer=new ServiceCustomer().find(customer);
 				this.order.setFormaCompra(new FormaCompra(2));
 				System.out.println("Asignaod "+this.idcliente);
 				
@@ -105,14 +110,13 @@ public class OrderAction  extends ActionSupport{
 			
 			int salida=new HasServiceOrderDetail().createfromList(this.order.getIdPedidoCabe(),this.orderDetail);
 			if (salida>0) {
+				System.out.println(customer.getCelular()+customer.getEmail()+customer.getNombre()+
+						customer.getApe_pa()+customer.getApe_ma()+this.order.getIdPedidoCabe());
 				//Creamos un objeto Email que implementa de Runable
-				Email email=new Email(u.getEmail(),
-											u.getNombre()+" "
-									 		+u.getApe_pa()+" "
-					
-									 		+u.getApe_ma(),this.order.getIdPedidoCabe());
+				Notificaciones 	notifi=new Notificaciones(customer.getCelular(),customer.getEmail(),
+						customer.getNombre(),customer.getApe_pa(),customer.getApe_ma(),this.order.getIdPedidoCabe());
 				//Enviamos el email con un Hilo para que proceso no afecte al tiempo de registro del Pedido
-				new Thread(email).start();
+				new Thread(notifi).start();
 				System.out.println("Registro correcto");
 			}
 			
@@ -129,6 +133,16 @@ public class OrderAction  extends ActionSupport{
 	public String EditStatus(){
 		
 		new HasServiceOrderDetail().update(idPedido,indice,estado);
+		
+		Order p=new HasServiceOrder().find(new Order(this.idPedido));
+		Customer customer=new ServiceCustomer().find(new Customer(p.getCliente().getIdUsuario()));
+		if(customer!=null){
+			//Creamos un objeto Email que implementa de Runable
+			Notificaciones 	notifi=new Notificaciones(customer.getCelular(),customer.getEmail(),
+					customer.getNombre(),customer.getApe_pa(),customer.getApe_ma(),this.order.getIdPedidoCabe());
+			//Enviamos el email con un Hilo para que proceso no afecte al tiempo de registro del Pedido
+			new Thread(notifi).start();
+		}
 		
 		return SUCCESS;
 	}

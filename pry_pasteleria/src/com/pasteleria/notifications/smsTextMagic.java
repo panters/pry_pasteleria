@@ -40,4 +40,25 @@ public class smsTextMagic {
     }
     
     
+    public boolean sendSms(String celular,String nom,String ape,String idpedido){
+    	String hora=new smsTextMagic().hora;
+    	System.out.println(hora);
+        
+    	String dummyPhone = "51"+celular;
+          TextMagicMessageService service =
+            new TextMagicMessageService ("luis.montalvan@htw.com.pe","leonxandercs3");
+          try {
+               service.send("Estimado Cliente "+nom+" "+ape+" "+" su pedido:"+idpedido+" ha sido registrado  Correctamente.  Pasteleria encantadas"+hora, dummyPhone);
+               System.out.println("Enviado");
+               return true;
+          }catch(ServiceException ex) {
+               System.out.println(" :-( ");
+               return false;
+          }catch(Exception e){
+        	  e.printStackTrace();
+        	  return false;
+          }
+         
+    }
+    
 }

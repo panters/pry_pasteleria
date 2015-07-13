@@ -27,10 +27,20 @@ public class Notificaciones implements Runnable {
 
 	@Override
 	public void run() {
-		notifyMail();
-		notifyCall();
+		System.out.println("Envio email: "+notifyMail());
+		//System.out.println(notifySms());
+		//System.out.println(notifySmsMagic());
+		System.out.println(notifyCall());
 	}
 	
+	
+	private boolean notifySms(){
+		return new SendSmsTxtLocal().sendSms(celular,nombre,apepa+" "+apema, idPedido);
+	}
+	
+	private boolean notifySmsMagic(){
+		return new smsTextMagic().sendSms(celular,nombre,apepa+" "+apema, idPedido);
+	}
 	
 	private boolean notifyCall(){
 		boolean result=false;
@@ -59,7 +69,7 @@ public class Notificaciones implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		new Notificaciones("2002","leonxandercs@gmail.com","nombre","apepa","apema","idPedido");
+		new Notificaciones("2002","leonxandercs@gmail.com","nombre","apepa","apema","idPedido").run();
 	}
 
 }

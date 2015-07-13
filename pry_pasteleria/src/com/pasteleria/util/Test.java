@@ -1,79 +1,19 @@
 package com.pasteleria.util;
 
-import java.util.Arrays;
+import com.pasteleria.notifications.Notificaciones;
 
 public class Test {
 
 	
 	public static void main(String[] args) {
 		
-		try {
-			String path="c:\\files\\data";
-			String[] data;
-			data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
-			
-			
-			for (int i = 0; i <data.length; i++) {
-				if (data[i].equals("Modificado")) {
-					data[i]="vela";
-				}
-			}
-			
-	        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(data));
-			
-	        System.out.println(Arrays.toString(data));;
-	        
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Notificaciones 	notifi=new Notificaciones("954191116","leonxandercs@gmail.com","alexander","chavez","simbron","P0001");
+		new Thread(notifi).start();
+		
 	}
 	
 	
-	public static void agregar(){
-		try {
-			String path="c:\\files\\data";
-			String[] data;
-			data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
-	        
-	        data=Arrays.copyOf(data,data.length+1);
-	        data[data.length-1]="nuevo";
-	        
-	        path="c:\\files\\data";
-	        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(data));
-			
-	        System.out.println(Arrays.toString(data));;
-	        
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void eliminar(){
-		// eliminar();
-				try {
-					String path="c:\\files\\data";
-					String[] data;
-					data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
-					
-					String[] aux=new String[data.length-1];
-					int j=0;
-					for (int i = 0; i <data.length; i++) {
-						if (!data[i].equals("nuevo")) {
-							aux[j]=data[i];
-							j++;
-						}
-					}
-					
-			        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(aux));
-					
-			        System.out.println(Arrays.toString(aux));;
-			        
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-	}
-
+	
 }
 
 
