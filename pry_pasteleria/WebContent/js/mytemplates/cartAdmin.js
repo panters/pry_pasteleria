@@ -109,7 +109,7 @@ $(document).ready(function(){
 							type:'success'
 					   });
 					 clienteAsignado=false;
-					//setTimeout(function(){window.location.href="seguimiento.action";},3000);
+					setTimeout(function(){window.location.href="seguimiento.action";},3000);
 				}
 			 });
 

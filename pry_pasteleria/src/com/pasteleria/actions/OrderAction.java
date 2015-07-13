@@ -74,8 +74,8 @@ public class OrderAction  extends ActionSupport{
 			User u=(User) session.get("user");
 			Employed employed=new Employed();
 			Customer customer=new Customer();
-			customer.setIdUsuario(u.getIdUsuario());
-			customer=new ServiceCustomer().find(customer);
+			//customer.setIdUsuario(u.getIdUsuario());
+			//customer=new ServiceCustomer().find(customer);
 			//Asignamos el id al Cliente que registra el pedido(en observación)
 			 
 			if (u.getRol().getIdRol()==2) {
@@ -86,12 +86,12 @@ public class OrderAction  extends ActionSupport{
 				
 				System.out.println("Asignaod "+this.idcliente);
 			}else{
-				
+				System.out.println("Asignaod "+this.idcliente);
 				employed.setIdUsuario(u.getIdUsuario());
 				customer.setIdUsuario(this.idcliente);
 				customer=new ServiceCustomer().find(customer);
 				this.order.setFormaCompra(new FormaCompra(2));
-				System.out.println("Asignaod "+this.idcliente);
+				System.out.println("Empleado asignado:"+customer.getIdUsuario()+"-"+customer.getNombre()+"-"+customer.getEmail());
 				
 			}
 			
