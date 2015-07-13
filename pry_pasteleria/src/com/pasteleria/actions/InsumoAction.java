@@ -1,17 +1,17 @@
 package com.pasteleria.actions;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Insumo;
 import com.pasteleria.services.ServiceInsumo;
+import com.pasteleria.util.ReaderJSON;
 import com.pasteleria.util.SaveFile;
 
 @ParentPackage(value="cloudedleopard")
@@ -21,6 +21,7 @@ public class InsumoAction extends ActionSupport{
 	private List<Insumo> insumos;
 	private Insumo insumo;
 	private String[] tipoinsumos;
+	private String tipo;
 	
 	private File archivo;
 	private String archivoContentType;
@@ -29,18 +30,70 @@ public class InsumoAction extends ActionSupport{
 	
 	@Action(value="listtipoinsumos",results={@Result(name="success",type="json")})
 	public String listTipo(){
-		ResourceBundle rb=ResourceBundle.getBundle("com/pasteleria/resources/tipoInsumos");
-		this.tipoinsumos=(rb.getString("tipo")).split(",");
+		//obtenemos los tipos del archivo
+		String path="c:\\files\\data\\tipo.json";
+		this.tipoinsumos=ReaderJSON.getArrayOfJsonArray(path);
 		return SUCCESS;
 	}
 	
+	@Action(value="addtipoinsumos",results={@Result(name="success",type="json")})
+	public String addTipo(){
+		try {
+			String path="c:\\files\\data";
+			String[] data;
+			//obtenemos los tipos
+			data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
+	        
+	        data=Arrays.copyOf(data,data.length+1);
+	        //Agregamos el nuevo tipo definido por el cliente al arreglo
+	        data[data.length-1]=this.tipo;
+	        //Sobrescirbimos el archivo
+	        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(data));
+			//mostramos en consola el resultado
+	        System.out.println(Arrays.toString(data));;
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
+	@Action(value="deletetipoinsumos",results={@Result(name="success",type="json")})
+	public String deleteTipo(){
+		try {
+			String path="c:\\files\\data";
+			String[] data;
+			//Obtenemos el arreglo de tipos del archivo
+			data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
+			
+			String[] aux=new String[data.length-1];
+			int j=0;
+			for (int i = 0; i <data.length; i++) {
+				if (!data[i].equals(this.tipo)) {//Agregamos el tipo que sea diferente al eliminado
+					aux[j]=data[i];
+					j++;
+				}
+			}
+			//Guardamos el arreglo modificado en el archivo
+	        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(aux));
+			//mostramos en consola el resultado
+	        System.out.println(Arrays.toString(aux));;
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return SUCCESS;
+	}
+	
+	
 	@Action(value="findInsumo",results={@Result(name="success",type="json")})
+	
 	public String find(){
 		this.insumo=new ServiceInsumo().find(this.insumo);
 		return SUCCESS;
 	}
 		
-	
 	@Action(value="saveInsumo",results={@Result(name=SUCCESS,type="redirectAction",location="minsumo")})
 	public String cargar(){
 		//Validamos si se cargo algun archivo al input File si se cargo se actualiza imagen 
@@ -64,8 +117,6 @@ public class InsumoAction extends ActionSupport{
 		
 		return SUCCESS;
 	}
-	
-	
 	
 	@Action(value="deleteInsumo",results={@Result(name=SUCCESS,type="redirectAction",location="minsumo")})
 	public String delete(){
@@ -114,6 +165,18 @@ public class InsumoAction extends ActionSupport{
 	public void setTipoinsumos(String[] tipoinsumos) {
 		this.tipoinsumos = tipoinsumos;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	
+
+	
 	
 	
 	

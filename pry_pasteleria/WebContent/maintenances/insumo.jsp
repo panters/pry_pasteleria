@@ -125,7 +125,7 @@ $(document).ready(function() {
 		  modal.find('.modal-body #cbocategoria').val(dato4);
 		  modal.find('.modal-body #imagen').val(dato5);
 		  
-		  $('#img_bkp').html("<label>Imagen Actual:<br/></label><img  src='verImagen?imagenName="+dato5+"' width=\'100\' height=\'70\' />");
+		  $('#img_bkp').html("<label>Imagen Actual:</label><br/><img  src='verImagen?imagenName="+dato5+"' width=\'100\' height=\'70\' />");
 		  
 		});
     }
