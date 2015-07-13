@@ -33,7 +33,6 @@ public class OrderAction  extends ActionSupport{
 	private int estado;
 	private String idcliente;
 	
-	
 	@Action(value="listOrderDet",results={@Result(name=SUCCESS,type="json")})
 	public String listDet(){
 		

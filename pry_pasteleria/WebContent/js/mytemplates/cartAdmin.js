@@ -7,6 +7,7 @@ $(document).ready(function(){
 	var lista=[];
 	var datos=[];
 	var total;
+	var clienteAsignado=false;
 	
 	//Evita la escritura en los input[type=number] para que solo se modifique cantidad con las flechitas
 	$('#cart tbody').on('keypress','#txtCantidad',function(e){
@@ -59,6 +60,7 @@ $(document).ready(function(){
 	 };
 	
 	$('#btnbuscar').click(function(){
+		 clienteAsignado=false;
 	     verNuevo();
 	});
 	
@@ -66,6 +68,7 @@ $(document).ready(function(){
 		var datos=$('#view').DataTable().row(this).data();
 		$('#myModalBusqueda').modal('toggle');
         $('#cliente').val(datos.idUsuario);
+        clienteAsignado=true;
       });
 	
 	
@@ -89,6 +92,8 @@ $(document).ready(function(){
 	//Registro del Pedido
 	$('#formRegPedido').submit(function(event){
 		event.preventDefault();
+		event.preventDefault();
+		if(clienteAsignado==true){
 			$.ajax({
 				url:$(this).attr('action'),
 				type:"post",
@@ -103,11 +108,23 @@ $(document).ready(function(){
 						},{
 							type:'success'
 					   });
-					setTimeout(function(){window.location.href="seguimiento.action";},3000);
+					 clienteAsignado=false;
+					//setTimeout(function(){window.location.href="seguimiento.action";},3000);
 				}
 			 });
-		
-		return false;
+
+			return false;
+			
+		}else{
+			$.growl(
+					{
+						title:" <strong>Error:</strong> ",
+						message:"Debe Asignar un Cliente..!",
+						icon:"glyphicon glyphicon-alert"
+					},{
+						type:'danger'
+				   });
+		}
 	});
 	
 
@@ -122,11 +139,12 @@ $(document).ready(function(){
 	     loadDetailFields();
 		 $('#stepone').fadeOut(1000);
 		 $('#setptwo').fadeIn(3000);
-		 
+		 clienteAsignado=false;
 	});
 	
 	 //Boton volver
 	 $('#volver').click(function(){
+		 clienteAsignado=false;
 		 $('#setptwo').hide();
 		 $('#stepone').fadeIn();
 		 

@@ -110,6 +110,7 @@ $(document).ready(function() {
                     { "data": "fechaPedido" },
                     { "data": "total" },
                     { "data": "cliente.nombre" },
+                    { "data": "empleado.nombre" },
                     { "data": "montoPagado" },     
                     { "data": "estadoPago.desEstadoPago" },
                     { "data": "estado.descripcion" }
@@ -117,7 +118,7 @@ $(document).ready(function() {
                 ] ,
                 "columnDefs":[							
     	                      {
-    	                    	  "targets": [7], // El objetivo de la columna de posición, desde cero.
+    	                    	  "targets": [8], // El objetivo de la columna de posición, desde cero.
     	                          "data":null, // La inclusión de datos
     	                          "defaultContent":"<a  class='label label-default verDetalle' id='verDetalle'>VER</a>"
     	                      }
@@ -146,7 +147,7 @@ $(document).ready(function() {
        "initComplete":function(){
 			$('#example tbody tr').each(function(){
 				var datos=$('#example').DataTable().row(this).data();
-				var cell=$(this).children('td').eq(6);
+				var cell=$(this).children('td').eq(7);
 				var label="<label>"+cell.text()+"</label>";
 				cell.html(label);
 				formatCombo2($(cell).children('label'),datos.estado.idEstado);
@@ -254,7 +255,7 @@ $(document).ready(function() {
 	$('#detalle').on('click','.grabar',function(){
 		var row=$(this).parents('tr');
 		var datos=$('#detalle').DataTable().row(row).data();
-		var comboEstado=row.children('td').eq(6).children('select').val();
+		var comboEstado=row.children('td').eq(7).children('select').val();
 	
 		
 		$.ajax({
@@ -294,7 +295,7 @@ $(document).ready(function() {
 	  function updateStyles(){
 			$('#example tbody tr').each(function(){
 				var datos=$('#example').DataTable().row(this).data();
-				var cell=$(this).children('td').eq(6);
+				var cell=$(this).children('td').eq(7);
 				var label="<label>"+cell.text()+"</label>";
 				cell.html(label);
 				formatCombo2($(cell).children('label'),datos.estado.idEstado);
@@ -394,7 +395,8 @@ $(document).ready(function() {
 			                <th>Codigo</th>
 			                <th>Fecha Pedido</th>
 			                <th>Total</th>
-			                <th>Cliente</th>
+			                <th>Empleado</th>
+			                <th>Empleado</th>
 			                <th>Monto Pagado</th>
 			                <th>Estado Pago</th>
 			                <th>Estado Pedido</th>
@@ -407,7 +409,8 @@ $(document).ready(function() {
 			                <th>Codigo</th>
 			                <th>Fecha Pedido</th>
 			                <th>Total</th>
-			                <th>Cliente</th>
+			                <th>Empleado</th>
+			                <th>Empleado</th>
 			                <th>Monto Pagado</th>
 			                <th>Estado Pago</th>
 			                <th>Estado Pedido</th>
