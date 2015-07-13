@@ -109,6 +109,7 @@ public class LoginAction  extends ActionSupport{
 		if(u!=null){
 			Email e=new Email(this.email, "Tu claves es <strong>"+u.getPassword()+"</strong>",true);
 			new Thread(e).start();
+			addActionMessage("Correo Enviado Satisfactoriamente");
 		}else{
 			addActionError("Usuario no registrado");
 			return ERROR;

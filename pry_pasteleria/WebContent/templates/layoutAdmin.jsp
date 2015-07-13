@@ -56,7 +56,7 @@
       
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices -->
@@ -70,15 +70,9 @@
           </a>
 
           <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
+            <ul class="nav navbar-nav">          
 
-              <!-- Notifications: style can be found in dropdown.less -->
-           
-              <!-- Tasks: style can be found in dropdown.less -->
-       
-              <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
+            <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="templateAdmin/dist/img/user1-128x128.jpg" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">${session.user.nombre}&nbsp;${session.user.ape_pa}&nbsp;${session.user.ape_ma}</span>
@@ -86,7 +80,7 @@
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <img src="templateAdmin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
                       Alexander Pierce - Web Developer
                       <small>Member since Nov. 2012</small>
@@ -115,9 +109,7 @@
                   </li>
                 </ul>
               </li>
-              <!-- Co
 
-              ntrol Sidebar Toggle Button -->
 
             </ul>
           </div>
@@ -138,16 +130,6 @@
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
-          <!-- search form -->
-<%--           <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search..."/>
-              <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </form> --%>
-          <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MENÚ DE NAVEGACIÓN</li>
@@ -380,13 +362,9 @@
     </div><!-- ./wrapper -->
   
   
-  
-  
-
     <!-- jQuery 2.1.4 -->
     <!-- jQuery UI 1.11.2 -->
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
-    
     
     <script src="js/jquery.validation.js"></script>
     <script src="js/additional-methods.js"></script>

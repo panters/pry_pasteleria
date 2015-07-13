@@ -1,5 +1,22 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <link href="css/styles_account.css" media="all" rel="stylesheet">
+<s:if test="hasActionMessages()">
+<s:actionmessage id="messageSucces" />
+	<script>
+		var msj = $('#messageSucces li span').text();
+		$('#messageSucces').remove();
+		$.growl(
+			{
+				title:" <strong>!Mensaje: </strong></b>",
+				message:msj,
+				icon:"glyphicon glyphicon-thumbs-up"
+			},{
+				type:'success'
+			}
+		  );
+	</script>
+</s:if>
+
 <s:if test="hasActionErrors()">
 	<s:actionerror id="messagerror" />
 	<script>
@@ -15,13 +32,6 @@
 					type:'danger'
 				}
 			);
-		/*
-		$.bootstrapGrowl("Mensaje: " + msj + "..!", {
-			type : 'danger',
-			width : 'auto',
-			align:'rigth',
-			allow_dismiss : false
-		});*/
 	</script>
 </s:if>
 
@@ -88,7 +98,7 @@
 				<h1></h1>
 				<br></br>
 			</div> <!------------------------------------------------ -->
-	  </div>
+	    </div>
 			
 			
 			

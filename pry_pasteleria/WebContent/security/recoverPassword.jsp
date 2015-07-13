@@ -3,18 +3,25 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <link href="css/styles_account.css" media="all" rel="stylesheet">
 
-<script>/*
+<s:if test="hasActionErrors()">
+ <s:actionerror id="messagerror"/>
+<script>
+
+var msj = $('#messagerror li span').text();
+$('#messagerror').remove();
 $.growl(
-			{
-				title:" <strong>Mensaje: </strong></b>",
-				message:"Clave envia a"+$('#email').val(),
-				icon:"glyphicon glyphicon-thumbs-up"
-			},
-			{
-				type:'info'
-			}
-		);*/
+		{
+			title:" <strong>Error: </strong></b>",
+			message:msj,
+			icon:"glyphicon glyphicon-alert"
+		},
+		{
+			type:'danger'
+		}
+	);
 </script>
+</s:if>
+
 
 <div id="contenedor" width="100%">
 	<table width="800px">
@@ -55,8 +62,3 @@ $.growl(
 				</div>
 
 
-
-			</td>
-		</tr>
-	</table>
-</div>
