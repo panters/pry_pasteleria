@@ -140,7 +140,8 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="mproduct.action"><i class="fa fa-circle-o"></i>Producto</a></li>
-                <li><a href="minsumo.action"><i class="fa fa-circle-o"></i>Insumos</a>  </li>
+                <li><a href="mtipoinsumo.action"><i class="fa fa-circle-o"></i>Tipo de Insumos</a></li>
+                <li><a href="minsumo.action"><i class="fa fa-circle-o"></i>Insumos</a></li>
                 <li><a href="mcobertura.action"><i class="fa fa-circle-o"></i> Cobertura</a></li>
                 <li><a href="mdough.action"><i class="fa fa-circle-o"></i> Masa</a></li>
                 <li><a href="mfilling.action"><i class="fa fa-circle-o"></i> Relleno</a></li>

@@ -22,6 +22,7 @@ public class InsumoAction extends ActionSupport{
 	private Insumo insumo;
 	private String[] tipoinsumos;
 	private String tipo;
+	private String tipoAntiguo;
 	
 	private File archivo;
 	private String archivoContentType;
@@ -36,21 +37,47 @@ public class InsumoAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	@Action(value="addtipoinsumos",results={@Result(name="success",type="json")})
+	@Action(value="addtipoinsumos",results={@Result(name="success",type="redirectAction",location="mtipoinsumo")})
 	public String addTipo(){
+		this.tipo=this.tipo.replaceAll("\\s","");
+		System.out.println(tipo);
 		try {
-			String path="c:\\files\\data";
-			String[] data;
-			//obtenemos los tipos
-			data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
-	        
-	        data=Arrays.copyOf(data,data.length+1);
-	        //Agregamos el nuevo tipo definido por el cliente al arreglo
-	        data[data.length-1]=this.tipo;
-	        //Sobrescirbimos el archivo
-	        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(data));
-			//mostramos en consola el resultado
-	        System.out.println(Arrays.toString(data));;
+			
+			if (this.tipoAntiguo.isEmpty() || this.tipoAntiguo.equals("nuevo")){
+				String path="c:\\files\\data";
+				String[] data;
+				//obtenemos los tipos
+				data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
+		        
+		        data=Arrays.copyOf(data,data.length+1);
+		        //Agregamos el nuevo tipo definido por el cliente al arreglo
+		        data[data.length-1]=this.tipo;
+		        //Sobrescirbimos el archivo
+		        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(data));
+				//mostramos en consola el resultado
+		        System.out.println(Arrays.toString(data));
+			}else{
+				try {
+					String path="c:\\files\\data";
+					String[] data;
+					data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
+					
+					
+					for (int i = 0; i <data.length; i++) {
+						if (data[i].equals(this.tipoAntiguo)) {
+							data[i]=this.tipo;
+						}
+					}
+					
+			        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(data));
+					
+			        System.out.println(Arrays.toString(data));;
+			        
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
 	        
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,14 +85,14 @@ public class InsumoAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	@Action(value="deletetipoinsumos",results={@Result(name="success",type="json")})
+	@Action(value="deletetipoinsumos",results={@Result(name="success",type="redirectAction",location="mtipoinsumo")})
 	public String deleteTipo(){
 		try {
 			String path="c:\\files\\data";
 			String[] data;
 			//Obtenemos el arreglo de tipos del archivo
 			data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
-			
+			System.out.println("eliminar:"+this.tipo);
 			String[] aux=new String[data.length-1];
 			int j=0;
 			for (int i = 0; i <data.length; i++) {
@@ -172,6 +199,12 @@ public class InsumoAction extends ActionSupport{
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+	public String getTipoAntiguo() {
+		return tipoAntiguo;
+	}
+	public void setTipoAntiguo(String tipoAntiguo) {
+		this.tipoAntiguo = tipoAntiguo;
 	}
 
 	

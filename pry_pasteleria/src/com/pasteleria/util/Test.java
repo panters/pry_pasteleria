@@ -7,7 +7,25 @@ public class Test {
 	
 	public static void main(String[] args) {
 		
-	 
+		try {
+			String path="c:\\files\\data";
+			String[] data;
+			data=ReaderJSON.getArrayOfJsonArray(path+"\\tipo.json");
+			
+			
+			for (int i = 0; i <data.length; i++) {
+				if (data[i].equals("Modificado")) {
+					data[i]="vela";
+				}
+			}
+			
+	        SaveFile.escribirArchivo(SaveFile.crearArchivo(path,"tipo.json"),Arrays.toString(data));
+			
+	        System.out.println(Arrays.toString(data));;
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

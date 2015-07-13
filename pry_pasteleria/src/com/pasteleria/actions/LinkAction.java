@@ -144,6 +144,12 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@Action(value="mtipoinsumo",results={@Result(name=SUCCESS,type="tiles",location="mtipoinsumo")})
+	public String mtipoInsumo(){
+		return SUCCESS;
+	}
+	
+	
 	@Action(value="mrol",results={@Result(name=SUCCESS,type="tiles",location="mrol")})
 	public String mrol(){
 		return SUCCESS;
