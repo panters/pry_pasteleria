@@ -18,34 +18,25 @@ public class ServiceInsumo implements InsumoDAO{
 
 	@Override
 	public Insumo find(Insumo bean) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.find(bean);
 	}
 
 	@Override
 	public int create(Insumo bean) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.create(bean);
 	}
 
 	@Override
 	public int update(Insumo bean) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.update(bean);
 	}
 
 	@Override
 	public int delete(Insumo bean) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(bean);
 	}
 
-	@Override
-	public List<Insumo> filter(int idcategoria, int idcobertura, int idmasa,
-			int idrelleno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	
 }

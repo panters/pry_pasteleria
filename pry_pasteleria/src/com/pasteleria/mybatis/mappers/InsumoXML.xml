@@ -4,24 +4,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="insumoxml">
 
-	<select id="sql_select" resultType="insumo" statementType="PREPARED">
+	<select id="sql_select" resultType="insumo">
 		 select * from Insumo;
 	</select>
 	
-	<insert id="sql_insert" parameterType="employed" statementType="CALLABLE">
-		exec NUEVO_EMPLEADO #{nombre}, #{ape_pa}, #{ape_ma}, #{dni}, #{fec_nacimiento}, #{sexo}, #{email}, #{estado_civil}, #{telefono}, #{celular},#{sueldo},#{activo},#{login},#{password},#{rol.idRol}
+	<insert id="sql_insert" parameterType="insumo" statementType="CALLABLE">
+		exec sp_inserta_insumo #{descripcion},#{precio},#{tipo},#{imagen};
 	</insert>
 	
-	<select id="sql_find" parameterType="String" resultMap="mapxml.employedMap" statementType="PREPARED">
-		select * from BUSCA_EMPLEADO where idUsuario=#{idUsuario};
+	<select id="sql_find" parameterType="int" resultType="insumo">
+		select * from Insumo where idinsumo=#{id};
 	</select>
 	
-	<update id="sql_update" parameterType="employed" statementType="CALLABLE">
-		exec SP_MODIFICA_EMPLEADO #{nombre}, #{ape_pa}, #{ape_ma}, #{dni}, #{fec_nacimiento}, #{sexo}, #{email}, #{estado_civil}, #{telefono}, #{celular},#{fecha_ingreso},#{sueldo},#{fecha_salida},#{activo},#{idUsuario},#{login},#{password},#{rol.idRol}
+	<update id="sql_update" parameterType="insumo" statementType="CALLABLE">
+		exec sp_modifica_insumo #{descripcion},#{precio},#{tipo},#{imagen},#{idinsumo};
 	</update>
 	
-	<delete id="sql_delete" parameterType="String" statementType="CALLABLE">
-		exec SP_ELIMINA_EMPLEADO #{idUsuario};
+	<delete id="sql_delete" parameterType="int" >
+		delete from Insumo where idinsumo=#{id};
 	</delete>
 	
 </mapper>

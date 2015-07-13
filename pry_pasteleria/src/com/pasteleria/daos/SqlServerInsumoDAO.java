@@ -31,33 +31,66 @@ public class SqlServerInsumoDAO implements InsumoDAO {
 
 	@Override
 	public Insumo find(Insumo bean) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		Insumo list=null;
+		try {
+			list=(Insumo)session.selectOne("insumoxml.sql_find",bean.getIdinsumo());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}	
+		return list;
 	}
 
 	@Override
 	public int create(Insumo bean) {
-		// TODO Auto-generated method stub
-		return 0;
+		int salida=0;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		try {
+			salida=session.insert("insumoxml.sql_insert",bean);
+			session.commit();
+			System.out.println(salida);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return salida;
 	}
 
 	@Override
 	public int update(Insumo bean) {
-		// TODO Auto-generated method stub
-		return 0;
+		int salida=0;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		try {
+			salida=session.update("insumoxml.sql_update",bean);
+			session.commit();
+			System.out.println(salida);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return salida;
 	}
 
 	@Override
 	public int delete(Insumo bean) {
-		// TODO Auto-generated method stub
-		return 0;
+		int salida=0;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		try {
+			salida=session.delete("insumoxml.sql_delete",bean.getIdinsumo());
+			session.commit();
+			System.out.println(salida);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return salida;
 	}
 
-	@Override
-	public List<Insumo> filter(int idcategoria, int idcobertura, int idmasa,
-			int idrelleno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

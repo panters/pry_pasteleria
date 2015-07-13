@@ -139,6 +139,11 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@Action(value="minsumo",results={@Result(name=SUCCESS,type="tiles",location="minsumo")})
+	public String mInsumo(){
+		return SUCCESS;
+	}
+	
 	@Action(value="mrol",results={@Result(name=SUCCESS,type="tiles",location="mrol")})
 	public String mrol(){
 		return SUCCESS;
