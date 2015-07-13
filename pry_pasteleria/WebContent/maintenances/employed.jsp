@@ -133,8 +133,25 @@ $(document).ready(function() {
 		  modal.find('.modal-body #sueldo').val(dato13);
 		  modal.find('.modal-body #fecha_salida').val(dato14);
 		  modal.find('.modal-body #cborol').val(dato15);
+		  
+		  if(dato7=='M'){
+			  $('#sexoM').prop('checked',true);
+			  $('#sexoF').prop('checked',false);
+			  $('#sexo').val(dato7);
+		  }
+		  else{
+			  $('#sexoM').prop('checked',false);
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val(dato7);
+		  }
+			  
+		  
+		  
+		  
 		});
     }
+    
+    
     
     //Clean Fields
     function limpiarfields(){
@@ -153,6 +170,8 @@ $(document).ready(function() {
     	limpiarfields();
     	modal.find('.modal-header h4').text('Registrar Empleado: ');
     	modal.find('.modal-body #idUsuario').val('nuevo');
+    	$('#sexoM').prop('checked',true);
+    	$('#sexo').val('M');
     	$("#delete").hide();
     };
 
@@ -162,6 +181,30 @@ $(document).ready(function() {
 	});
 	
 
+	$('#sexoF').change(function(){
+		  if( $('#sexoF').prop('checked')){
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val('F');
+		  }
+		  else{
+			  $('#sexoM').prop('checked',true);
+			  $('#sexoF').prop('checked',false);
+			  $('#sexo').val('M');
+		  }
+	});
+	
+	$('#sexoM').change(function(){
+
+		  if($('#sexoM').prop('checked')){
+			  $('#sexoM').prop('checked',true);
+			  $('#sexo').val('M');
+		  }
+		  else{
+			  $('#sexoM').prop('checked',false);
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val('F');
+		  }
+	});
 
 	  $('#delete').click(function(){
 	      	$('#borrame').remove();
@@ -304,7 +347,13 @@ $(document).ready(function() {
 	    		<sj:datepicker label="Fecha Nacimiento :" name="empleado.fec_nacimiento" id="fec_nacimiento" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Sexo:" name="empleado.sexo" id="sexo" cssClass="form-control"/>
+	    		<div class="radio">
+							Seleccione Sexo:&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label><input type="radio" id="sexoM" value="M" name="s">Masculino</label>
+							&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio" id="sexoF" value="F" name="s">Femenino</label>
+							<s:hidden id="sexo" name="empleado.sexo" />
+				</div>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Email:" name="empleado.email" id="email" cssClass="form-control"/>
