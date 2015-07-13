@@ -36,6 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="com.pasteleria.bean.Customer" id="customerMap" extends="userMap">
 		<result property="fecha_registro" column="fecha_registro" javaType="string"/>
+		<result property="nombrecli" column="nombrecli" javaType="string"/>
+		<result property="idCliente" column="idCliente" javaType="string"/>
 	</resultMap>
 	
 	<resultMap type="com.pasteleria.bean.Category" id="categoryMap">

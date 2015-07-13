@@ -91,7 +91,8 @@ public class OrderAction  extends ActionSupport{
 				customer.setIdUsuario(this.idcliente);
 				customer=new ServiceCustomer().find(customer);
 				this.order.setFormaCompra(new FormaCompra(2));
-				System.out.println("Empleado asignado:"+customer.getIdUsuario()+"-"+customer.getNombre()+"-"+customer.getEmail());
+				System.out.println("Empleado asignado:"+customer.getIdUsuario()+"-"+customer.getNombre()+
+						"-"+customer.getEmail()+"-"+customer.getCelular());
 				
 			}
 			
