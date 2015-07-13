@@ -128,6 +128,18 @@ $(document).ready(function() {
 		  modal.find('.modal-body #estado_civil').val(dato9);
 		  modal.find('.modal-body #telefono').val(dato10);
 		  modal.find('.modal-body #celular').val(dato11);
+		  
+		  if(dato7=='M'){
+			  $('#sexoM').prop('checked',true);
+			  $('#sexoF').prop('checked',false);
+			  $('#sexo').val(dato7);
+		  }
+		  else{
+			  $('#sexoM').prop('checked',false);
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val(dato7);
+		  }
+		  
 		});
     }
     
@@ -136,6 +148,7 @@ $(document).ready(function() {
 		/* Limpiar el Validate */
 	    $('.modal-body .form-group').removeClass('has-error');
 	    $('.modal-body .form-group').removeClass('has-success');
+	    $('.modal-body #estado_civil').val(0);
 	    $(".help-block").hide();
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
@@ -148,9 +161,36 @@ $(document).ready(function() {
     	limpiarfields();
     	modal.find('.modal-header h4').text('Registrar Cliente: ');
     	modal.find('.modal-body #idUsuario').val('nuevo');
+    	$('#sexoM').prop('checked',true);
+    	$('#sexo').val('M');
     	$("#delete").hide();
     };
 
+	$('#sexoF').change(function(){
+		  if( $('#sexoF').prop('checked')){
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val('F');
+		  }
+		  else{
+			  $('#sexoM').prop('checked',true);
+			  $('#sexoF').prop('checked',false);
+			  $('#sexo').val('M');
+		  }
+	});
+	
+	$('#sexoM').change(function(){
+
+		  if($('#sexoM').prop('checked')){
+			  $('#sexoM').prop('checked',true);
+			  $('#sexo').val('M');
+		  }
+		  else{
+			  $('#sexoM').prop('checked',false);
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val('F');
+		  }
+	});
+	
 	$('#btnNuevo').click(function(){
 	    	limpiarfields();
 			verNuevo();
@@ -297,14 +337,26 @@ $(document).ready(function() {
 	    	<div class="form-group">
 	    		<s:textfield label="Fecha Nacimiento :" name="cliente.fec_nacimiento" id="fec_nacimiento" cssClass="form-control"/>
 	    	</div>
-        	<div class="form-group">
-	    		<s:textfield label="Sexo:" name="cliente.sexo" id="sexo" cssClass="form-control"/>
-	    	</div> 	    		    		    	
+	    	<div class="form-group">
+	    		<div class="radio">
+							Seleccione Sexo:&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label><input type="radio" id="sexoM" value="M" name="s">Masculino</label>
+							&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio" id="sexoF" value="F" name="s">Femenino</label>
+							<s:hidden id="sexo" name="cliente.sexo" />
+				</div>
+	    	</div>    		    		    	
 	    	<div class="form-group">
 	    		<s:textfield label="Email:" name="cliente.email" id="email" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Estado Civil:" name="cliente.estado_civil" id="estado_civil" cssClass="form-control"/>
+	    		<!--<s:textfield label="Estado Civil:" name="cliente.estado_civil" id="estado_civil" cssClass="form-control"/>-->
+	    		<s:select label="Estado Civil:" 
+	    		id="estado_civil"
+				headerKey="0" headerValue="--Seleccione Estado--"
+				list="#{'S':'Soltero(o)', 'C':'Casado(a)', 'V':'Viudo(a)', 'D':'Divorciado(a)'}" 
+				name="cliente.estado_civil" 
+				cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Telefono:" name="cliente.telefono" id="telefono" cssClass="form-control" maxlength="7" onkeypress="return validarEntero(event)"/>

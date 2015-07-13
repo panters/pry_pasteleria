@@ -133,8 +133,25 @@ $(document).ready(function() {
 		  modal.find('.modal-body #sueldo').val(dato13);
 		  modal.find('.modal-body #fecha_salida').val(dato14);
 		  modal.find('.modal-body #cborol').val(dato15);
+		  
+		  if(dato7=='M'){
+			  $('#sexoM').prop('checked',true);
+			  $('#sexoF').prop('checked',false);
+			  $('#sexo').val(dato7);
+		  }
+		  else{
+			  $('#sexoM').prop('checked',false);
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val(dato7);
+		  }
+			  
+		  
+		  
+		  
 		});
     }
+    
+    
     
     //Clean Fields
     function limpiarfields(){
@@ -145,6 +162,7 @@ $(document).ready(function() {
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
+		$('.modal-body #estado_civil').val(0);
 		}
     
     function verNuevo(){
@@ -153,6 +171,8 @@ $(document).ready(function() {
     	limpiarfields();
     	modal.find('.modal-header h4').text('Registrar Empleado: ');
     	modal.find('.modal-body #idUsuario').val('nuevo');
+    	$('#sexoM').prop('checked',true);
+    	$('#sexo').val('M');
     	$("#delete").hide();
     };
 
@@ -162,6 +182,30 @@ $(document).ready(function() {
 	});
 	
 
+	$('#sexoF').change(function(){
+		  if( $('#sexoF').prop('checked')){
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val('F');
+		  }
+		  else{
+			  $('#sexoM').prop('checked',true);
+			  $('#sexoF').prop('checked',false);
+			  $('#sexo').val('M');
+		  }
+	});
+	
+	$('#sexoM').change(function(){
+
+		  if($('#sexoM').prop('checked')){
+			  $('#sexoM').prop('checked',true);
+			  $('#sexo').val('M');
+		  }
+		  else{
+			  $('#sexoM').prop('checked',false);
+			  $('#sexoF').prop('checked',true);
+			  $('#sexo').val('F');
+		  }
+	});
 
 	  $('#delete').click(function(){
 	      	$('#borrame').remove();
@@ -188,10 +232,17 @@ $(document).ready(function() {
 	            // Mostramos un mensaje con la respuesta de PHP
 	            success: function(data) {
 	                $('#result').html(data);
+	                $.growl(
+	            			{
+	            				title:" <strong>!Cambios</strong>:",
+	            				message:" <strong>Guardados</strong>",
+	            				icon:"glyphicon glyphicon-thumbs-up"
+	            			},{
+	            				type:'success'
+	            			}
+	            		  );
 	                //recargamos el DataTable
 	                table.ajax.reload();
-	                alert('Registrado');
-	                
 	            }
 	        })        
 	        return false;
@@ -304,13 +355,25 @@ $(document).ready(function() {
 	    		<sj:datepicker label="Fecha Nacimiento :" name="empleado.fec_nacimiento" id="fec_nacimiento" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Sexo:" name="empleado.sexo" id="sexo" cssClass="form-control"/>
+	    		<div class="radio">
+							Seleccione Sexo:&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label><input type="radio" id="sexoM" value="M" name="s">Masculino</label>
+							&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio" id="sexoF" value="F" name="s">Femenino</label>
+							<s:hidden id="sexo" name="empleado.sexo" />
+				</div>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Email:" name="empleado.email" id="email" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Estado Civil:" name="empleado.estado_civil" id="estado_civil" cssClass="form-control"/>
+	    		<!--<s:textfield label="Estado Civil:" name="empleado.estado_civil" id="estado_civil" cssClass="form-control"/>-->
+	    		<s:select label="Estado Civil:" 
+	    		id="estado_civil"
+				headerKey="0" headerValue="--Seleccione Estado--"
+				list="#{'S':'Soltero(o)', 'C':'Casado(a)', 'V':'Viudo(a)', 'D':'Divorciado(a)'}" 
+				name="empleado.estado_civil" 
+				cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Telefono:" name="empleado.telefono" id="telefono" cssClass="form-control" maxlength="7" onkeypress="return validarEntero(event)"/>

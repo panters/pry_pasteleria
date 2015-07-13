@@ -12,6 +12,5 @@ public interface InsumoDAO {
 	public int create(Insumo bean);
 	public int update(Insumo bean);
 	public int delete(Insumo bean);
-	public List<Insumo> filter(int idcategoria,int idcobertura,int idmasa,int idrelleno);
 	
 }

@@ -65,7 +65,7 @@ if(te=="."){
 	}
 	return patron.test(te);	
 }     
-}		
+}				
 function validarLetra(e) { 
 tecla = (document.all) ? e.keyCode : e.which; 
 if (tecla==8 || tecla==0 || tecla==9) return true; 

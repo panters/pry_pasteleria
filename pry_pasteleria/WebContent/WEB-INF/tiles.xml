@@ -90,6 +90,14 @@
 		<put-attribute name="body" 	 value="/maintenances/product.jsp"/>
 	</definition>
 	
+	<definition name="minsumo" extends="layoutAdmin">
+		<put-attribute name="body" 	 value="/maintenances/insumo.jsp"/>
+	</definition>
+	
+	<definition name="mtipoinsumo" extends="layoutAdmin">
+		<put-attribute name="body" 	 value="/maintenances/tipoinsumo.jsp"/>
+	</definition>
+	
 	<definition name="mrol" extends="layoutAdmin">
 		<put-attribute name="body" 	 value="/maintenances/rol.jsp"/>
 	</definition>

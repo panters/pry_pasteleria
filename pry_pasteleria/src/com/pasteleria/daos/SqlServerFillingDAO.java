@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import com.pasteleria.bean.Coverage;
 import com.pasteleria.bean.Filling;
 import com.pasteleria.factory.SqlServerFactory;
 import com.pasteleria.interfaces.FillingDAO;
