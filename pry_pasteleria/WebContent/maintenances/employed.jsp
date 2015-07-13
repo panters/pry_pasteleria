@@ -162,6 +162,7 @@ $(document).ready(function() {
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
+		$('.modal-body #estado_civil').val(0);
 		}
     
     function verNuevo(){
@@ -366,7 +367,13 @@ $(document).ready(function() {
 	    		<s:textfield label="Email:" name="empleado.email" id="email" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Estado Civil:" name="empleado.estado_civil" id="estado_civil" cssClass="form-control"/>
+	    		<!--<s:textfield label="Estado Civil:" name="empleado.estado_civil" id="estado_civil" cssClass="form-control"/>-->
+	    		<s:select label="Estado Civil:" 
+	    		id="estado_civil"
+				headerKey="0" headerValue="--Seleccione Estado--"
+				list="#{'S':'Soltero(o)', 'C':'Casado(a)', 'V':'Viudo(a)', 'D':'Divorciado(a)'}" 
+				name="empleado.estado_civil" 
+				cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Telefono:" name="empleado.telefono" id="telefono" cssClass="form-control" maxlength="7" onkeypress="return validarEntero(event)"/>

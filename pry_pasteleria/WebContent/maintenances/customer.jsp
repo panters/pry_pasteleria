@@ -148,6 +148,7 @@ $(document).ready(function() {
 		/* Limpiar el Validate */
 	    $('.modal-body .form-group').removeClass('has-error');
 	    $('.modal-body .form-group').removeClass('has-success');
+	    $('.modal-body #estado_civil').val(0);
 	    $(".help-block").hide();
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
@@ -349,7 +350,13 @@ $(document).ready(function() {
 	    		<s:textfield label="Email:" name="cliente.email" id="email" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Estado Civil:" name="cliente.estado_civil" id="estado_civil" cssClass="form-control"/>
+	    		<!--<s:textfield label="Estado Civil:" name="cliente.estado_civil" id="estado_civil" cssClass="form-control"/>-->
+	    		<s:select label="Estado Civil:" 
+	    		id="estado_civil"
+				headerKey="0" headerValue="--Seleccione Estado--"
+				list="#{'S':'Soltero(o)', 'C':'Casado(a)', 'V':'Viudo(a)', 'D':'Divorciado(a)'}" 
+				name="cliente.estado_civil" 
+				cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Telefono:" name="cliente.telefono" id="telefono" cssClass="form-control" maxlength="7" onkeypress="return validarEntero(event)"/>
