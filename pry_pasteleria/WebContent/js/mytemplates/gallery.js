@@ -198,7 +198,7 @@ $(document).ready(function(){
 				row.html('');//limpiamos la grilla de productos
 				products=json.productos;
 				if(products.length==0)
-					row.html('<h3>Ningún productos coincide con el criterio de búsqueda</h3>');
+					row.html('<h3>Ning&uacute;n productos coincide con el criterio de b&uacute;squeda</h3>');
 				else
 				getProductsGrid(products);//recargamos la grilla con los productos encontrados
 			}
