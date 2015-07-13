@@ -231,10 +231,17 @@ $(document).ready(function() {
 	            // Mostramos un mensaje con la respuesta de PHP
 	            success: function(data) {
 	                $('#result').html(data);
+	                $.growl(
+	            			{
+	            				title:" <strong>!Cambios</strong>:",
+	            				message:" <strong>Guardados</strong>",
+	            				icon:"glyphicon glyphicon-thumbs-up"
+	            			},{
+	            				type:'success'
+	            			}
+	            		  );
 	                //recargamos el DataTable
 	                table.ajax.reload();
-	                alert('Registrado');
-	                
 	            }
 	        })        
 	        return false;
