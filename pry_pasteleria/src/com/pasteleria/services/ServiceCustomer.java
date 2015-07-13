@@ -3,6 +3,7 @@ package com.pasteleria.services;
 import java.util.List;
 
 import com.pasteleria.bean.Customer;
+import com.pasteleria.bean.User;
 import com.pasteleria.factory.Factory;
 import com.pasteleria.interfaces.CustomerDAO;
 
@@ -17,7 +18,7 @@ public class ServiceCustomer implements CustomerDAO {
 	}
 
 	@Override
-	public Customer find(Customer bean) {
+	public Customer find(User bean) {
 		return dao.find(bean);
 	}
 
@@ -41,6 +42,11 @@ public class ServiceCustomer implements CustomerDAO {
 	@Override
 	public int delete(Customer bean) {
 		return dao.delete(bean);
+	}
+
+	@Override
+	public int updatePassword(Customer bean) {
+		return dao.updatePassword(bean);
 	}
 
 }

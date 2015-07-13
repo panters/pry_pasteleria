@@ -129,6 +129,18 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@Action(value="updateCustomer",
+			results={@Result(name=SUCCESS,type="redirectAction",location="findCustomer")})
+	public String updateCustomer(){
+		return SUCCESS;
+	}
+	
+	@Action(value="updatePassword",
+			results={@Result(name=SUCCESS,type="redirectAction",location="findCustomerupd")})
+	public String updatePassword(){
+		return SUCCESS;
+	}
+	
 	@Action(value="memployed",results={@Result(name=SUCCESS,type="tiles",location="memployed")})
 	public String memployed(){
 		return SUCCESS;

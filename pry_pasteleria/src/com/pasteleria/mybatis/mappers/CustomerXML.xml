@@ -20,7 +20,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from BUSCA_CLIENTE where idUsuario=#{idUsuario};
 	</select>
 	
-	<update id="sql_update" parameterType="customer" statementType="CALLABLE">
+   <update id="sql_update" parameterType="customer" statementType="CALLABLE">
+		exec SP_MODIFICA_CLIENTE  #{nombre}, #{ape_pa}, #{ape_ma}, #{dni}, #{fec_nacimiento}, #{sexo}, #{email}, #{estado_civil}, #{telefono}, #{celular},#{fecha_registro},#{login}, #{password},#{idUsuario};
+	</update>
+	
+	<update id="sql_updatePassword" parameterType="customer" statementType="CALLABLE">
 		exec SP_MODIFICA_CLIENTE  #{nombre}, #{ape_pa}, #{ape_ma}, #{dni}, #{fec_nacimiento}, #{sexo}, #{email}, #{estado_civil}, #{telefono}, #{celular},#{fecha_registro},#{login}, #{password},#{idUsuario};
 	</update>
 	

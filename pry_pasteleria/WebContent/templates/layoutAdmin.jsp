@@ -4,7 +4,7 @@
 <%@taglib uri="/struts-jquery-tags" prefix="sj" %>
 <%@taglib uri="/struts-jquery-grid-tags" prefix="sjg" %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <meta charset="UTF-8">
     <title>AdminLTE 2 | Dashboard</title>
@@ -40,6 +40,9 @@
 	<script src="js/datatables/jquery.dataTables.min.js"></script>
 	<script src="js/datatables/dataTables.responsive.js"></script>
 	<script src="js/datatables/dataTables.bootstrap.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/bootstrap-datepicker.es.min.js"></script>
+	
 	
 	<link rel="stylesheet" type="text/css" href="css/datatables/jquery.dataTables.css">
 	<link rel="stylesheet" type="text/css" href="css/datatables/dataTables.responsive.css">
@@ -372,8 +375,6 @@
     <script src="js/messages_es.js"></script>
     <script src="js/main.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/bootstrap-datepicker.es.min.js"></script>
     <script>
       
      $.widget.bridge('uibutton', $.ui.button);
@@ -417,6 +418,7 @@
 			//alert(' Click deshabilitado-previene el registro de fechas anteriores');
 	  });
       
+	
      }); 
     </script>
     <!-- Bootstrap 3.3.2 JS -->

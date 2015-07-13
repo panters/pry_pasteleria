@@ -66,6 +66,14 @@
 		<put-attribute name="body" 	 value="/security/recoverPassword.jsp"/>
 	</definition>
 	
+	<definition name="customerupd" extends="layout">
+		<put-attribute name="body" 	 value="/security/updateCustomer.jsp"/>
+	</definition>
+	
+	<definition name="customerupdpass" extends="layout">
+		<put-attribute name="body" 	 value="/security/updatePassword.jsp"/>
+	</definition>
+	
 	<definition name="mcobertura" extends="layoutAdmin">
 		<put-attribute name="body" 	 value="/maintenances/coverage.jsp"/>
 	</definition>

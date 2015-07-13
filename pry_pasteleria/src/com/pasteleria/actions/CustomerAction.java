@@ -10,6 +10,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Customer;
+import com.pasteleria.bean.User;
 import com.pasteleria.services.ServiceCustomer;
 
 @ParentPackage(value="cloudedleopard")
@@ -39,22 +40,48 @@ public class CustomerAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	@Action(value="findCustomer",results={@Result(name="success",type="json")})
-	public String find(){
-		cliente=new ServiceCustomer().find(cliente);
+	@Action(value="findCustomer",results={@Result(name=SUCCESS,type="tiles",location="customerupd")})
+	public String findPas(){
+		Map<String, Object> session=ActionContext.getContext().getSession();
+		User u=(User) session.get("user");
+		cliente=new ServiceCustomer().find(u);
 		return SUCCESS;
 	}
 	
+	@Action(value="findCustomerupd",results={@Result(name=SUCCESS,type="tiles",location="customerupdpass")})
+	public String find(){
+		Map<String, Object> session=ActionContext.getContext().getSession();
+		User u=(User) session.get("user");
+		cliente=new ServiceCustomer().find(u);
+		return SUCCESS;
+	}
+	
+	@Action(value="updatePassword1",results={@Result(name=SUCCESS,type="tiles",location="catalogo")})
+	public String updatePassword(){
+		new ServiceCustomer().updatePassword(cliente);
+		return SUCCESS;
+	}
 	
 	@Action(value="saveCustomer",results={
-			@Result(name="success",type="json")})
+			@Result(name="success",type="json"),
+			@Result(name="admin",type="json"),
+			@Result(name="cliente",type="tiles",location="catalogo")})
 	public String save(){
 		Map<String, Object> session=ActionContext.getContext().getSession();
+		User u=(User) session.get("user");
 	if(session.get("user")!=null){	
 		if (cliente.getIdUsuario().equals("nuevo")) {
 			new ServiceCustomer().create(cliente);
+		
 		}else{
-			new ServiceCustomer().update(cliente);
+				if(u.getRol().getIdRol()==2){
+					new ServiceCustomer().update(cliente);
+					addActionMessage("Cambios Guardados");
+					 return "cliente";
+				}else{
+					new ServiceCustomer().update(cliente);
+					return "admin";
+				}				
 		}
 	}else{
 		new ServiceCustomer().register(username, apellidop, apellidom, documento, nacimiento, sexo, email, estadocivil, telefono, celular, password);  

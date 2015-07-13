@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.pasteleria.bean.Customer;
+import com.pasteleria.bean.User;
 import com.pasteleria.factory.SqlServerFactory;
 import com.pasteleria.interfaces.CustomerDAO;
 
@@ -31,7 +32,7 @@ public class SqlServerCustomerDAO implements CustomerDAO {
 	}
 
 	@Override
-	public Customer find(Customer bean) {
+	public Customer find(User bean) {
 		SqlSession session=SQL_SESSION_FACTORY.openSession();
 		Customer customer=null;
 		try {
@@ -115,6 +116,21 @@ public class SqlServerCustomerDAO implements CustomerDAO {
 			salida=session.delete("customerxml.sql_delete",bean.getIdUsuario());
 			session.commit();
 			System.out.println(salida);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return salida;
+	}
+
+	@Override
+	public int updatePassword(Customer bean) {
+		int salida=0;
+		SqlSession session=SQL_SESSION_FACTORY.openSession();
+		try {
+			salida=session.update("customerxml.sql_updatePassword",bean);
+			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

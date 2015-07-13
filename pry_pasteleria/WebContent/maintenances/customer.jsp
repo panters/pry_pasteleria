@@ -312,6 +312,9 @@ $(document).ready(function() {
 	    	<div class="form-group">
 	    		<s:textfield label="Celular:" name="cliente.celular" id="celular" cssClass="form-control" maxlength="9" onkeypress="return validarEntero(event)"/>
 	    	</div>
+	    	<div class="form-group">
+	    		<s:hidden label="Password:" name="cliente.password" cssClass="form-control" maxlength="9" onkeypress="return validarEntero(event)"/>
+	    	</div>
    		 </div>
       <div class="modal-footer">
   	  <div style="text-align:left;">
