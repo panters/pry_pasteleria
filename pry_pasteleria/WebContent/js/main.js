@@ -114,7 +114,61 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
 	    });
 	  
 ////////////////////////////////////////////////////////////////////////  
-  
+$("#formRegProducto").validate({
+    rules: {
+    	"producto.descripcion": {
+          minlength: 3,
+          maxlength: 20,
+          lettersonly:true,
+          required: true
+        },
+        "producto.stock": {
+        	 minlength:10,
+	         maxlength:20,
+	         lettersonly:true,
+	         required: true
+        },
+        "producto.precio": {
+          date:true,
+          required: true
+        },
+        "archivo": {
+          min:1,
+	      max:7,
+          required: true
+        }
+      },
+      highlight: function(element) {
+        $(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+      },
+      unhighlight: function(element) {
+        $(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+        var f=$(element).parent().parent().parent().children().eq(1);
+        if (f.hasClass('input-group-addon')){}	        	
+        else{f.addClass('glyphicon glyphicon-ok');}
+      }
+    });
+    $('input[type=submit]').click(function() {
+    	
+      $('#formRegProducto.animated').removeClass('animated shake');
+      if ($("#form").valid()) {
+        $("#formRegProducto").addClass("success");
+      } else {
+        $("#formRegProducto").removeClass("success").addClass("invalid");
+        $(this).addClass("disabled");
+      }
+
+      $("#formRegProducto.invalid input").on("keyup blur", function() {
+        if ($("#formRegProducto").valid()) {
+          $(".submit input").removeClass("disabled");
+          $("#formRegProducto").removeClass("invalid");
+        } else {
+          $(".submit input").addClass("disabled");
+        }
+      });
+    });
+		  
+	////////////////////////////////////////////////////////////////////////  
   
   
   

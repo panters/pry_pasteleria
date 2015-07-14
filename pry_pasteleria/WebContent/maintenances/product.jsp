@@ -278,7 +278,7 @@ $(document).ready(function() {
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
-  <s:form action="saveProduct" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="well form-vertical">
+  <s:form id="formRegProducto" action="saveProduct" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="animate-form well form-vertical">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     	<h4>Registrar Producto</h4>
@@ -286,14 +286,14 @@ $(document).ready(function() {
 		<div class="modal-body">
 	    		<s:hidden id="idProducto" name="producto.idProducto" />
 	    	<div class="form-group">
-		   		<s:textfield label="Producto :" name="producto.descripcion" id="descripcion" cssClass="form-control" onkeypress="return validarLetra(event)"/>
+		   		<s:textfield label="Producto :" name="producto.descripcion" id="descripcion" cssClass="form-control"/>
 	    	</div>
 	    	
 	    	<div class="form-group">
-	    		<s:textfield label="Stock :" name="producto.stock" id="stock" cssClass="form-control" maxlength="3" onkeypress="return validarEntero(event)"/>
+	    		<s:textfield label="Stock :" name="producto.stock" id="stock" cssClass="form-control" maxlength="3"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Precio :" name="producto.precio" id="precio" cssClass="form-control" onkeypress="return validarPrecio(event)"/>
+	    		<s:textfield label="Precio :" name="producto.precio" id="precio" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:file label="Imagen :" name="archivo"/>
@@ -301,8 +301,10 @@ $(document).ready(function() {
 	    		<s:textfield label="Imagen :" name="producto.image_resource" id="imagen" cssClass="form-control"/>
 	    		-->
 	    	</div>
-	    	<div class="form-group">
-	    			<s:url id="URL_ListCategorys" action="listCategory"/>
+	    	
+	    	
+	    		<div class="form-group has-feedback">
+					<s:url id="URL_ListCategorys" action="listCategory"/>
 					<sj:select cssClass="form-control"
 					id="cbocategoria" 
 					label="Categoria :"
@@ -313,7 +315,8 @@ $(document).ready(function() {
 					headerKey="0"
 					headerValue="--Seleccione--" 
 					name="producto.categoria.idCategoria" />
-	    	</div>
+				</div>
+	    	
 	    	<div class="form-group">
 	    		<s:url id="URL_ListCoverages" action="listCoverage"/>
 				<sj:select cssClass="form-control" 

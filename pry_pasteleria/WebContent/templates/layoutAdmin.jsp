@@ -32,7 +32,8 @@
     <link href="templateAdmin/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="templateAdmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-
+	
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css" media="all" rel="stylesheet">
 	<%-- <script src="templateAdmin/plugins/jQuery/jQuery-2.1.4.min.js"></script> --%>
 	<sj:head />
 	<script src="js/jquery.bootstrap-growl.js"></script>
