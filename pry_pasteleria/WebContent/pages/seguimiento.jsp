@@ -262,7 +262,7 @@ $(document).ready(function() {
 			datatype:'json',
 			data:{idPedido:datos.pedidoCabe.idPedidoCabe,indice:datos.indice,estado:comboEstado},
 			success:function(data){
-				alert('actualizado');
+				//alert('actualizado');
 				$.growl(
 						{
 							title:" <strong>Pedido: "+datos.pedidoCabe.idPedidoCabe+"</strong> ",
