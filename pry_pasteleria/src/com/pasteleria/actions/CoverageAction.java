@@ -8,7 +8,6 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Coverage;
-import com.pasteleria.services.HasServiceRol;
 import com.pasteleria.services.ServiceCoverage;
 
 @ParentPackage(value="cloudedleopard")

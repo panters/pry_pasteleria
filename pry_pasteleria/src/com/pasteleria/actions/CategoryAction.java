@@ -8,12 +8,7 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Category;
-import com.pasteleria.bean.Coverage;
-import com.pasteleria.bean.Filling;
-import com.pasteleria.services.HasServiceRol;
 import com.pasteleria.services.ServiceCategory;
-import com.pasteleria.services.ServiceCoverage;
-import com.pasteleria.services.ServiceFilling;
 
 @ParentPackage(value="cloudedleopard")
 public class CategoryAction extends ActionSupport{
