@@ -121,22 +121,23 @@ public class VoipAsteriskManager
 		
 		int callAttemp=0;//intentamos llamar 3 veces en caso cuelgue o no conteste
 		
-		while (!responseStatus.equals(STATUS[1]) && callAttemp<=0) {
-			
-			 // enviando el originate action y estableciendo el tiempo espera en  30 segundos 
-		    // to send a reply
-		    System.out.println("Llamando..");
-		    originateResponse = managerConnection.sendAction(originateAction, 30000);
-		    
-			 System.out.println("Mensaje: "+originateResponse.getMessage());
-			 
-		     // print out whether the originate succeeded or not
-		     System.out.println("obteniendo la respuesta: "+ originateResponse.getResponse());
-		     responseStatus=originateResponse.getResponse();
-		     callAttemp ++;
-			
-		  
-		}
+			while (!responseStatus.equals(STATUS[1]) && callAttemp<=0) {
+				
+				 // enviando el originate action y estableciendo el tiempo espera en  30 segundos 
+			    // to send a reply
+			    System.out.println("Llamando..");
+			    originateResponse = managerConnection.sendAction(originateAction, 30000);
+			    
+				 System.out.println("Mensaje: "+originateResponse.getMessage());
+				 
+			     // print out whether the originate succeeded or not
+			     System.out.println("obteniendo la respuesta: "+ originateResponse.getResponse());
+			     responseStatus=originateResponse.getResponse();
+			     callAttemp ++;
+				
+			}
+		 //Finalmente log off and disconnect
+		 managerConnection.logoff();
 		
 		} catch (IOException e1) {
 			// TODO: handle exception
@@ -144,10 +145,6 @@ public class VoipAsteriskManager
 			// TODO: handle exception
 		}catch(TimeoutException e3){
 			// TODO: handle exception
-		}
-		finally{
-			//Finalmente log off and disconnect
-			managerConnection.logoff();
 		}
 		
 		if (responseStatus.equals(STATUS[1]))
