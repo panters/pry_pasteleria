@@ -15,7 +15,6 @@ import com.pasteleria.bean.FormaCompra;
 import com.pasteleria.bean.Order;
 import com.pasteleria.bean.OrderDetail;
 import com.pasteleria.bean.User;
-import com.pasteleria.notifications.Email;
 import com.pasteleria.notifications.Notificaciones;
 import com.pasteleria.services.HasServiceOrder;
 import com.pasteleria.services.HasServiceOrderDetail;
@@ -66,7 +65,7 @@ public class OrderAction  extends ActionSupport{
 	public String registerOrder(){
 		
 		System.out.println("register Order was invoked");
-		System.out.println(orderDetail.get(0).getFec_requerimiento());
+		
 		try {
 			
 			this.order=new Order();
@@ -74,8 +73,7 @@ public class OrderAction  extends ActionSupport{
 			User u=(User) session.get("user");
 			Employed employed=new Employed();
 			Customer customer=new Customer();
-			//customer.setIdUsuario(u.getIdUsuario());
-			//customer=new ServiceCustomer().find(customer);
+			
 			//Asignamos el id al Cliente que registra el pedido(en observación)
 			 
 			if (u.getRol().getIdRol()==2) {
@@ -90,18 +88,16 @@ public class OrderAction  extends ActionSupport{
 				employed.setIdUsuario(u.getIdUsuario());
 				customer.setIdUsuario(this.idcliente);
 				customer=new ServiceCustomer().find(customer);
-				
-				System.out.println("Cliente asignado:"+customer.getIdUsuario()+"-"+customer.getNombre()+
-						"-"+customer.getEmail()+"-"+customer.getCelular());
-				
 				this.order.setFormaCompra(new FormaCompra(2));
-						
+				
 			}
 			
 			double total=0;
 			for (OrderDetail oj : (List<OrderDetail>)session.get("cart")) {
 				total+=oj.getSubTotal();
 			}
+			
+			System.out.println("Cliente asignado:"+customer.getIdUsuario()+"-"+customer.getCelular());
 			
 			this.order.setCliente(customer);
 			this.order.setEmpleado(employed);
@@ -113,8 +109,6 @@ public class OrderAction  extends ActionSupport{
 			int salida=new HasServiceOrderDetail().createfromList(this.order.getIdPedidoCabe(),this.orderDetail);
 			
 			if (salida>0) {
-				System.out.println(customer.getCelular()+customer.getEmail()+customer.getNombre()+
-						customer.getApe_pa()+customer.getApe_ma()+this.order.getIdPedidoCabe());
 				//Creamos un objeto Email que implementa de Runable
 				Notificaciones 	notifi=new Notificaciones(customer.getCelular(),customer.getEmail(),
 						customer.getNombre(),customer.getApe_pa(),customer.getApe_ma(),this.order.getIdPedidoCabe());

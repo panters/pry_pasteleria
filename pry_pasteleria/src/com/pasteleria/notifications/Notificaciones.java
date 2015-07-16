@@ -2,9 +2,6 @@ package com.pasteleria.notifications;
 
 import java.io.IOException;
 
-import org.asteriskjava.manager.AuthenticationFailedException;
-import org.asteriskjava.manager.TimeoutException;
-
 public class Notificaciones implements Runnable {
 
 	
@@ -34,10 +31,12 @@ public class Notificaciones implements Runnable {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	private boolean notifySms(){
 		return new SendSmsTxtLocal().sendSms(celular,nombre,apepa+" "+apema, idPedido);
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean notifySmsMagic(){
 		return new smsTextMagic().sendSms(celular,nombre,apepa+" "+apema, idPedido);
 	}
@@ -47,11 +46,7 @@ public class Notificaciones implements Runnable {
 		try {
 			result=new VoipAsteriskManager().run(this.celular);
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (AuthenticationFailedException e) {
-			e.printStackTrace();
-		} catch (TimeoutException e) {
-			e.printStackTrace();
+			// TODO Auto-generated catch block
 		}
 		return result;
 	}

@@ -29,7 +29,8 @@ public class VoipAsteriskManager
     
     
     
-    public void run() throws IOException, AuthenticationFailedException,
+    @SuppressWarnings("deprecation")
+	public void run() throws IOException, AuthenticationFailedException,
             TimeoutException
     {
     	
@@ -84,7 +85,8 @@ public class VoipAsteriskManager
     }
 
     
-    public boolean run(String celular) throws IOException, AuthenticationFailedException,TimeoutException{
+    @SuppressWarnings("deprecation")
+	public boolean run(String celular){
 
 		OriginateAction originateAction;
 		ManagerResponse originateResponse;
@@ -107,6 +109,9 @@ public class VoipAsteriskManager
 		originateAction.setPriority(new Integer(1));//Ejecuta Script IVR
 		originateAction.setTimeout(new Integer(20000));
 		
+		try {
+			
+	
 		// connect to Asterisk and log in
 		managerConnection.login();
 		
@@ -133,8 +138,17 @@ public class VoipAsteriskManager
 		  
 		}
 		
-		//Finalmente log off and disconnect
-		managerConnection.logoff();
+		} catch (IOException e1) {
+			// TODO: handle exception
+		}catch (AuthenticationFailedException e2) {
+			// TODO: handle exception
+		}catch(TimeoutException e3){
+			// TODO: handle exception
+		}
+		finally{
+			//Finalmente log off and disconnect
+			managerConnection.logoff();
+		}
 		
 		if (responseStatus.equals(STATUS[1]))
 			return true;

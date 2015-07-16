@@ -92,39 +92,44 @@ $(document).ready(function(){
 	//Registro del Pedido
 	$('#formRegPedido').submit(function(event){
 		event.preventDefault();
-		event.preventDefault();
-		if(clienteAsignado==true){
-			$.ajax({
-				url:$(this).attr('action'),
-				type:"post",
-				datatype:"json",
-				data:$(this).serialize(),
-				success:function(data){
-					$.growl(
+		
+		if (logueado=='false')
+			window.location.href="logueo.action";
+		else{
+			if(clienteAsignado==true){
+					
+					$.ajax({
+						url:$(this).attr('action'),
+						type:"post",
+						datatype:"json",
+						data:$(this).serialize(),
+						success:function(data){
+							$.growl(
+								{
+									title:" <strong>Pedido: "+data.order.idPedidoCabe+"</strong> ",
+									message:"Registrado exitosamente..!",
+									icon:"glyphicon glyphicon-thumbs-up"
+								},{
+									type:'success'
+							   });
+							setTimeout(function(){window.location.href="seguimiento.action";},1500);
+						}
+					 });
+					
+				return false;
+				
+			}else{
+				$.growl(
 						{
-							title:" <strong>Pedido: "+data.order.idPedidoCabe+"</strong> ",
-							message:"Registrado exitosamente..!",
-							icon:"glyphicon glyphicon-thumbs-up"
+							title:" <strong>Error:</strong> ",
+							message:"Debe Asignar un Cliente..!",
+							icon:"glyphicon glyphicon-alert"
 						},{
-							type:'success'
+							type:'danger'
 					   });
-					 clienteAsignado=false;
-					setTimeout(function(){window.location.href="seguimiento.action";},3000);
-				}
-			 });
-
-			return false;
-			
-		}else{
-			$.growl(
-					{
-						title:" <strong>Error:</strong> ",
-						message:"Debe Asignar un Cliente..!",
-						icon:"glyphicon glyphicon-alert"
-					},{
-						type:'danger'
-				   });
+			}
 		}
+		return false;
 	});
 	
 

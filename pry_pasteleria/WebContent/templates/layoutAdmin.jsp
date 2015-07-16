@@ -26,24 +26,26 @@
     <link href="templateAdmin/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
     <link href="templateAdmin/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- Date Picker -->
+    <!-- Date Picker 
     <link href="templateAdmin/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker -->
+    -->
+    <!-- Daterange picker
     <link href="templateAdmin/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+     -->
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="templateAdmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 	
+	
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css" media="all" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.standalone.css">
 	<%-- <script src="templateAdmin/plugins/jQuery/jQuery-2.1.4.min.js"></script> --%>
+	
 	<sj:head />
 	<script src="js/jquery.bootstrap-growl.js"></script>
 	<script src="js/bootstrap-growl.min.js"></script>	
 	<script src="js/datatables/jquery.dataTables.min.js"></script>
 	<script src="js/datatables/dataTables.responsive.js"></script>
 	<script src="js/datatables/dataTables.bootstrap.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/bootstrap-datepicker.es.min.js"></script>
-	
 	
 	<link rel="stylesheet" type="text/css" href="css/datatables/jquery.dataTables.css">
 	<link rel="stylesheet" type="text/css" href="css/datatables/dataTables.responsive.css">
@@ -426,6 +428,10 @@
     </script>
     <!-- Bootstrap 3.3.2 JS -->
     <script src="templateAdmin/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>    
+    <!-- datepickers -->
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/bootstrap-datepicker.es.min.js"></script>
+    
     <!-- Morris.js charts -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="templateAdmin/plugins/morris/morris.min.js" type="text/javascript"></script>
@@ -436,11 +442,13 @@
     <script src="templateAdmin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
     <!-- jQuery Knob Chart -->
     <script src="templateAdmin/plugins/knob/jquery.knob.js" type="text/javascript"></script>
-    <!-- daterangepicker -->
+    <!-- daterangepicker
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
     <script src="templateAdmin/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- datepicker -->
+     -->
+    <!-- datepicker 
     <script src="templateAdmin/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    -->
     <!-- Bootstrap WYSIHTML5 -->
     <script src="templateAdmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
     <!-- Slimscroll -->

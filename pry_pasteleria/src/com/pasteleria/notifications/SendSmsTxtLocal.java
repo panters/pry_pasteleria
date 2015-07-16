@@ -18,7 +18,6 @@ public class SendSmsTxtLocal {
 			String hash = "&hash=" + "Leonxandercs3";
 			String message = "&message=" + "Prueba de Envio de Sms desde Java...by tu papi  Alexander";
 			String sender = "&sender=" + "Alexander	";
-			String n2="51959228405";
 			String numbers = "&numbers=" + "51954191116";
 
 			// Send data

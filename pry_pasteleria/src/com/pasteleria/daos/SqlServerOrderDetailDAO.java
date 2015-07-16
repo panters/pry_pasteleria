@@ -63,7 +63,7 @@ public class SqlServerOrderDetailDAO implements OrderDetailDAO {
 		SqlSession session=SQL_SESSION_FACTORY.openSession();
 		try {
 			
-				System.out.println(details.size());
+				System.out.println("dimension: "+details.size());
 				
 				if (details!=null && details.size()>0) {
 					
@@ -71,15 +71,6 @@ public class SqlServerOrderDetailDAO implements OrderDetailDAO {
 						
 						obj.setPedidoCabe(new Order(idPedido));
 						obj.setPrecioUnidad(obj.getProducto().getPrecio());
-						
-						System.out.println(obj.getPedidoCabe().getIdPedidoCabe()+
-								obj.getProducto().getIdProducto()+
-								obj.getPrecioUnidad()+
-								obj.getDedicatoria()+
-								obj.getNombre_agasajado()+
-								obj.getFec_requerimiento()
-								);
-						
 						
 						salida=session.insert("orderDetailxml.sql_insert",obj);
 						
