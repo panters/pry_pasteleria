@@ -22,6 +22,8 @@ public class User implements Serializable{
 	private String telefono;
 	private String celular;
 	
+	
+	
 	public String getIdUsuario() {
 		return idUsuario;
 	}

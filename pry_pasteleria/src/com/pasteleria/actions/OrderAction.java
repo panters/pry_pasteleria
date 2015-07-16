@@ -79,21 +79,23 @@ public class OrderAction  extends ActionSupport{
 			//Asignamos el id al Cliente que registra el pedido(en observación)
 			 
 			if (u.getRol().getIdRol()==2) {
+				
 				employed.setIdUsuario("E0000");
 				customer.setIdUsuario(u.getIdUsuario());
 				customer=new ServiceCustomer().find(customer);
-				this.order.setFormaCompra(new FormaCompra(1));
+				this.order.setFormaCompra(new FormaCompra(1));		
 				
-				System.out.println("Asignaod "+this.idcliente);
 			}else{
-				System.out.println("Asignaod "+this.idcliente);
+				
 				employed.setIdUsuario(u.getIdUsuario());
 				customer.setIdUsuario(this.idcliente);
 				customer=new ServiceCustomer().find(customer);
-				this.order.setFormaCompra(new FormaCompra(2));
-				System.out.println("Empleado asignado:"+customer.getIdUsuario()+"-"+customer.getNombre()+
+				
+				System.out.println("Cliente asignado:"+customer.getIdUsuario()+"-"+customer.getNombre()+
 						"-"+customer.getEmail()+"-"+customer.getCelular());
 				
+				this.order.setFormaCompra(new FormaCompra(2));
+						
 			}
 			
 			double total=0;
@@ -108,8 +110,8 @@ public class OrderAction  extends ActionSupport{
 			//Registramos el pedido y obtenemos el Codigo del Pedido Generado
 			this.order.setIdPedidoCabe(new HasServiceOrder().create(this.order));
 			
-			
 			int salida=new HasServiceOrderDetail().createfromList(this.order.getIdPedidoCabe(),this.orderDetail);
+			
 			if (salida>0) {
 				System.out.println(customer.getCelular()+customer.getEmail()+customer.getNombre()+
 						customer.getApe_pa()+customer.getApe_ma()+this.order.getIdPedidoCabe());
@@ -129,6 +131,8 @@ public class OrderAction  extends ActionSupport{
 		
 		return SUCCESS;
 	}
+	
+	
 	
 	@Action(value="EditStatus",results={@Result(name=SUCCESS,type="json")})
 	public String EditStatus(){

@@ -71,6 +71,16 @@ public class SqlServerOrderDetailDAO implements OrderDetailDAO {
 						
 						obj.setPedidoCabe(new Order(idPedido));
 						obj.setPrecioUnidad(obj.getProducto().getPrecio());
+						
+						System.out.println(obj.getPedidoCabe().getIdPedidoCabe()+
+								obj.getProducto().getIdProducto()+
+								obj.getPrecioUnidad()+
+								obj.getDedicatoria()+
+								obj.getNombre_agasajado()+
+								obj.getFec_requerimiento()
+								);
+						
+						
 						salida=session.insert("orderDetailxml.sql_insert",obj);
 						
 						if(salida<=0){
