@@ -16,6 +16,35 @@ jQuery.validator.addMethod("vigencia", function(value, element) {
 jQuery.validator.addMethod("precio", function(value, element) {
 return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/i.test(value);
 }, "Precio inv&aacute;lido utilice formato 0000.00");
+
+$.validator.addMethod("dni", function(value, element) {
+	  if(/^([0-9]{8})*[a-zA-Z]+$/.test(value)){
+	    var numero = value.substr(0,value.length-1);
+	    var let = value.substr(value.length-1,1).toUpperCase();
+	    numero = numero % 23;
+	    var letra='TRWAGMYFPDXBNJZSQVHLCKET';
+	    letra = letra.substring(numero,numero+1);
+	    if (letra==let) return true;
+	    return false;
+	  }
+	  return this.optional(element);
+	}, "DNI no v&aacute;lido");
+
+jQuery.validator.addMethod("telefono", function (value, element) {
+    value = value.replace("(", "");
+    value = value.replace(")", "");
+    value = value.replace("-", "");
+    return this.optional(element) || /[0-9]{10}/.test(value);
+}, "Por favor, um telefone v&aacute;lido");
+
+jQuery.validator.addMethod("celular", function (value, element) {
+	value = value.replace("(", "");
+	value = value.replace(")", "");
+	value = value.replace("-", "");
+	value = value.replace("_", "");
+	value = value.replace(" ", "");
+	return this.optional(element) || /[0-9]{10}/.test(value) || /[0-9]{11}/.test(value);
+	}, "Digite un  celular v&aacute;lido.");
 /*
 jQuery.validator.addMethod("precio", function(value, element) {
 	return this.optional(element) || /^S\/.+[0-9]$/i.test(value);
@@ -553,19 +582,54 @@ $("#RegistroRol").validate({
 ////////////////////////////////////////////////////////////////////////
 //		Validacion de Mantenimiento Clientes
 ////////////////////////////////////////////////////////////////////////
-	$("#RegistroRol").validate({
+	$("#formCliente").validate({
 			rules: {
-				"rol.descripcion": {
+				"cliente.nombre": {
 					minlength: 3,
 					maxlength:50,
 					lettersonlyWithSpace:true,
 					required: true
-					}
-			
+					},
+				"cliente.ape_pa":{
+					minlength: 3,
+					maxlength:50,
+					lettersonlyWithSpace:true,
+					required: true	
+				},
+				"cliente.ape_ma":{
+					minlength: 3,
+					maxlength:50,
+					lettersonlyWithSpace:true,
+					required: true
+				},
+				"cliente.dni":{
+					required:true,
+					dni:true
+				},
+				"cliente.fec_nacimiento":{
+					required:true,
+					date:true
+				},
+				"cliente.email":{
+					email:true,
+					required:true
+				},
+				"cliente.telefono":{
+					telefono:true
+				},
+				"cliente.celular":{
+					required:true,
+					celular:true
+				},
+				"cliente.estado_civil":{
+					required:true,
+					lettersonlyWithSpace:true
+				}
+					
 				},
 			messages:{ 
-				"rol.descripcion": {
-						required:"Descripci&oacute;n de Rol  inv&aacute;lida."
+				"cliente.estado_civil": {
+					lettersonlyWithSpace:"Seleccione una opci&oacute;n v&aacute;lida."
 				}
 			},
 			highlight: function(element) {
@@ -580,18 +644,18 @@ $("#RegistroRol").validate({
 			});
 			$('input[type=submit]').click(function() {
 			
-			$('#RegistroRol.animated').removeClass('animated shake');
-			if ($("#RegistroRol").valid()) {
-			$("#RegistroRol").addClass("success");
+			$('#formCliente.animated').removeClass('animated shake');
+			if ($("#formCliente").valid()) {
+			$("#formCliente").addClass("success");
 			} else {
-			$("#RegistroRol").removeClass("success").addClass("invalid");
+			$("#formCliente").removeClass("success").addClass("invalid");
 			$(this).addClass("disabled");
 			}
 			
-			$("#RegistroRol.invalid input").on("keyup blur", function() {
-			if ($("#RegistroRol").valid()) {
+			$("#formCliente.invalid input").on("keyup blur", function() {
+			if ($("#formCliente").valid()) {
 			$(".submit input").removeClass("disabled");
-			$("#RegistroRol").removeClass("invalid");
+			$("#formCliente").removeClass("invalid");
 			} else {
 			$(".submit input").addClass("disabled");
 			}

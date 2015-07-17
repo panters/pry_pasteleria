@@ -83,7 +83,6 @@ $(document).ready(function() {
     /*  Evento Doble click */
     $('#example tbody').on( 'dblclick', 'tr', function () {
     	limpiarfields();
-   	
        if ( $(this).hasClass('selected') ) {
            $(this).removeClass('selected');
        }
@@ -145,11 +144,15 @@ $(document).ready(function() {
     
     //Clean Fields
     function limpiarfields(){
-		/* Limpiar el Validate */
-	    $('.modal-body .form-group').removeClass('has-error');
-	    $('.modal-body .form-group').removeClass('has-success');
-	    $('.modal-body #estado_civil').val(0);
-	    $(".help-block").hide();
+    	/* Limpiar el Validate */
+    	$('.modal-body .form-group').removeClass('has-error');
+    	$('.modal-body .form-group').removeClass('has-feedback');
+    	$('.modal-body .form-group').removeClass('has-success');
+    	$('.modal-body .form-group').removeClass('glyphicon glyphicon-ok');
+    	$('.error').remove();
+    	$(".help-block").hide();
+    	/*limpiar el efecto*/
+    	$('form').removeClass('animated shake');
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
@@ -213,15 +216,22 @@ $(document).ready(function() {
 	 
 	 
 	 // Interceptamos el evento submit
-	    $('#form').submit(function() {
-	    	 $('#myModalNuevo').modal('hide');	
-	  // Enviamos el formulario usando AJAX
+	    $('#formCliente').submit(function(e) {
+	  	e.preventDefault();
+	    //detenemos el evento para validar el form
+	   var $form=$(this);
+	   if (! $form.valid()) {
+			return false;
+		  //si no es valido no hacemos nada
+		}else{
+			// Enviamos el formulario usando AJAX
 	        $.ajax({
 	            type: 'POST',
 	            url: $(this).attr('action'),
 	            data: $(this).serialize(),
-	            // Mostramos un mensaje con la respuesta de PHP
+	            // Mostramos un mensaje con la respuesta
 	            success: function(data) {
+	            	$('#myModalNuevo').modal('hide');
 	                $('#result').html(data);
 	            	$.growl(
 	            			{
@@ -237,7 +247,9 @@ $(document).ready(function() {
 	             }
 	        })        
 	        return false;
-	    }); 
+		   }
+	   return false;
+	 }); 
     
 } );
 
@@ -315,7 +327,7 @@ $(document).ready(function() {
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
-  <s:form id="form" action="saveCustomer"  theme="bootstrap" cssClass="well form-vertical">
+  <s:form id="formCliente" action="saveCustomer"  theme="bootstrap" cssClass="animate-form well form-vertical">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     	<h4>Registro</h4>
@@ -349,15 +361,14 @@ $(document).ready(function() {
 	    	<div class="form-group">
 	    		<s:textfield label="Email:" name="cliente.email" id="email" cssClass="form-control"/>
 	    	</div>
-	    	<div class="form-group">
-	    		<!--<s:textfield label="Estado Civil:" name="cliente.estado_civil" id="estado_civil" cssClass="form-control"/>-->
-	    		<s:select label="Estado Civil:" 
-	    		id="estado_civil"
-				headerKey="0" headerValue="--Seleccione Estado--"
-				list="#{'S':'Soltero(o)', 'C':'Casado(a)', 'V':'Viudo(a)', 'D':'Divorciado(a)'}" 
-				name="cliente.estado_civil" 
-				cssClass="form-control"/>
-	    	</div>
+	    	<!--<s:textfield label="Estado Civil:" name="cliente.estado_civil" id="estado_civil" cssClass="form-control"/>-->
+    		<s:select label="Estado Civil:" 
+    		id="estado_civil"
+			headerKey="0" headerValue="--Seleccione Estado--"
+			list="#{'S':'Soltero(o)', 'C':'Casado(a)', 'V':'Viudo(a)', 'D':'Divorciado(a)'}" 
+			name="cliente.estado_civil" 
+			cssClass="form-control"/>
+	    	
 	    	<div class="form-group">
 	    		<s:textfield label="Telefono:" name="cliente.telefono" id="telefono" cssClass="form-control" maxlength="7" onkeypress="return validarEntero(event)"/>
 	    	</div>
