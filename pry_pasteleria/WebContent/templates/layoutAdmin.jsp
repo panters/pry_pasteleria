@@ -41,6 +41,7 @@
 	<%-- <script src="templateAdmin/plugins/jQuery/jQuery-2.1.4.min.js"></script> --%>
 	
 	<sj:head />
+	<script src="js/jquery.idle.js"></script>
 	<script src="js/jquery.bootstrap-growl.js"></script>
 	<script src="js/bootstrap-growl.min.js"></script>	
 	<script src="js/datatables/jquery.dataTables.min.js"></script>
@@ -384,8 +385,27 @@
       
      $.widget.bridge('uibutton', $.ui.button);
       
+     $(document).idle({
+         onIdle: function(){
+           alert('Inactivo un 2 segundos!');
+         },
+         onActive: function(){
+        	 //alert('Active!');
+         },
+         onHide: function(){
+        	 //alert('Hidden!');
+         },
+         onShow: function(){
+           // Add a slight pause so you can see the change
+           setTimeout(function(){
+        	   //alert('Visible!');
+           }, 250);
+         },
+         idle:2000
+       });
+     
      $(document).ready(function(){
-    	 
+
     	 var patron = /^\d*$/;
          var date=new Date();
          var month = date.getMonth()+1;
