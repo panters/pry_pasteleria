@@ -22,6 +22,13 @@
 <script>
 $(document).ready(function() {
 	
+	$( ".fechas" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		language: "es",
+		yearRange: '1940:2000'
+		});
+	
 	
     var table=$('#example').DataTable({
        // "processing": true,
@@ -347,7 +354,7 @@ $(document).ready(function() {
 	    		<s:textfield label="DNI :" name="cliente.dni" id="dni" cssClass="form-control" maxlength="8" />
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Fecha Nacimiento :" name="cliente.fec_nacimiento" id="fec_nacimiento" cssClass="form-control"/>
+	    		<s:textfield label="Fecha Nacimiento :" name="cliente.fec_nacimiento" id="fec_nacimiento" cssClass="form-control fechas" readonly="true" />
 	    	</div>
 	    	<div class="form-group">
 	    		<div class="radio">

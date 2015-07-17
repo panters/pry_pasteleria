@@ -239,21 +239,21 @@ $(document).ready(function(){
 	    
 	    '<td>'+
 		'<div class="form-group has-feedback">'+
-	    '<input type="text" class="form-control" name="orderDetail['+j+'].nombre_agasajado"  pattern="[A-Za-z ]+" >'+
+	    '<input type="text" class="form-control" name="orderDetail['+j+'].nombre_agasajado"  pattern="[A-Z a-z \s\u00A0-\uD7FF]+" >'+
 	    '<span	class="glyphicon glyphicon-ok form-control-feedback"></span>'+
 		'</div>'+
 		'</td>'+
 	    
 	    '<td>'+
 		'<div class="form-group has-feedback">'+
-		'<input type="text" class="form-control" name="orderDetail['+j+'].dedicatoria" pattern="[A-Za-z ]+" >'+
+		'<input type="text" class="form-control" name="orderDetail['+j+'].dedicatoria" pattern="[A-Z a-z \s\u00A0-\uD7FF]+" >'+
 	    '<span	class="glyphicon glyphicon-ok form-control-feedback"></span>'+
 		'</div>'+
 		'</td>'+
 	    '<td>'+
 		'<div class="form-group has-feedback">'+
 		'<div class="input-group date">'+
-		'<input type="text" class="form-control" id="fechita" name="orderDetail['+j+'].fec_requerimiento" pattern="\\d{1,2}/\\d{1,2}/\\d{4}" required="true" />'+
+		'<input type="text" class="form-control" id="fechita" name="orderDetail['+j+'].fec_requerimiento" pattern="\\d{1,2}/\\d{1,2}/\\d{4}" required="true" autocomplete="off" />'+
 			'<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>'+
 			'</span>'+
 		'</div>'+

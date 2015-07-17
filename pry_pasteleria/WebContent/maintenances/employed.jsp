@@ -15,6 +15,14 @@
 <script>
 $(document).ready(function() {
 	
+	$( ".fechas" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		language: "es",
+		yearRange: '1940:2000'
+		});
+	
+	
     var table=$('#example').DataTable( {
         "processing": true,
         "ajax": {
@@ -365,8 +373,7 @@ $(document).ready(function() {
 	    		<s:textfield label="DNI :" name="empleado.dni" id="dni" cssClass="form-control" maxlength="8"/>
 	    	</div>
 	    	<div class="form-group">
-	    		
-	    		<sj:datepicker label="Fecha Nacimiento :" name="empleado.fec_nacimiento" id="fec_nacimiento" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" " yearRange="1955:1997" changeYear="true" />
+	    		<s:textfield label="Fecha Nacimiento :" name="empleado.fec_nacimiento" id="fec_nacimiento" cssClass="form-control fechas" readonly="true"  />
 	    	</div>
 	    	<div class="form-group">
 	    		<div class="radio">
@@ -397,13 +404,13 @@ $(document).ready(function() {
 	    	</div>
 	    	
 	    	<div class="form-group">
-	    		<sj:datepicker label="Fecha Ingreso:" name="empleado.fecha_ingreso" id="fecha_ingreso" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "  changeYear="true"/>
+	    		<s:textfield label="Fecha Ingreso:" name="empleado.fecha_ingreso" id="fecha_ingreso" cssClass="form-control fechas"  readonly="true"  />
 	    	</div>
 	    	<div class="form-group">
 	    		<s:textfield label="Sueldo:" name="empleado.sueldo" id="sueldo" cssClass="form-control" />
 	    	</div>
 	    	<div class="form-group">
-	    		<sj:datepicker label="Fin Contrato:" name="empleado.fecha_salida" id="fecha_salida" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "   changeYear="true"/>
+	    		<s:textfield label="Fin Contrato:" name="empleado.fecha_salida" id="fecha_salida" cssClass="form-control fechas"  readonly="true"  />
 	    	</div>
 	    	<div class="form-group">
 	    		<s:url id="URL_ListRoles" action="listRol"/>
