@@ -91,7 +91,7 @@
                     <img src="templateAdmin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
                       Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      <small>Miembro desde Nov. 2012</small>
                     </p>
                   </li>
                   <!-- Menu Body -->
@@ -402,7 +402,7 @@
         	   //alert('Visible!');
            }, 250);
          },
-         idle:3000
+         idle:10*1000
        });
      
      $(document).ready(function(){
