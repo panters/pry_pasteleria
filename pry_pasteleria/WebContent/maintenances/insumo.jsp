@@ -85,7 +85,7 @@ $(document).ready(function() {
     
     /*  Evento Doble click */
     $('#example tbody').on( 'dblclick', 'tr', function () {
-   		 
+   		 limpiarfields();
        if ( $(this).hasClass('selected') ) {
            $(this).removeClass('selected');
        }
@@ -132,14 +132,18 @@ $(document).ready(function() {
     
     //Clean Fields
     function limpiarfields(){
-		/* Limpiar el Validate */
+    	/* Limpiar el Validate */
 	    $('.modal-body .form-group').removeClass('has-error');
+	    $('.modal-body .form-group').removeClass('has-feedback');
 	    $('.modal-body .form-group').removeClass('has-success');
+	    $('.modal-body .form-group').removeClass('glyphicon glyphicon-ok');
+	    $('.error').remove();
 	    $(".help-block").hide();
+	    /*limpiar el efecto*/
+	    $('form').removeClass('animated shake');
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
-		//modal.find('.modal-body #precio').val('S/.0.00');
 		$('#cbocategoria').val(0);
 		$('#img_bkp').html('');
 		}
@@ -233,7 +237,7 @@ $(document).ready(function() {
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
-  <s:form action="saveInsumo" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="well form-vertical">
+  <s:form id="FormInsumo" action="saveInsumo" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="animate-form  well form-vertical">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     	<h4>Registrar Producto</h4>
@@ -241,11 +245,11 @@ $(document).ready(function() {
 		<div class="modal-body">
 	    		<s:hidden id="idProducto" name="insumo.idinsumo" />
 	    	<div class="form-group">
-		   		<s:textfield label="Insumo :" name="insumo.descripcion" id="descripcion" cssClass="form-control" onkeypress="return validarLetra(event)"/>
+		   		<s:textfield label="Insumo :" name="insumo.descripcion" id="descripcion" cssClass="form-control"/>
 	    	</div>
 	    	
 	    	<div class="form-group">
-	    		<s:textfield label="Precio :" name="insumo.precio" id="precio" cssClass="form-control" onkeypress="return validarPrecio(event)"/>
+	    		<s:textfield label="Precio :" name="insumo.precio" id="precio" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:file label="Imagen :" name="archivo"/>
@@ -254,17 +258,15 @@ $(document).ready(function() {
 	    		<s:textfield label="Imagen :" name="producto.image_resource" id="imagen" cssClass="form-control"/>
 	    		-->
 	    	</div>
-	    	<div class="form-group">
-	    			<s:url id="URL_ListTipos" action="listtipoinsumos"/>
-					<sj:select cssClass="form-control"
-					id="cbocategoria" 
-					label="Tipo :"
-					list="tipoinsumos"
-					href="%{URL_ListTipos}"
-					headerKey="0"
-					headerValue="--Seleccione--" 
-					name="insumo.tipo" />
-	    	</div>
+   			<s:url id="URL_ListTipos" action="listtipoinsumos"/>
+				<sj:select cssClass="form-control"
+				id="cbocategoria" 
+				label="Tipo :"
+				list="tipoinsumos"
+				href="%{URL_ListTipos}"
+				headerKey="0"
+				headerValue="--Seleccione--" 
+				name="insumo.tipo" />
    		 </div>
       <div class="modal-footer">
   	  <div style="text-align:left;">

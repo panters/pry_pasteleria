@@ -242,29 +242,172 @@ $("#formRegProducto").validate({
         });
         $('input[type=submit]').click(function() {
         	
-          $('#formRegProducto.animated').removeClass('animated shake');
-          if ($("#form").valid()) {
-            $("#formRegProducto").addClass("success");
+          $('#FormTipoInsumo.animated').removeClass('animated shake');
+          if ($("#FormTipoInsumo").valid()) {
+            $("#FormTipoInsumo").addClass("success");
           } else {
-            $("#formRegProducto").removeClass("success").addClass("invalid");
+            $("#FormTipoInsumo").removeClass("success").addClass("invalid");
             $(this).addClass("disabled");
           }
 
-          $("#formRegProducto.invalid input").on("keyup blur", function() {
-            if ($("#formRegProducto").valid()) {
+          $("#FormTipoInsumo.invalid input").on("keyup blur", function() {
+            if ($("#FormTipoInsumo").valid()) {
               $(".submit input").removeClass("disabled");
-              $("#formRegProducto").removeClass("invalid");
+              $("#FormTipoInsumo").removeClass("invalid");
             } else {
               $(".submit input").addClass("disabled");
             }
           });
         });
     		  
-    ////////////////////////////////////////////////////////////////////////  
-  
-  
-  
-  
+////////////////////////////////////////////////////////////////////////  
+//				Validacion Mantenimiento Insumos
+////////////////////////////////////////////////////////////////////////
+        $("#FormInsumo").validate({
+            rules: {
+            	"insumo.descripcion": {
+                  minlength: 3,
+                  maxlength:50,
+                  lettersonlyWithSpace:true,
+                  required: true
+                },
+                "insumo.precio":{
+                	precio:true,
+                	required: true
+                },
+                "insumo.tipo":{
+                	required: true,
+                	lettersonlyWithSpace:true,
+                }
+              },
+              messages:{ 
+            	  "insumo.tipo": {
+            		  lettersonlyWithSpace:"Seleccione un tipo v&aacute;lido."
+                  }
+              },
+              highlight: function(element) {
+                $(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+              },
+              unhighlight: function(element) {
+                $(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+                var f=$(element).parent().parent().parent().children().eq(1);
+                if (f.hasClass('input-group-addon')){}	        	
+                else{/**/}
+              }
+            });
+            $('input[type=submit]').click(function() {
+            	
+              $('#FormInsumo.animated').removeClass('animated shake');
+              if ($("#FormInsumo").valid()) {
+                $("#FormInsumo").addClass("success");
+              } else {
+                $("#FormInsumo").removeClass("success").addClass("invalid");
+                $(this).addClass("disabled");
+              }
+
+              $("#FormInsumo.invalid input").on("keyup blur", function() {
+                if ($("#FormInsumo").valid()) {
+                  $(".submit input").removeClass("disabled");
+                  $("#FormInsumo").removeClass("invalid");
+                } else {
+                  $(".submit input").addClass("disabled");
+                }
+              });
+            });
+////////////////////////////////////////////////////////////////////////        		    
+//			Validacion de Mantenimiento Cobertura  
+////////////////////////////////////////////////////////////////////////
+            $("#Registro").validate({
+                rules: {
+                	"cobertura.descripcion": {
+                      minlength: 3,
+                      maxlength:50,
+                      lettersonlyWithSpace:true,
+                      required: true
+                    }
+            
+                  },
+                  messages:{ 
+                	  "cobertura.descripcion": {
+                	   required:"Descripci&oacute;n de Cobertura  inv&aacute;lida."
+                      }
+                  },
+                  highlight: function(element) {
+                    $(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+                  },
+                  unhighlight: function(element) {
+                    $(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+                    var f=$(element).parent().parent().parent().children().eq(1);
+                    if (f.hasClass('input-group-addon')){}	        	
+                    else{/**/}
+                  }
+                });
+                $('input[type=submit]').click(function() {
+                	
+                  $('#Registro.animated').removeClass('animated shake');
+                  if ($("#Registro").valid()) {
+                    $("#Registro").addClass("success");
+                  } else {
+                    $("#Registro").removeClass("success").addClass("invalid");
+                    $(this).addClass("disabled");
+                  }
+
+                  $("#Registro.invalid input").on("keyup blur", function() {
+                    if ($("#Registro").valid()) {
+                      $(".submit input").removeClass("disabled");
+                      $("#Registro").removeClass("invalid");
+                    } else {
+                      $(".submit input").addClass("disabled");
+                    }
+                  });
+                });  
+////////////////////////////////////////////////////////////////////////
+//    			Validacion de Mantenimiento Masa  
+////////////////////////////////////////////////////////////////////////
+                $("#RegistroMasa").validate({
+                    rules: {
+                    	"masa.descripcion": {
+                          minlength: 3,
+                          maxlength:50,
+                          lettersonlyWithSpace:true,
+                          required: true
+                        }
+                
+                      },
+                      messages:{ 
+                    	  "masa.descripcion": {
+                    	   required:"Descripci&oacute;n de Masa  inv&aacute;lida."
+                          }
+                      },
+                      highlight: function(element) {
+                        $(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+                      },
+                      unhighlight: function(element) {
+                        $(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+                        var f=$(element).parent().parent().parent().children().eq(1);
+                        if (f.hasClass('input-group-addon')){}	        	
+                        else{/**/}
+                      }
+                    });
+                    $('input[type=submit]').click(function() {
+                    	
+                      $('#RegistroMasa.animated').removeClass('animated shake');
+                      if ($("#RegistroMasa").valid()) {
+                        $("#RegistroMasa").addClass("success");
+                      } else {
+                        $("#RegistroMasa").removeClass("success").addClass("invalid");
+                        $(this).addClass("disabled");
+                      }
+
+                      $("#RegistroMasa.invalid input").on("keyup blur", function() {
+                        if ($("#RegistroMasa").valid()) {
+                          $(".submit input").removeClass("disabled");
+                          $("#RegistroMasa").removeClass("invalid");
+                        } else {
+                          $(".submit input").addClass("disabled");
+                        }
+                      });
+                    });  
   
   
   

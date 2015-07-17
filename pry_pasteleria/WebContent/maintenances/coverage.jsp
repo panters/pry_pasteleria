@@ -41,7 +41,7 @@ $(document).ready(function() {
     });    
   
     $('#example tbody').on( 'dblclick', 'tr', function () {
-   		 
+   		 limpiarfields();
        if ( $(this).hasClass('selected') ) {
            $(this).removeClass('selected');
        }
@@ -73,10 +73,15 @@ $(document).ready(function() {
     
     //Clean Fields
     function limpiarfields(){
-		/* Limpiar el Validate */
-	    $('.modal-body .form-group').removeClass('has-error');
-	    $('.modal-body .form-group').removeClass('has-success');
-	    $(".help-block").hide();
+    	/* Limpiar el Validate */
+    	$('.modal-body .form-group').removeClass('has-error');
+    	$('.modal-body .form-group').removeClass('has-feedback');
+    	$('.modal-body .form-group').removeClass('has-success');
+    	$('.modal-body .form-group').removeClass('glyphicon glyphicon-ok');
+    	$('.error').remove();
+    	$(".help-block").hide();
+    	/*limpiar el efecto*/
+    	$('form').removeClass('animated shake');
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
@@ -112,24 +117,32 @@ $(document).ready(function() {
 	  
 	  $('#Registro').submit(function(event){
 			event.preventDefault();
-				$.ajax({
-					url:$(this).attr('action'),
-					type:"post",
-					datatype:"json",
-					data:$(this).serialize(),
-					success:function(data){
-						$.growl(
-							{
-								title:" <strong>Rol: "+data.cobertura.descripcion+"</strong> ",
-								message:"Registrado exitosamente..!",
-								icon:"glyphicon glyphicon-thumbs-up"
-							},{
-								type:'success'
-						   });
-						$('#myModalNuevo').modal('hide');
-						table.ajax.reload();
-					}
-				 });
+			 //detenemos el evento para validar el form
+			   var $form=$(this);
+			   if (! $form.valid()) {
+				   //si no es valido no hacemos nada
+					return false;
+				}else{
+					$.ajax({
+						url:$(this).attr('action'),
+						type:"post",
+						datatype:"json",
+						data:$(this).serialize(),
+						success:function(data){
+							$.growl(
+								{
+									title:" <strong>Rol: "+data.cobertura.descripcion+"</strong> ",
+									message:"Registrado exitosamente..!",
+									icon:"glyphicon glyphicon-thumbs-up"
+								},{
+									type:'success'
+							   });
+							$('#myModalNuevo').modal('hide');
+							table.ajax.reload();
+						}
+					 });
+				return false;
+			}
 			return false;
 		});
 	
@@ -163,14 +176,14 @@ $(document).ready(function() {
 			        <thead>
 			            <tr>
 			                <th>Codigo</th>
-			                <th>Rol</th>
+			                <th>Descripci&oacute;n</th>
 			            </tr>
 			        </thead>
 			 
 			        <tfoot>
 			            <tr>
 			                <th>Codigo</th>
-			                <th>Rol</th>
+			                <th>Descripci&oacute;n</th>
 			            </tr>
 			        </tfoot>
 			    </table>
@@ -186,7 +199,7 @@ $(document).ready(function() {
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
-  <s:form id="Registro" action="createCoverage" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="well form-vertical">
+  <s:form id="Registro" action="createCoverage" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="animate-form well form-vertical">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     	<h4>Registrar Cobertura</h4>
