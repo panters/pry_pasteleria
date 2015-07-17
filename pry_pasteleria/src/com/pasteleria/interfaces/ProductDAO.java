@@ -10,7 +10,7 @@ import com.pasteleria.bean.Product;
  */
 public interface ProductDAO {
 
-	public List<Product> list();
+	public List<Product> list(boolean catalogo);
 	public Product find(Product bean);
 	public int create(Product bean);
 	public int update(Product bean);

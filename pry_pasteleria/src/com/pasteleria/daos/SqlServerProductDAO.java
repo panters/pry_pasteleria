@@ -17,11 +17,14 @@ public class SqlServerProductDAO implements ProductDAO {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Product> list() {
+	public List<Product> list(boolean catalogo) {
 		SqlSession session=SQL_SESSION_FACTORY.openSession();
 		List<Product> list=null;
 		try {
-			list=session.selectList("productxml.sql_select");
+			if(catalogo)
+			 list=session.selectList("productxml.sql_select");
+			else
+			 list=session.selectList("productxml.sql_mselect");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

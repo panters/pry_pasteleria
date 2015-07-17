@@ -9,7 +9,7 @@ $(document).ready(function() {
   var table=$('#example').DataTable({
         "processing": true,
         "ajax": {
-        	"url":"listProduct.action",
+        	"url":"listProduct.action?mantenimiento=1",
         	 "dataSrc":"productos"
         	},
         "columns": [
@@ -89,7 +89,7 @@ $(document).ready(function() {
     
     /*  Evento Doble click */
     $('#example tbody').on( 'dblclick', 'tr', function () {
-   		 
+   		limpiarfields();
        if ( $(this).hasClass('selected') ) {
            $(this).removeClass('selected');
        }
@@ -169,12 +169,16 @@ $(document).ready(function() {
     function limpiarfields(){
 		/* Limpiar el Validate */
 	    $('.modal-body .form-group').removeClass('has-error');
+	    $('.modal-body .form-group').removeClass('has-feedback');
 	    $('.modal-body .form-group').removeClass('has-success');
+	    $('.modal-body .form-group').removeClass('glyphicon glyphicon-ok');
+	    $('.error').remove();
 	    $(".help-block").hide();
+	    /*limpiar el efecto*/
+	    $('#formRegProducto').removeClass('animated shake');
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
-		//modal.find('.modal-body #precio').val('S/.0.00');
 		$('#cbocategoria').val(0);
 		$('#cbocobertura').val(0);
 		$('#cbomasa').val(0);
@@ -302,22 +306,19 @@ $(document).ready(function() {
 	    		-->
 	    	</div>
 	    	
+				<s:url id="URL_ListCategorys" action="listCategory"/>
+				<sj:select cssClass="form-control"
+				id="cbocategoria" 
+				label="Categoria :"
+				list="categorias"
+				listKey="idCategoria"
+				listValue="descripcion"
+				href="%{URL_ListCategorys}"
+				headerKey="0"
+				headerValue="--Seleccione--" 
+				name="producto.categoria.idCategoria" />
 	    	
-	    		<div class="form-group has-feedback">
-					<s:url id="URL_ListCategorys" action="listCategory"/>
-					<sj:select cssClass="form-control"
-					id="cbocategoria" 
-					label="Categoria :"
-					list="categorias"
-					listKey="idCategoria"
-					listValue="descripcion"
-					href="%{URL_ListCategorys}"
-					headerKey="0"
-					headerValue="--Seleccione--" 
-					name="producto.categoria.idCategoria" />
-				</div>
 	    	
-	    	<div class="form-group">
 	    		<s:url id="URL_ListCoverages" action="listCoverage"/>
 				<sj:select cssClass="form-control" 
 					id="cbocobertura" 
@@ -329,8 +330,7 @@ $(document).ready(function() {
 					headerKey="0"
 					headerValue="--Seleccione--" 
 					name="producto.cobertura.idCobertura" />
-	    	</div>
-	    	<div class="form-group">
+	    	
 	    		<s:url id="URL_ListDoughs" action="listDough"/>
 				<sj:select cssClass="form-control"
 					id="cbomasa" 
@@ -342,8 +342,7 @@ $(document).ready(function() {
 					headerKey="0"
 					headerValue="--Seleccione--" 
 					name="producto.masa.idMasa" />
-	    	</div>
-	    	<div class="form-group">
+	    	
 	    		<s:url id="URL_ListFillings" action="listFilling"/>
 				<sj:select cssClass="form-control"
 					id="cborelleno" 
@@ -355,7 +354,7 @@ $(document).ready(function() {
 					headerKey="0"
 					headerValue="--Seleccione--" 
 					name="producto.relleno.idRelleno" />
-	    	</div>
+	    	
    		 </div>
       <div class="modal-footer">
   	  <div style="text-align:left;">

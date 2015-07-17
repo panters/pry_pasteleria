@@ -5,7 +5,25 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
     return this.optional(element) || /^[a-z]+$/i.test(value);
   }, "Solo letras");
 	
-	
+jQuery.validator.addMethod("lettersonlyWithSpace", function(value, element) {
+    return this.optional(element) || /^[a-zA-Z\s\u00A0-\uD7FF]+$/.test(value);
+}, "S&oacute;lo letras, espacios");
+
+jQuery.validator.addMethod("vigencia", function(value, element) {
+	  return this.optional(element) || /^(SI|si|sI|Si|NO|no|No|nO)$/i.test(value);
+}, "Ingrese sólo \"Si\" o \"No\" ");
+
+jQuery.validator.addMethod("precio", function(value, element) {
+return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/i.test(value);
+}, "Precio inv&aacute;lido utilice formato 0000.00");
+/*
+jQuery.validator.addMethod("precio", function(value, element) {
+	return this.optional(element) || /^S\/.+[0-9]$/i.test(value);
+	}, "Precio inv&aacute;lido");
+*/
+
+//-------------------------------------------------------------------------
+
 //Validación de login
   $("#form").validate({
     rules: {
@@ -64,13 +82,13 @@ jQuery.validator.addMethod("lettersonly", function(value, element) {
 	    	"orderDetail.nombre_agasajado": {
 	          minlength: 3,
 	          maxlength: 20,
-	          lettersonly:true,
+	          lettersonlyWithSpace:true,
 	          required: true
 	        },
 	        "orderDetail.dedicatoria": {
 	        	 minlength:10,
 		         maxlength:20,
-		         lettersonly:true,
+		         lettersonlyWithSpace:true,
 		         required: true
 	        },
 	        "orderDetail.fec_requerimiento": {
@@ -118,25 +136,51 @@ $("#formRegProducto").validate({
     rules: {
     	"producto.descripcion": {
           minlength: 3,
-          maxlength: 20,
-          lettersonly:true,
+          maxlength:50,
+          lettersonlyWithSpace:true,
           required: true
         },
         "producto.stock": {
-        	 minlength:10,
-	         maxlength:20,
-	         lettersonly:true,
+        	 minlength:1,
+	         maxlength:3,
+	         min:1,
+	         number:true,
 	         required: true
         },
         "producto.precio": {
-          date:true,
+          precio:true,
           required: true
         },
-        "archivo": {
-          min:1,
-	      max:7,
-          required: true
+        "producto.categoria.idCategoria":{
+        	required: true,
+        	min:1
+        },
+        "producto.cobertura.idCobertura":{
+        	required: true,
+        	min:1
+        },
+        "producto.masa.idMasa":{
+        	required: true,
+        	min:1
+        },
+        "producto.relleno.idRelleno":{
+        	required: true,
+        	min:1
         }
+      },
+      messages:{ 
+    	  "producto.categoria.idCategoria": {
+      		min:"Selecci&oacute;ne una opci&oacute;n v&aacute;lida."
+          },
+          "producto.cobertura.idCobertura":{
+        	min:"Selecci&oacute;ne una opci&oacute;n v&aacute;lida."
+          },
+          "producto.masa.idMasa":{
+        	min:"Selecci&oacute;ne una opci&oacute;n v&aacute;lida."
+          },
+          "producto.relleno.idRelleno":{
+        	min:"Selecci&oacute;ne una opci&oacute;n v&aacute;lida."
+          }
       },
       highlight: function(element) {
         $(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
@@ -145,7 +189,7 @@ $("#formRegProducto").validate({
         $(element).closest(".form-group").removeClass("has-error").addClass("has-success");
         var f=$(element).parent().parent().parent().children().eq(1);
         if (f.hasClass('input-group-addon')){}	        	
-        else{f.addClass('glyphicon glyphicon-ok');}
+        else{/**/}
       }
     });
     $('input[type=submit]').click(function() {

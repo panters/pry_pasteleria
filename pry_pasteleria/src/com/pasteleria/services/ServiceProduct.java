@@ -12,8 +12,8 @@ public class ServiceProduct implements ProductDAO {
 	ProductDAO dao=factory.getProductDAO();
 
 	@Override
-	public List<Product> list() {
-		return dao.list();
+	public List<Product> list(boolean catalogo) {
+		return dao.list(catalogo);
 	}
 
 	@Override

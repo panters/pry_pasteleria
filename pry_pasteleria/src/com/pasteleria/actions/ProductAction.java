@@ -21,10 +21,14 @@ public class ProductAction extends ActionSupport {
 	private File archivo;
 	private String archivoContentType;
 	private String archivoFileName;
+	private int mantenimiento;
 			
 	@Action(value="listProduct",results={@Result(name="success",type="json")})
 	public String list(){
-		productos=new ServiceProduct().list();
+		if(mantenimiento!=0)
+		  productos=new ServiceProduct().list(false);
+		else
+		  productos=new ServiceProduct().list(true);
 		return SUCCESS;
 	}
 	
@@ -45,8 +49,11 @@ public class ProductAction extends ActionSupport {
 			uploaded=new SaveFile().save(this.archivo,this.archivoFileName);
 			this.producto.setImage_resource(archivoFileName);
 		}else{
-			this.producto.setImage_resource((new ServiceProduct().find(producto)).getImage_resource());
+			Product obj=(new ServiceProduct().find(producto));
+			//Si el producto existe y no se cargo imagen no se remplaza,sino existe se registra como vacio
+			this.producto.setImage_resource(obj!=null?obj.getImage_resource():"vacia");
 		}
+		
 		
 		if (producto.getIdProducto()==0)
 			new ServiceProduct().create(this.producto);
@@ -118,6 +125,14 @@ public class ProductAction extends ActionSupport {
 
 	public void setArchivoFileName(String archivoFileName) {
 		this.archivoFileName = archivoFileName;
+	}
+
+	public int getMantenimiento() {
+		return mantenimiento;
+	}
+
+	public void setMantenimiento(int mantenimiento) {
+		this.mantenimiento = mantenimiento;
 	}
 	
 	

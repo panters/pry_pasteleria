@@ -9,6 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<select id="sql_select" resultMap="mapxml.productMap" statementType="PREPARED">
+		select * from buscar_producto  where ruta_imagen!='vacia';
+	</select>
+	
+	<select id="sql_mselect" resultMap="mapxml.productMap" statementType="PREPARED">
 		select * from buscar_producto;
 	</select>
 		
@@ -30,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="sql_filter" parameterType="map" resultMap="mapxml.productMap" statementType="PREPARED" >
 		<include refid="sql_all"/>
-		 where  idCategoria like #{idCategoria}+'%' and idCobertura like #{idCobertura}+'%' and idMasa like #{idMasa}+'%' and idRelleno like #{idRelleno}+'%';
+		 where  ruta_imagen!='vacia' and idCategoria like #{idCategoria}+'%' and idCobertura like #{idCobertura}+'%' and idMasa like #{idMasa}+'%' and idRelleno like #{idRelleno}+'%';
 	</select>
 	
 </mapper>
