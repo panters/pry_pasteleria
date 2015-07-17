@@ -18,32 +18,15 @@ return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/i.test(value);
 }, "Precio inv&aacute;lido utilice formato 0000.00");
 
 $.validator.addMethod("dni", function(value, element) {
-	  if(/^([0-9]{8})*[a-zA-Z]+$/.test(value)){
-	    var numero = value.substr(0,value.length-1);
-	    var let = value.substr(value.length-1,1).toUpperCase();
-	    numero = numero % 23;
-	    var letra='TRWAGMYFPDXBNJZSQVHLCKET';
-	    letra = letra.substring(numero,numero+1);
-	    if (letra==let) return true;
-	    return false;
-	  }
-	  return this.optional(element);
+	  return this.optional(element) || /^([0-9]{8})$/.test(value);
 	}, "DNI no v&aacute;lido");
 
 jQuery.validator.addMethod("telefono", function (value, element) {
-    value = value.replace("(", "");
-    value = value.replace(")", "");
-    value = value.replace("-", "");
-    return this.optional(element) || /[0-9]{10}/.test(value);
+    return this.optional(element) || /[0-9]{7}$/.test(value);
 }, "Por favor, um telefone v&aacute;lido");
 
 jQuery.validator.addMethod("celular", function (value, element) {
-	value = value.replace("(", "");
-	value = value.replace(")", "");
-	value = value.replace("-", "");
-	value = value.replace("_", "");
-	value = value.replace(" ", "");
-	return this.optional(element) || /[0-9]{10}/.test(value) || /[0-9]{11}/.test(value);
+	return this.optional(element) || /[0-9]{9}$/.test(value) || /[0-9]{10,11}$/.test(value);
 	}, "Digite un  celular v&aacute;lido.");
 /*
 jQuery.validator.addMethod("precio", function(value, element) {
@@ -661,7 +644,98 @@ $("#RegistroRol").validate({
 			}
 			});
 	});   
-  
+////////////////////////////////////////////////////////////////////////
+//			Validacion de Mantenimiento Empleados
+////////////////////////////////////////////////////////////////////////
+		$("#FormEmpleado").validate({
+				rules: {
+					"empleado.nombre": {
+						minlength: 3,
+						maxlength:50,
+						lettersonlyWithSpace:true,
+						required: true
+						},
+					"empleado.ape_pa":{
+						minlength: 3,
+						maxlength:50,
+						lettersonlyWithSpace:true,
+						required: true	
+					},
+					"empleado.ape_ma":{
+						minlength: 3,
+						maxlength:50,
+						lettersonlyWithSpace:true,
+						required: true
+					},
+					"empleado.dni":{
+						required:true,
+						dni:true
+					},
+					"empleado.fec_nacimiento":{
+						required:true,
+						date:true
+					},
+					"empleado.email":{
+						email:true,
+						required:true
+					},
+					"empleado.telefono":{
+						telefono:true
+					},
+					"empleado.celular":{
+						required:true,
+						celular:true
+					},
+					"empleado.estado_civil":{
+						required:true,
+						lettersonlyWithSpace:true
+					},
+					"empleado.rol.idRol":{
+						required:true,
+						min:1
+					},
+					"empleado.sueldo":{
+						precio:true,
+						required:true
+					}	
+				},
+				messages:{ 
+					"empleado.estado_civil": {
+						lettersonlyWithSpace:"Seleccione una opci&oacute;n v&aacute;lida."
+					},
+					"empleado.rol.idRol":{
+						min:"Seleccione una opci&oacute;n v&aacute;lida."
+					}
+				},
+				highlight: function(element) {
+				$(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+				},
+				unhighlight: function(element) {
+				$(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+				var f=$(element).parent().parent().parent().children().eq(1);
+				if (f.hasClass('input-group-addon')){}	        	
+				else{/**/}
+				}
+				});
+				$('input[type=submit]').click(function() {
+				
+				$('#FormEmpleado.animated').removeClass('animated shake');
+				if ($("#FormEmpleado").valid()) {
+				$("#FormEmpleado").addClass("success");
+				} else {
+				$("#FormEmpleado").removeClass("success").addClass("invalid");
+				$(this).addClass("disabled");
+				}
+				
+				$("#FormEmpleado.invalid input").on("keyup blur", function() {
+				if ($("#FormEmpleado").valid()) {
+				$(".submit input").removeClass("disabled");
+				$("#FormEmpleado").removeClass("invalid");
+				} else {
+				$(".submit input").addClass("disabled");
+				}
+				});
+		});  
   
   
   

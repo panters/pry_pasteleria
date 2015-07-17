@@ -155,10 +155,15 @@ $(document).ready(function() {
     
     //Clean Fields
     function limpiarfields(){
-		/* Limpiar el Validate */
-	    $('.modal-body .form-group').removeClass('has-error');
-	    $('.modal-body .form-group').removeClass('has-success');
-	    $(".help-block").hide();
+    	/* Limpiar el Validate */
+    	$('.modal-body .form-group').removeClass('has-error');
+    	$('.modal-body .form-group').removeClass('has-feedback');
+    	$('.modal-body .form-group').removeClass('has-success');
+    	$('.modal-body .form-group').removeClass('glyphicon glyphicon-ok');
+    	$('.error').remove();
+    	$(".help-block").hide();
+    	/*limpiar el efecto*/
+    	$('form').removeClass('animated shake');
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
@@ -222,30 +227,39 @@ $(document).ready(function() {
  
 	  
 	// Interceptamos el evento submit
-	    $('#form').submit(function() {
-	    	 $('#myModalNuevo').modal('hide');	
-	  // Enviamos el formulario usando AJAX
-	        $.ajax({
-	            type: 'POST',
-	            url: $(this).attr('action'),
-	            data: $(this).serialize(),
-	            // Mostramos un mensaje con la respuesta de PHP
-	            success: function(data) {
-	                $('#result').html(data);
-	                $.growl(
-	            			{
-	            				title:" <strong>!Cambios</strong>:",
-	            				message:" <strong>Guardados</strong>",
-	            				icon:"glyphicon glyphicon-thumbs-up"
-	            			},{
-	            				type:'success'
-	            			}
-	            		  );
-	                //recargamos el DataTable
-	                table.ajax.reload();
-	            }
-	        })        
-	        return false;
+	    $('#FormEmpleado').submit(function(e) {
+	    e.preventDefault();
+	    //detenemos el evento para validar el form
+		   var $form=$(this);
+		   if (! $form.valid()) {
+				return false;
+			  //si no es valido no hacemos nada
+			}else{
+		  		// Enviamos el formulario usando AJAX
+		        $.ajax({
+		            type: 'POST',
+		            url: $(this).attr('action'),
+		            data: $(this).serialize(),
+		            // Mostramos un mensaje con la respuesta de PHP
+		            success: function(data) {
+		           	    $('#myModalNuevo').modal('hide');	
+		                $('#result').html(data);
+		                $.growl(
+		            			{
+		            				title:" <strong>!Cambios</strong>:",
+		            				message:" <strong>Guardados</strong>",
+		            				icon:"glyphicon glyphicon-thumbs-up"
+		            			},{
+		            				type:'success'
+		            			}
+		            		  );
+		                //recargamos el DataTable
+		                table.ajax.reload();
+		            }
+		        })        
+		        return false;
+			}
+		  return false;
 	    }); 
 	  
     
@@ -331,7 +345,7 @@ $(document).ready(function() {
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
-  <s:form id="form" action="saveEmployed"  theme="bootstrap" cssClass="well form-vertical">
+  <s:form id="FormEmpleado" action="saveEmployed"  theme="bootstrap" cssClass="animate-form well form-vertical">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     	<h4>Registro</h4>
@@ -339,20 +353,20 @@ $(document).ready(function() {
 		<div class="modal-body">
 	    		<s:hidden id="idUsuario" name="empleado.idUsuario" />
 	    	<div class="form-group">
-		   		<s:textfield label="Nombre :" name="empleado.nombre" id="nombre" cssClass="form-control" onkeypress="return validarLetra(event)"/>
+		   		<s:textfield label="Nombre :" name="empleado.nombre" id="nombre" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Apellido Paterno :" name="empleado.ape_pa" id="ape_pa" cssClass="form-control" onkeypress="return validarLetra(event)"/>
+	    		<s:textfield label="Apellido Paterno :" name="empleado.ape_pa" id="ape_pa" cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Apellido Materno :" name="empleado.ape_ma" id="ape_ma" cssClass="form-control" onkeypress="return validarLetra(event)"/>
+	    		<s:textfield label="Apellido Materno :" name="empleado.ape_ma" id="ape_ma" cssClass="form-control" />
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="DNI :" name="empleado.dni" id="dni" cssClass="form-control" maxlength="8" onkeypress="return validarEntero(event)"/>
+	    		<s:textfield label="DNI :" name="empleado.dni" id="dni" cssClass="form-control" maxlength="8"/>
 	    	</div>
 	    	<div class="form-group">
 	    		
-	    		<sj:datepicker label="Fecha Nacimiento :" name="empleado.fec_nacimiento" id="fec_nacimiento" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "/>
+	    		<sj:datepicker label="Fecha Nacimiento :" name="empleado.fec_nacimiento" id="fec_nacimiento" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" " yearRange="1955:1997" changeYear="true" />
 	    	</div>
 	    	<div class="form-group">
 	    		<div class="radio">
@@ -376,20 +390,20 @@ $(document).ready(function() {
 				cssClass="form-control"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Telefono:" name="empleado.telefono" id="telefono" cssClass="form-control" maxlength="7" onkeypress="return validarEntero(event)"/>
+	    		<s:textfield label="Telefono:" name="empleado.telefono" id="telefono" cssClass="form-control" maxlength="7" />
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Celular:" name="empleado.celular" id="celular" cssClass="form-control" maxlength="9" onkeypress="return validarEntero(event)"/>
+	    		<s:textfield label="Celular:" name="empleado.celular" id="celular" cssClass="form-control" maxlength="9" />
 	    	</div>
 	    	
 	    	<div class="form-group">
-	    		<sj:datepicker label="Fecha Ingreso:" name="empleado.fecha_ingreso" id="fecha_ingreso" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "/>
+	    		<sj:datepicker label="Fecha Ingreso:" name="empleado.fecha_ingreso" id="fecha_ingreso" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "  changeYear="true"/>
 	    	</div>
 	    	<div class="form-group">
-	    		<s:textfield label="Sueldo:" name="empleado.sueldo" id="sueldo" cssClass="form-control" onkeypress="return validarPrecio(event)"/>
+	    		<s:textfield label="Sueldo:" name="empleado.sueldo" id="sueldo" cssClass="form-control" />
 	    	</div>
 	    	<div class="form-group">
-	    		<sj:datepicker label="Fin Contrato:" name="empleado.fecha_salida" id="fecha_salida" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "/>
+	    		<sj:datepicker label="Fin Contrato:" name="empleado.fecha_salida" id="fecha_salida" cssClass="form-control" displayFormat="yy-mm-dd" readonly="true" buttonImageOnly="true" buttonImage="" buttonText=" "   changeYear="true"/>
 	    	</div>
 	    	<div class="form-group">
 	    		<s:url id="URL_ListRoles" action="listRol"/>
