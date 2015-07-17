@@ -139,9 +139,14 @@
             </div>
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
+          
+          <tiles:insertAttribute name="menu"/>
+          
+          <!--  
           <ul class="sidebar-menu">
             <li class="header">MENÚ DE NAVEGACIÓN</li>
-            <li class="active treeview">
+           
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Mantenimiento</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -174,15 +179,11 @@
             </li>
       
 
-            <li>
-              <a href="carritoAdmin.action">
-                <i class="fa fa-laptop"></i>
-                <span>Realizar Pedido</span>
-              </a>
-            </li>
+            <li><a href="carritoAdmin.action"><i class="fa fa-laptop"></i><span>Realizar Pedido</span></a></li>
 
 
-       </ul>
+       		</ul>
+         -->
         </section>
         <!-- /.sidebar -->
       </aside>

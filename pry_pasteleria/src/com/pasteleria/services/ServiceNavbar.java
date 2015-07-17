@@ -31,5 +31,10 @@ public class ServiceNavbar implements NavbarDAO{
 		return dao.getNavBarWithRol(rol);
 	}
 
+	@Override
+	public String getNavBarWithEmployeds(int rol) {
+		return dao.getNavBarWithEmployeds(rol);
+	}
+
 	
 }

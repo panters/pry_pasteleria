@@ -89,4 +89,46 @@ public class SqlServerNavbarDAO implements NavbarDAO {
 		sb.append(rb.getString("stylefin"));
 		return String.valueOf(sb);
 	}
+	
+	
+	@Override
+	public String getNavBarWithEmployeds(int rol) {
+		
+		StringBuilder sb=new StringBuilder(rb.getString("styleinicioAdmin"));
+		
+		for (Navbar menuBean :getNavbar(rol)) {
+			
+			if (menuBean.getUrl().equals("#") && menuBean.getPadre()==0) {
+				List<Navbar> submenu=getNavbarChildren(rol,menuBean.getIdMenu());
+				if (submenu.size()>0) {
+					sb.append("<li class=\"treeview\">");
+					sb.append("<a href=\"#\">"+menuBean.getIcono()+"<span>"+menuBean.getDescripcion()+"</span><i class=\"fa fa-angle-left pull-right\"></i></a>");
+					
+					sb.append("<ul class=\"treeview-menu\">");
+					for (Navbar menuBean2 : submenu) {
+						sb.append("<li><a href="+menuBean2.getUrl()+">"+menuBean2.getIcono()+menuBean2.getDescripcion()+"</a></li>");
+					}
+					sb.append("</ul></li>");
+				}else{
+					//sb.append("<li><a href="+menuBean.getUrl()+">"+menuBean.getIcono()+"<span>&nbsp;&nbsp;"+menuBean.getDescripcion()+"</span></a></li>");
+				}
+			}else{			
+				sb.append("<li><a href="+menuBean.getUrl()+">"+menuBean.getIcono()+"<span>&nbsp;&nbsp;"+menuBean.getDescripcion()+"</span></a></li>");
+			}
+			
+		}
+		
+		sb.append(rb.getString("stylefinAdmin"));
+		return String.valueOf(sb);
+	}
+	
+
+	public static void main(String[] args) {
+		String menu=new SqlServerNavbarDAO().getNavBarWithEmployeds(4);
+		System.out.println(menu);
+	}
+
+	
+	
+	
 }

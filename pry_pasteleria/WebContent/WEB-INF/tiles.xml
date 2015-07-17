@@ -17,6 +17,7 @@
 	
 	<definition name="layoutAdmin" template="/templates/layoutAdmin.jsp">
 		<put-attribute name="body"  value="/maintenances/home.jsp"/>
+		<put-attribute name="menu"  value="/templates/menu.jsp"/>
 	</definition>
 	
 	<!-- 

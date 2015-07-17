@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.services.ServiceNavbar;
 import com.pasteleria.bean.User;
+import com.pasteleria.daos.SqlServerNavbarDAO;
 /**
  * 
  * @author Pantera
@@ -32,8 +33,15 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	@Action(value="layoutAdmin",results={@Result(name=SUCCESS,type="tiles",location="layoutAdmin")})
+	@Action(value="layoutAdmin",results={@Result(name=SUCCESS,type="tiles",location="layoutAdmin"),
+			@Result(name="nologged",type="redirectAction",location="Admin")})
 	public String layoutAdmin(){
+		
+		if(session.get("user")!=null){
+			session.put("navbar",new SqlServerNavbarDAO().getNavBarWithEmployeds(((User)session.get("user")).getRol().getIdRol()));
+		}else{
+			return "nologged";
+		}
 		return SUCCESS;
 	}
 	

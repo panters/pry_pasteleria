@@ -10,6 +10,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.User;
+import com.pasteleria.daos.SqlServerNavbarDAO;
 import com.pasteleria.notifications.Email;
 import com.pasteleria.services.ServiceNavbar;
 import com.pasteleria.services.ServiceUser;
@@ -47,6 +48,7 @@ public class LoginAction  extends ActionSupport{
 		if (user!=null)
 		{
 			if((user.getRol().getIdRol()==3 || user.getRol().getIdRol()==4) && a==1 ){
+				session.put("navbar",new SqlServerNavbarDAO().getNavBarWithEmployeds(user.getRol().getIdRol()));
 				session.put("user", user);
 				return "admin";
 			}

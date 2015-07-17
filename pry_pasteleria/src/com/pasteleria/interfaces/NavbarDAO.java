@@ -14,5 +14,6 @@ public interface NavbarDAO {
 	List<Navbar> getNavbar(int rol);
 	List<Navbar> getNavbarChildren(int rol,int father);
 	String getNavBarWithRol(int rol);
+	String getNavBarWithEmployeds(int rol);
 	
 }
