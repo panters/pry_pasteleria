@@ -76,7 +76,8 @@ jQuery.validator.addMethod("precio", function(value, element) {
   });
   
 ////////////////////////////////////////////////////////////////////////  
-  
+//        Validacion de Modal para comprar
+////////////////////////////////////////////////////////////////////////  
   $("#formComprar").validate({
 	    rules: {
 	    	"orderDetail.nombre_agasajado": {
@@ -130,7 +131,8 @@ jQuery.validator.addMethod("precio", function(value, element) {
 	        }
 	      });
 	    });
-	  
+////////////////////////////////////////////////////////////////////////
+//         Validacion de Mantenimiento de Productos	    
 ////////////////////////////////////////////////////////////////////////  
 $("#formRegProducto").validate({
     rules: {
@@ -211,9 +213,54 @@ $("#formRegProducto").validate({
         }
       });
     });
-		  
-	////////////////////////////////////////////////////////////////////////  
-  
+////////////////////////////////////////////////////////////////////////
+//   Validacion de Tipo de Insumo    
+////////////////////////////////////////////////////////////////////////  
+    $("#FormTipoInsumo").validate({
+        rules: {
+        	"tipo": {
+              minlength: 3,
+              maxlength:10,
+              lettersonlyWithSpace:true,
+              required: true
+            }
+          },
+          messages:{ 
+        	  "tipo": {
+        	   required:"Descripci&oacute;n de insumo  inv&aacute;lida."
+              }
+          },
+          highlight: function(element) {
+            $(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+          },
+          unhighlight: function(element) {
+            $(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+            var f=$(element).parent().parent().parent().children().eq(1);
+            if (f.hasClass('input-group-addon')){}	        	
+            else{/**/}
+          }
+        });
+        $('input[type=submit]').click(function() {
+        	
+          $('#formRegProducto.animated').removeClass('animated shake');
+          if ($("#form").valid()) {
+            $("#formRegProducto").addClass("success");
+          } else {
+            $("#formRegProducto").removeClass("success").addClass("invalid");
+            $(this).addClass("disabled");
+          }
+
+          $("#formRegProducto.invalid input").on("keyup blur", function() {
+            if ($("#formRegProducto").valid()) {
+              $(".submit input").removeClass("disabled");
+              $("#formRegProducto").removeClass("invalid");
+            } else {
+              $(".submit input").addClass("disabled");
+            }
+          });
+        });
+    		  
+    ////////////////////////////////////////////////////////////////////////  
   
   
   

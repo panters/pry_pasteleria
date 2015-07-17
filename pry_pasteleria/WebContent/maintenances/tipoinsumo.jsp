@@ -59,6 +59,7 @@ $.getJSON('listtipoinsumos',function(data){
     
     /*  Evento Doble click */
     $('#example tbody').on( 'dblclick', 'tr', function () {
+    	limpiarfields();
        if ( $(this).hasClass('selected') ) {
            $(this).removeClass('selected');
        }
@@ -89,8 +90,13 @@ $.getJSON('listtipoinsumos',function(data){
     function limpiarfields(){
 		/* Limpiar el Validate */
 	    $('.modal-body .form-group').removeClass('has-error');
+	    $('.modal-body .form-group').removeClass('has-feedback');
 	    $('.modal-body .form-group').removeClass('has-success');
+	    $('.modal-body .form-group').removeClass('glyphicon glyphicon-ok');
+	    $('.error').remove();
 	    $(".help-block").hide();
+	    /*limpiar el efecto*/
+	    $('form').removeClass('animated shake');
 	    /* Limpiar el Modal */
 		var modal =$('#myModalNuevo');
 		modal.find('.modal-body input').val('');
@@ -177,7 +183,7 @@ $.getJSON('listtipoinsumos',function(data){
 <div class="modal fade" id="myModalNuevo" role="dialog" ria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
-  <s:form action="addtipoinsumos" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="well form-vertical">
+  <s:form id="FormTipoInsumo" action="addtipoinsumos" enctype="multipart/form-data" method="post" acceptcharset="utf-8" theme="bootstrap" cssClass="animate-form well form-vertical">
     <div class="modal-header">
     	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     	<h4>Registrar Producto</h4>
@@ -185,7 +191,7 @@ $.getJSON('listtipoinsumos',function(data){
 		 <div class="modal-body">
 	        <s:hidden id="idProducto" name="tipoAntiguo" />
 	    	<div class="form-group">
-		   		<s:textfield label="Insumo :" name="tipo" id="tipo" cssClass="form-control" onkeypress="return validarLetra(event)"/>
+		   		<s:textfield label="Insumo :" name="tipo" id="tipo" cssClass="form-control"/>
 	    	</div>
 	    	
    		 </div>
