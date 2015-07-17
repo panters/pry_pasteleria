@@ -86,6 +86,26 @@ public class LoginAction  extends ActionSupport{
 		
 	}
 	
+	
+	@Action(value="reloadSession",results={@Result(name=SUCCESS,type="redirectAction",location="layoutAdmin"),
+			@Result(name="notlogged",type="redirectAction",location="Admin"),
+			@Result(name=ERROR,location="/security/lockscreen.jsp"),})
+	public String reloadSession(){
+		if (session.get("user")!=null){
+			this.logged="true";
+			if(((User)session.get("user")).getRol().getIdRol()==3 || ((User)session.get("user")).getRol().getIdRol()==4){
+				if(((User)session.get("user")).getPassword().equals(this.password)){
+					return SUCCESS;
+				}else{
+					addActionError("Credenciales Incorrectas");
+					return ERROR;
+				}
+			}
+	    }		
+		return "notlogged";
+	}
+	
+	
 	@Action(value="isLogged",results={@Result(name=SUCCESS,type="json")})
 	public String isLogged(){
 		if (session.get("user")!=null){

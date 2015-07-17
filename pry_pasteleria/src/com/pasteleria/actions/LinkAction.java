@@ -20,6 +20,7 @@ import com.pasteleria.bean.User;
 public class LinkAction  extends ActionSupport{
 	
 	private String navbar;
+	private String username;
 	
 	Map<String,Object> session=ActionContext.getContext().getSession();
 		
@@ -31,9 +32,25 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@Action(value="layoutAdmin",results={@Result(name=SUCCESS,type="tiles",location="layoutAdmin")})
+	public String layoutAdmin(){
+		return SUCCESS;
+	}
+	
 	@Action(value="logueo",
 			results={@Result(name=SUCCESS,type="tiles",location="login")})
 	public String logueo(){
+		return SUCCESS;
+	}
+	
+	@Action(value="lockscreen",
+			results={@Result(name=SUCCESS,location="/security/lockscreen.jsp"),
+			@Result(name="notlogged",type="redirectAction",location="Admin")})
+	public String lock(){
+		if(session.get("user")!=null)
+			this.username=((User)session.get("user")).getNombre()+" "+((User)session.get("user")).getApe_pa();
+		else
+			return "notlogged";
 		return SUCCESS;
 	}
 	
@@ -186,4 +203,18 @@ public class LinkAction  extends ActionSupport{
 	public String loginAdmin(){
 		return SUCCESS;
 	}
+
+	
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
+	
+	
 }

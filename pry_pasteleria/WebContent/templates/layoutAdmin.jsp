@@ -387,7 +387,8 @@
       
      $(document).idle({
          onIdle: function(){
-           alert('Inactivo un 2 segundos!');
+           //alert('Inactivo un 2 segundos!');
+           window.location.href="lockscreen.action";
          },
          onActive: function(){
         	 //alert('Active!');
@@ -401,7 +402,7 @@
         	   //alert('Visible!');
            }, 250);
          },
-         idle:2000
+         idle:3000
        });
      
      $(document).ready(function(){
