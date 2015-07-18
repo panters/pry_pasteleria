@@ -22,6 +22,7 @@ public class LinkAction  extends ActionSupport{
 	
 	private String navbar;
 	private String username;
+
 	
 	Map<String,Object> session=ActionContext.getContext().getSession();
 		
@@ -55,9 +56,10 @@ public class LinkAction  extends ActionSupport{
 			results={@Result(name=SUCCESS,location="/security/lockscreen.jsp"),
 			@Result(name="notlogged",type="redirectAction",location="Admin")})
 	public String lock(){
-		if(session.get("user")!=null)
+		if(session.get("user")!=null){
 			this.username=((User)session.get("user")).getNombre()+" "+((User)session.get("user")).getApe_pa();
-		else
+			session.put("lock",true);
+		}else
 			return "notlogged";
 		return SUCCESS;
 	}
@@ -69,14 +71,27 @@ public class LinkAction  extends ActionSupport{
 	}
 	
 	@Action(value="catalogoAdmin",
-			results={@Result(name=SUCCESS,type="tiles",location="catalogoAdmin")})
+			results={@Result(name=SUCCESS,type="tiles",location="catalogoAdmin"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String catalogoAdmin(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
 	@Action(value="seguimiento",
 			results={@Result(name="admin",type="tiles",location="seguimiento"),
-			@Result(name="cliente",type="tiles",location="seguimientoCustomer")})
+			@Result(name="cliente",type="tiles",location="seguimientoCustomer"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String seguimiento(){
 		
 		if (session.get("user")!=null) {
@@ -86,6 +101,10 @@ public class LinkAction  extends ActionSupport{
 				return "cliente";
 			}else{
 				System.out.println("usuario empleado");
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
 				return "admin";
 			}
 		}else{
@@ -107,9 +126,21 @@ public class LinkAction  extends ActionSupport{
 	}
 	
 	@Action(value="carritoAdmin",
-			results={@Result(name=SUCCESS,type="tiles",location="carritoAdmin")})
+			results={@Result(name=SUCCESS,type="tiles",location="carritoAdmin"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String carritoAdmin(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
 	@Action(value="singup",
@@ -125,33 +156,93 @@ public class LinkAction  extends ActionSupport{
 	}
 	
 	@Action(value="mproducto",
-			results={@Result(name=SUCCESS,type="tiles",location="mproducto")})
+			results={@Result(name=SUCCESS,type="tiles",location="mproducto"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mProducto(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
 	@Action(value="mcliente",
-			results={@Result(name=SUCCESS,type="tiles",location="mcliente")})
+			results={@Result(name=SUCCESS,type="tiles",location="mcliente"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mCliente(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
 	@Action(value="mempleado",
-			results={@Result(name=SUCCESS,type="tiles",location="mempleado")})
+			results={@Result(name=SUCCESS,type="tiles",location="mempleado"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mEmpleado(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
 	@Action(value="mcobertura",
-			results={@Result(name=SUCCESS,type="tiles",location="mcobertura")})
+			results={@Result(name=SUCCESS,type="tiles",location="mcobertura"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mCobertura(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
 	@Action(value="mcustomer",
-			results={@Result(name=SUCCESS,type="tiles",location="mcustomer")})
+			results={@Result(name=SUCCESS,type="tiles",location="mcustomer"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mCustomer(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
 	@Action(value="updateCustomer",
@@ -166,49 +257,156 @@ public class LinkAction  extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	@Action(value="memployed",results={@Result(name=SUCCESS,type="tiles",location="memployed")})
+	@Action(value="memployed",results={@Result(name=SUCCESS,type="tiles",location="memployed"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String memployed(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
-	@Action(value="mproduct",results={@Result(name=SUCCESS,type="tiles",location="mproduct")})
+	@Action(value="mproduct",results={@Result(name=SUCCESS,type="tiles",location="mproduct"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mproduct(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
-	@Action(value="minsumo",results={@Result(name=SUCCESS,type="tiles",location="minsumo")})
+	@Action(value="minsumo",results={@Result(name=SUCCESS,type="tiles",location="minsumo"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mInsumo(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
-	@Action(value="mtipoinsumo",results={@Result(name=SUCCESS,type="tiles",location="mtipoinsumo")})
+	@Action(value="mtipoinsumo",results={@Result(name=SUCCESS,type="tiles",location="mtipoinsumo"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mtipoInsumo(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
 	
-	@Action(value="mrol",results={@Result(name=SUCCESS,type="tiles",location="mrol")})
+	@Action(value="mrol",results={@Result(name=SUCCESS,type="tiles",location="mrol"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mrol(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
-	@Action(value="mdough",results={@Result(name=SUCCESS,type="tiles",location="mdough")})
+	@Action(value="mdough",results={@Result(name=SUCCESS,type="tiles",location="mdough"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mdough(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
-	@Action(value="mfilling",results={@Result(name=SUCCESS,type="tiles",location="mfilling")})
+	@Action(value="mfilling",results={@Result(name=SUCCESS,type="tiles",location="mfilling"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mfilling(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
-	@Action(value="mcategory",results={@Result(name=SUCCESS,type="tiles",location="mcategory")})
+	@Action(value="mcategory",results={@Result(name=SUCCESS,type="tiles",location="mcategory"),
+			@Result(name="noadmin",location="/security/loginAdmin.jsp"),
+			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String mcategory(){
-		return SUCCESS;
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				if(session.get("lock")!=null){
+					if((boolean)session.get("lock"))
+						return "nologged";
+				}
+				return SUCCESS;
+			}
+		}
+		return "noadmin";
 	}
 	
-	@Action(value="Admin",results={@Result(name=SUCCESS,location="/security/loginAdmin.jsp")})
+	
+	
+	
+	@Action(value="Admin",results={@Result(name=SUCCESS,location="/security/loginAdmin.jsp"),
+			@Result(name="desbloquear",type="redirectAction",location="lockscreen")})
 	public String loginAdmin(){
+		
+		if(session.get("user")!=null){
+			User obj=(User) session.get("user");
+			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+				return "desbloquear";
+			}
+		}
 		return SUCCESS;
 	}
 
@@ -217,10 +415,19 @@ public class LinkAction  extends ActionSupport{
 	public String getUsername() {
 		return username;
 	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public String getNavbar() {
+		return navbar;
+	}
+
+	public void setNavbar(String navbar) {
+		this.navbar = navbar;
+	}
+
+	
 	
 	
 	

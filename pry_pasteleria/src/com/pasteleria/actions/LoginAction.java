@@ -97,6 +97,7 @@ public class LoginAction  extends ActionSupport{
 			this.logged="true";
 			if(((User)session.get("user")).getRol().getIdRol()==3 || ((User)session.get("user")).getRol().getIdRol()==4){
 				if(((User)session.get("user")).getPassword().equals(this.password)){
+					session.put("lock",false);
 					return SUCCESS;
 				}else{
 					addActionError("Credenciales Incorrectas");
