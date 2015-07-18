@@ -12,7 +12,7 @@
 		<put-attribute name="title" value="Template"/>
 		<put-attribute name="baner" value="/templates/baner.jsp"/>		
 		<put-attribute name="menu"  value="/templates/menu.jsp"/>
-		<put-attribute name="body"  value="/security/login.jsp"/>
+		<put-attribute name="body"  value="/pages/catalogo.jsp"/>
 	</definition>	
 	
 	<definition name="layoutAdmin" template="/templates/layoutAdmin.jsp">

@@ -30,6 +30,9 @@ public class LinkAction  extends ActionSupport{
 			results={@Result(name=SUCCESS,type="tiles",location="layout")})
 	public String layout(){
 		navbar=new ServiceNavbar().getNavBarWithRol(1);
+		if(session.get("user")!=null && ((User)session.get("user")).getRol().getIdRol()==2){
+		     navbar=new ServiceNavbar().getNavBarWithRol(2);
+		}
 		session.put("navbar", this.navbar);
 		return SUCCESS;
 	}
@@ -90,6 +93,7 @@ public class LinkAction  extends ActionSupport{
 	
 	@Action(value="seguimiento",
 			results={@Result(name="admin",type="tiles",location="seguimiento"),
+			@Result(name=SUCCESS,type="redirectAction",location="logueo"),
 			@Result(name="cliente",type="tiles",location="seguimientoCustomer"),
 			@Result(name="nologged",type="redirectAction",location="lockscreen")})
 	public String seguimiento(){
