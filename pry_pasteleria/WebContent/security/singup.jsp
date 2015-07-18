@@ -3,49 +3,73 @@
 
 <link href="css/styles_reg.css" media="all" rel="stylesheet">
 
+<style>
+#registrar{
+display: block;
+width: 100%;
+font-size: 18px;
+letter-spacing: 0.4em;
+border-radius: 0px 0px 4px 4px;
+border: 0px none;
+padding: 20px 0px 22px;
+background-color: #F7A2CB;
+color: #FFF;
+height: 65px;
+font-weight: 500;
+transition: all 0.4s ease 0s;
+margin-right: -415px;
+margin-top: -65px;
+}
+</style>
 
 <script>
 $(document).ready(function(){
 	
-	$('#registrar').click(function(){
-	
-		var username1=$('#username').val();
-		var apellidop1=$('#apellidop').val();
-		var apellidom1=$('#apellidom').val();
-		var documento1=$('#documento').val();
-		var nacimiento1=$('#nacimiento').val();
-		var sexo1=$('input:radio[name=sexo]:checked').val();
-		var email1=$('#email').val();
-		var estadocivil1=$('input:radio[name=estado]:checked').val();
-		var telefono1=$('#telefono').val();
-		var celular1=$('#celular').val();
-		var password1=$('#password').val();
-		
-		if($('#username').val().length<1){
-			alert("Debe ingresar datos");
-		}else{
+	$('#formRegCli').submit(function(e){
+		e.preventDefault();
+		 //detenemos el evento para validar el form
+		   var $form=$(this);
+		   if (! $form.valid()) {
+				return false;
+			  //si no es valido no hacemos nada
+			}else{
+				var username1=$('#username').val();
+				var apellidop1=$('#apellidop').val();
+				var apellidom1=$('#apellidom').val();
+				var documento1=$('#documento').val();
+				var nacimiento1=$('#nacimiento').val();
+				var sexo1=$('input:radio[name=sexo]:checked').val();
+				var email1=$('#email').val();
+				var estadocivil1=$('input:radio[name=estado]:checked').val();
+				var telefono1=$('#telefono').val();
+				var celular1=$('#celular').val();
+				var password1=$('#password').val();
 				
-	 	 $.ajax({			
-			type:'post',
-			url:'saveCustomer',
-			datatype:'json',
-			data:{username:username1,apellidop:apellidop1,apellidom:apellidom1,documento:documento1,nacimiento:nacimiento1,
-				sexo:sexo1,email:email1,estadocivil:estadocivil1,telefono:telefono1,celular:celular1,password:password1},
-			success:function(){
-				$.growl(
-						{
-					    title:"<strong>!Usted ha sido</strong>:",
-					    message:"<strong>Registrado</strong>",
-					    icon:"glyphicon glyphicon-thumbs-up"
-			        	},{
-			        		type:'success'
-			        	}
-			       );				
-				$(location).attr('href','logueo.action');				
-			}
-		});
-		}
-		
+				if($('#username').val().length<1){
+					
+				}else{
+				 	 $.ajax({			
+						type:'post',
+						url:'saveCustomer',
+						datatype:'json',
+						data:{username:username1,apellidop:apellidop1,apellidom:apellidom1,documento:documento1,nacimiento:nacimiento1,
+							sexo:sexo1,email:email1,estadocivil:estadocivil1,telefono:telefono1,celular:celular1,password:password1},
+						success:function(){
+							$.growl(
+									{
+								    title:"<strong>!Usted ha sido</strong>:",
+								    message:"<strong>Registrado</strong>",
+								    icon:"glyphicon glyphicon-thumbs-up"
+						        	},{
+						        		type:'success'
+						        	}
+						       );				
+							$(location).attr('href','logueo.action');				
+						}
+					});
+				  }
+				return false;
+			   }
 	});	
 	
 });
@@ -56,14 +80,14 @@ $(document).ready(function(){
 <div class="form-header">
 	<h1>REGISTRO DE CLIENTE</h1>
 </div>
-<form class="form animate-form" id="form" onsubmit="return false;">
+<form class="form animate-form" id="formRegCli" >
 
 	<table width="800" id="table_registro">
 
 		<tr>
 			<td width="400px">
 
-				<div class="form-group has-feedback">
+				<div class="form-group">
 					<label class="control-label sr-only" for="email">Correo
 						electrónico</label>
 					<div class="input-group-addon">
@@ -74,8 +98,8 @@ $(document).ready(function(){
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
 
-				<div class="form-group has-feedback">
-					<label class="control-label sr-only" for="password">Contraseña</label>
+				<div class="form-group">
+					<label class="control-label sr-only" for="password">Contrase&ntilde;a</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-lock"></div>
 					</div>
@@ -85,46 +109,46 @@ $(document).ready(function(){
 				</div>
 
 
-				<div class="form-group has-feedback">
-					<label class="control-label sr-only" for="password">Contraseña</label>
+				<div class="form-group">
+					<label class="control-label sr-only" for="password">Contrase&ntilde;a</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-lock"></div>
 					</div>
 					<input class="form-control" id="password" name="password"
-						placeholder="Confirmar ContraseÃ±a" type="password"
+						placeholder="Confirmar Contrase&ntilde;a" type="password"
 						required="true"> <span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
 
-				<div class="form-group has-feedback">
+				<div class="form-group">
 					<label class="control-label sr-only" for="username">Nombre
 						Completo</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-user"></div>
 					</div>
-					<input class="form-control" id="username" name="text"
+					<input class="form-control" id="username" name="nombre"
 						placeholder="Nombre Completo" type="text"> <span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
 
-				<div class="form-group has-feedback">
+				<div class="form-group">
 					<label class="control-label sr-only" for="email">Apellido
 						Paterno</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-user"></div>
 					</div>
-					<input class="form-control" id="apellidop" name="text"
+					<input class="form-control" id="apellidop" name="ape_pa"
 						placeholder="Apellido Paterno" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
 
-				<div class="form-group has-feedback">
+				<div class="form-group">
 					<label class="control-label sr-only" for="email">Apellido
 						Materno</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-user"></div>
 					</div>
-					<input class="form-control" id="apellidom" name="text"
+					<input class="form-control" id="apellidom" name="ape_ma"
 						placeholder="Apellido Materno" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
@@ -137,7 +161,7 @@ $(document).ready(function(){
 			<td width="80px"></td>
 			<td width="400px">
 
-                <div class="form-group has-feedback">
+                <div class="form-group">
 					<div class="input-group">
 						<div class="radio">
 							Seleccione Estado Civil:&nbsp;&nbsp;&nbsp;&nbsp;
@@ -149,18 +173,18 @@ $(document).ready(function(){
 					</div>
 				</div>
 
-                <div class="form-group has-feedback">
+                <div class="form-group">
 					<label class="control-label sr-only" for="email">Documento
 						DNI</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-file"></div>
 					</div>
-					<input class="form-control" id="documento" name="text"
+					<input class="form-control" id="documento" name="dni"
 						placeholder="Documento DNI" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
 
-				<div class="form-group has-feedback">
+				<div class="form-group">
 					<div class="input-group">
 						<div class="radio">
 							Seleccione Sexo:&nbsp;&nbsp;&nbsp;&nbsp;
@@ -173,52 +197,40 @@ $(document).ready(function(){
 				</div>
 
 
-				<div class="form-group has-feedback">
+				<div class="form-group">
 					<label class="control-label sr-only" for="email">Telefono</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-phone-alt"></div>
 					</div>
-					<input class="form-control" id="telefono" name="number"
+					<input class="form-control" id="telefono" name="telefono"
 						placeholder="Telefono" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
 
-				<div class="form-group has-feedback">
+				<div class="form-group">
 					<label class="control-label sr-only" for="email">Celular</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-earphone"></div>
 					</div>
-					<input class="form-control" id="celular" name="number"
+					<input class="form-control" id="celular" name="celular"
 						placeholder="Celular" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div>
 
 
- 				<div class="form-group has-feedback">
+ 				<div class="form-group">
 					<label class="control-label sr-only" for="nacimiento">Fecha
 						Nacimiento</label>
 					<div class="input-group-addon">
 						<div class="glyphicon glyphicon-calendar"></div>
 					</div>
-					<input class="form-control" id="nacimiento" name="text"
+					<input class="form-control" id="nacimiento" name="fec_nacimiento"
 						placeholder="Fecha Nacimiento" type="text"><span
 						class="glyphicon glyphicon-ok form-control-feedback"></span>
 				</div> 
 				
-				
-<%-- 			    <div class="form-group has-feedback">
-			      <label class="control-label sr-only" for="nacimiento">Fecha
-						Nacimiento</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-calendar"></div>
-					</div>
-					<input class="form-control input-group date" id="nacimiento" name="text"  
-					      placeholder="Fecha Nacimiento" type="text">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-				</div> --%>
-				
 				<div class="form-group submit">
-					<a href="#" id="registrar" style="background-color: #A1477E;">REGISTRAR</a>
+					<s:submit id="registrar" cssStyle="background-color: #A1477E;" value="REGISTRAR"  />
 				</div>
 
 			</td>

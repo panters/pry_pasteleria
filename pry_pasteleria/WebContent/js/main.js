@@ -736,7 +736,92 @@ $("#RegistroRol").validate({
 				}
 				});
 		});  
-  
+ 
+////////////////////////////////////////////////////////////////////////
+//				Validacion de Registro Clientes
+////////////////////////////////////////////////////////////////////////
+	$("#formRegCli").validate({
+			rules: {
+				"nombre": {
+					minlength: 3,
+					maxlength:50,
+					lettersonlyWithSpace:true,
+					required: true
+					},
+				"ape_pa":{
+					minlength: 3,
+					maxlength:50,
+					lettersonlyWithSpace:true,
+					required: true	
+				},
+				"ape_ma":{
+					minlength: 3,
+					maxlength:50,
+					lettersonlyWithSpace:true,
+					required: true
+				},
+				"dni":{
+					required:true,
+					dni:true
+				},
+				"fec_nacimiento":{
+					required:true,
+					date:true
+				},
+				"email":{
+					email:true,
+					required:true
+				},
+				"telefono":{
+					telefono:true
+				},
+				"celular":{
+					required:true,
+					celular:true
+				},
+				"estado_civil":{
+					required:true,
+					lettersonlyWithSpace:true
+				},
+				"password":{
+					required:true
+				}
+					
+				},
+			messages:{ 
+				"password": {
+					required:"campo requerido."
+				}
+			},
+			highlight: function(element) {
+			$(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated wobble");;
+			},
+			unhighlight: function(element) {
+			$(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+			var f=$(element).parent().parent().parent().children().eq(1);
+			if (f.hasClass('input-group-addon')){}	        	
+			else{/**/}
+			}
+			});
+			$('input[type=submit]').click(function() {
+			
+			$('#formRegCli.animated').removeClass('animated wobble');
+			if ($("#formRegCli").valid()) {
+			$("#formRegCli").addClass("success");
+			} else {
+			$("#formRegCli").removeClass("success").addClass("invalid");
+			$(this).addClass("disabled");
+			}
+			
+			$("#formRegCli.invalid input").on("keyup blur", function() {
+			if ($("#formRegCli").valid()) {
+			$(".submit input").removeClass("disabled");
+			$("#formRegCli").removeClass("invalid");
+			} else {
+			$(".submit input").addClass("disabled");
+					}
+					});
+			});   				
   
   
 });
