@@ -779,9 +779,12 @@ $("#RegistroRol").validate({
 					required:true,
 					celular:true
 				},
-				"estado_civil":{
+				"estado":{
 					required:true,
 					lettersonlyWithSpace:true
+				},
+				"sexo":{
+				 required:true
 				},
 				"password":{
 					required:true

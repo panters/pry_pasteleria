@@ -106,6 +106,8 @@
 		                      ]                     
 		    });
 		});
+	  
+	 
 	
 	//Evita la escritura en los campos de fecha del carrito
 	  $('body').delegate(".input-group.date", "keypress", function (e) {

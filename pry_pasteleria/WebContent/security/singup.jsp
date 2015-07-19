@@ -25,6 +25,17 @@ margin-top: -65px;
 <script>
 $(document).ready(function(){
 	
+	var picker=$("#nacimiento");
+	
+	picker.keypress(function(e){
+		e.preventDefault();
+	});
+	
+    picker.datepicker({
+        language: "es"                 
+    });
+
+	
 	$('#formRegCli').submit(function(e){
 		e.preventDefault();
 		 //detenemos el evento para validar el form
@@ -128,13 +139,13 @@ $(document).ready(function(){
 
                 <div class="form-group" style="margin-top: -59px;">
 					<div class="input-group">
-						<div class="radio">
+						<!--  <div class="radio"> -->
 							Seleccione Estado Civil:&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label><input type="radio" name="estado" value="C">Casado</label>
 							&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio"
 								name="estado" value="S">Soltero</label>
-						</div>
+						<!--  </div> -->
 					</div>
 				</div>
 
@@ -145,13 +156,13 @@ $(document).ready(function(){
 
 				<div class="form-group">
 					<div class="input-group">
-						<div class="radio">
+						<!--  <div class="radio"> -->
 							Seleccione Sexo:&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label><input type="radio" name="sexo" value="M">Masculino</label>
 							&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio"
 								name="sexo" value="F">Femenino</label>
-						</div>
+						<!--  </div>  -->
 					</div>
 				</div>
 
@@ -169,9 +180,10 @@ $(document).ready(function(){
 
  				<div class="form-group">
 					<label class="control-label sr-only" for="nacimiento">Fecha Nacimiento</label>
-					<input class="form-control" id="nacimiento" name="fec_nacimiento" placeholder="Fecha Nacimiento" type="text">
+					<input class="form-control" id="nacimiento" name="fec_nacimiento" placeholder="Fecha Nacimiento" type="text" autocomplete="off">
 				</div> 
 				
+					
 				<div class="form-group submit">
 					<s:submit id="registrar" cssStyle="background-color: #A1477E;" value="REGISTRAR"  />
 				</div>
