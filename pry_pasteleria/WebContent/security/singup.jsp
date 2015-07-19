@@ -20,12 +20,42 @@ transition: all 0.4s ease 0s;
 margin-right: -415px;
 margin-top: -65px;
 }
+
+
+.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+    background-color: #006DCC;
+    background-image: -moz-linear-gradient(center top , #9500CC, #CC00A6);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #FFF;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.25);
+}
+
+
 </style>
 
 <script>
 $(document).ready(function(){
 	
 	var picker=$("#nacimiento");
+	var clave=$('.clave1');
+	var cclave=$('.clave2');
+	
+
+	function validatePassword(obj){
+		if(clave.val()!=cclave.val()){
+			 obj.val('');
+			 alert('Las contraseñas no coinciden');
+			 cclave.focus();
+			 return false;
+		}
+		return true;
+	}
+
+	$('#username').keyup(function(){
+		validatePassword($(this));
+	});
+	
 	
 	picker.keypress(function(e){
 		e.preventDefault();
@@ -35,7 +65,6 @@ $(document).ready(function(){
         language: "es"                 
     });
 
-	
 	$('#formRegCli').submit(function(e){
 		e.preventDefault();
 		 //detenemos el evento para validar el form
@@ -56,8 +85,8 @@ $(document).ready(function(){
 				var celular1=$('#celular').val();
 				var password1=$('#password').val();
 				
-				if($('#username').val().length<1){
-					
+				if(!validatePassword(cclave)){
+					return false;
 				}else{
 				 	 $.ajax({			
 						type:'post',
@@ -105,13 +134,13 @@ $(document).ready(function(){
 
 				<div class="form-group">
 					<label class="control-label sr-only" for="password">Contrase&ntilde;a</label>
-					<input class="form-control" id="password" name="password" placeholder="Contraseña" type="password">
+					<input class="form-control clave1" id="password" name="password" placeholder="Contraseña" type="password">
 				</div>
 
 
 				<div class="form-group">
 					<label class="control-label sr-only" for="password">Contrase&ntilde;a</label>
-					<input class="form-control" id="password" name="password" placeholder="Confirmar Contrase&ntilde;a" type="password">
+					<input class="form-control clave2" id="password" name="password" placeholder="Confirmar Contrase&ntilde;a" type="password">
 				</div>
 
 				<div class="form-group">
