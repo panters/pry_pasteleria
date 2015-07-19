@@ -14,7 +14,7 @@
   }
   
   
-  </style>
+</style>
 
 <script>
 	var cotizacion = 0;
@@ -139,13 +139,18 @@ $(document).ready(function() {
 	        html2canvas($("#armador"), {
 	            onrendered: function(canvas) {
 	                theCanvas = canvas;
-	                document.body.appendChild(canvas);
+	                //document.body.appendChild(canvas);
 
 	                // Convert and download as image 
-	                Canvas2Image.saveAsPNG(canvas); 
+	                //hace que se descgar:
+	                	//Canvas2Image.saveAsPNG(canvas); 
 	                
 	                var img = canvas.toDataURL("image/png");
-	                //$('body').append('<img src="'+img+'"/>');
+	                
+	                $('#iac').val(canvas.toDataURL("image/png"));
+	                $('#pc').val(cotizacion);
+	                $('#formCotizar').submit();
+	                
 	                
 	                //$("#img-out").append(canvas);
 	                // Clean up 
@@ -154,14 +159,35 @@ $(document).ready(function() {
 	        });
 	    });
 	
-	
+	$('#formCotizar').submit(function(e){
+    	e.preventDefault();
+    	$.ajax({
+    		type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function(data) {
+            //$('body').append('<img src="'+data.imagen+'"/>');
+            	$.growl(
+						{
+							title:" <strong>Cotización&nbsp;</strong> ",
+							message:"enviada correctamente..!",
+							icon:"glyphicon glyphicon-thumbs-up"
+						},{
+							type:'success'
+					   });
+            }
+    	});
+    	return false;
+    });
 	
 	
   });
 </script>
 
-
-
+<form method="POST" enctype="multipart/form-data" action="sendCotizacion.action" id="formCotizar" style="display:none;">
+    <input type="hidden" name="imagen" id="iac" value="" />
+    <input type="hidden" name="cotiprice" id="pc" value="" />
+</form>
 
 <div style="margin-left:5%;margin-right:5%;">
 <div id="products" style="width:40%;">
@@ -200,10 +226,9 @@ $(document).ready(function() {
       <div id="armador" class="placeholder" style="width:100%;height:100%;">Arrasta Aqui..!</div>
       <div id="img-out"></div>
   </div>
-  <button id="imprimir" class="btn btn-lg btn-primary">Enviar</button>
-  <input type="button" id="btnSave" value="Save PNG"/>
+  <!-- <button id="imprimir" class="btn btn-lg btn-primary">Enviar</button> -->
+  <input type="button" id="btnSave" value="Enviar" class="btn btn-lg btn-primary"/>
 </div>
-
 </div>
 <br></br>
 <br></br>

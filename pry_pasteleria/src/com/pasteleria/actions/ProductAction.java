@@ -1,15 +1,25 @@
 package com.pasteleria.actions;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
+import sun.misc.BASE64Decoder;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Product;
+import com.pasteleria.notifications.Email;
+import com.pasteleria.notifications.Notificaciones;
 import com.pasteleria.services.ServiceProduct;
+import com.pasteleria.util.ByteArrayImage;
 import com.pasteleria.util.SaveFile;
 
 @ParentPackage(value="cloudedleopard")
@@ -22,7 +32,30 @@ public class ProductAction extends ActionSupport {
 	private String archivoContentType;
 	private String archivoFileName;
 	private int mantenimiento;
+	private double cotiprice;
 			
+	private String imagen;
+	
+	@Action(value="sendCotizacion",results={@Result(name="success",type="json")})
+	public String cotizar(){
+		String res=this.imagen;		 
+		String x=(ResourceBundle.getBundle("com/pasteleria/resources/configMail")).getString("cotizar");
+		x=x.replace("#",res);
+		
+		String imageDataBytes =res.substring(res.indexOf(",")+1);
+		byte[] decoded = Base64.getDecoder().decode(imageDataBytes);
+		
+	    ByteArrayImage.writeImageFromArrayBytes(decoded);
+	    
+		System.out.println("pase");
+		
+		//Email e=new Email("leonxandercs@gmail.com",res,false);
+		//new Thread(e).start();
+		this.imagen=res;
+		return SUCCESS;
+	}
+	
+	
 	@Action(value="listProduct",results={@Result(name="success",type="json")})
 	public String list(){
 		if(mantenimiento!=0)
@@ -38,6 +71,7 @@ public class ProductAction extends ActionSupport {
 		return SUCCESS;
 	}
 		
+	
 	
 	@Action(value="saveProduct",results={@Result(name=SUCCESS,type="redirectAction",location="mproduct")})
 	public String cargar(){
@@ -133,6 +167,19 @@ public class ProductAction extends ActionSupport {
 
 	public void setMantenimiento(int mantenimiento) {
 		this.mantenimiento = mantenimiento;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	public double getCotiprice() {
+		return cotiprice;
+	}
+	public void setCotiprice(double cotiprice) {
+		this.cotiprice = cotiprice;
 	}
 	
 	

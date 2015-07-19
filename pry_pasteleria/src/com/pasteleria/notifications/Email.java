@@ -1,20 +1,29 @@
 package com.pasteleria.notifications;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.activation.DataHandler;
+import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
+import javax.mail.internet.PreencodedMimeBodyPart;
+import javax.mail.util.ByteArrayDataSource;
 /**
  * 
  * @author Pantera
@@ -80,6 +89,7 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
             props.setProperty("mail.smtp.port", "587");
             props.setProperty("mail.smtp.user", usuarioCorreo);
             props.setProperty("mail.smtp.auth", "true");
+            props.put("mail.imaps.partialfetch", false);
 
             Session session = Session.getDefaultInstance(props, null);
             BodyPart texto = new MimeBodyPart();
@@ -99,7 +109,6 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
 
             MimeMultipart multiParte = new MimeMultipart();
             multiParte.addBodyPart(texto);
-            
             if (rutaArchivo!=null){
             	if(!rutaArchivo.equals("")){
             		multiParte.addBodyPart(adjunto);
@@ -116,10 +125,20 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
             	message.setContent(multiParte);
             	message.setText("<h4>Contraseña Recuperada</h4><p>"+this.body+"</p>", "UTF-8", "html");
 			}else{
-				
-				message.setSubject(asunto);
-	            message.setContent(multiParte);
-	            message.setText(customMessage(usuario, idpedido), "UTF-8", "html");
+				if(asunto==null || this.usuario==null){
+					
+					MimeBodyPart filePart =  new  PreencodedMimeBodyPart( "base64" ); 
+			        filePart.setText (this.body);
+					message.setSubject("Cotización de Torta personalizada");
+					multiParte.addBodyPart(addAttachment("cotizar",this.body));
+		            message.setContent(multiParte);
+		            //message.setText("hola", "UTF-8", "html");
+		            System.out.println("email printing l :"+body);
+				}else{
+					message.setSubject(asunto);
+		            message.setContent(multiParte);
+		            message.setText(customMessage(usuario, idpedido), "UTF-8", "html");
+				}
 			}
             
            
@@ -150,7 +169,40 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
     	mensaje=mensaje.replaceAll("date",String.valueOf(formato.format(date)));
     	return mensaje;
     }
-    
+
+    @SuppressWarnings({ "resource" })
+	private MimeBodyPart addAttachment(final String fileName, final String fileContent) throws MessagingException {
+       if (fileName == null || fileContent == null) {
+            return null;
+        }
+
+       
+        MimeBodyPart filePart = new MimeBodyPart();
+
+        String data = fileContent;
+        DataSource ds;
+        //InputStream in = new ByteArrayInputStream(data.getBytes("UTF-8"), "application/octet-stream");
+        try {
+            //in = MimeUtility.decode(in,"base64");
+            try {
+                ds = new ByteArrayDataSource(data.getBytes("UTF-8"), "application/octet-stream");
+            } finally {
+                //in.close();
+            }
+        } catch (IOException ioe) {
+            throw new MessagingException(fileName, ioe);
+        }
+
+        // "image/*"
+        filePart.setDataHandler(new DataHandler(ds));
+        filePart.addHeader("Content-Type", "text/plain; charset=\"UTF-8\"");
+        filePart.addHeader("Content-Transfer-Encoding", "base64");
+        filePart.setFileName(fileName+".png");
+        filePart.setDisposition(Part.ATTACHMENT);
+         
+      
+        return filePart;
+    }
     
     public static void main(String[] args){
         
