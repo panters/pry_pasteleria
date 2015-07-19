@@ -403,7 +403,7 @@
         	   //alert('Visible!');
            }, 250);
          },
-         idle:10*1000
+         idle:60*1000
        });
      
      $(document).ready(function(){

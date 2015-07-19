@@ -52,7 +52,6 @@ $(document).ready(function() {
 		for (var i = 0; i < data.length; i++) {
 			switch (data[i].tipo) {
 			case 'fruta':
-				
 				imagen = '<div class="fruts"><img src="verImagen?imagenName='+ data[i].imagen +'" data-precio="'+ data[i].precio+'" width="30" heigth="70" class="drag"/></div>';
 				cfrutas.append(imagen);
 				break;
@@ -214,25 +213,16 @@ $(document).ready(function() {
     <h2><a href="#">Masas</a></h2>
     <div>
       <ul id="cmasas">
-        <li>Lolcat Shirt</li>
-        <li>Cheezeburger Shirt</li>
-        <li>Buckit Shirt</li>
       </ul>
     </div>
     <h2><a href="#">Frutas</a></h2>
     <div>
       <ul id="cfrutas">
-        <li>Zebra Striped</li>
-        <li>Black Leather</li>
-        <li>Alligator Leather</li>
       </ul>
     </div>
     <h2><a href="#">Adornos</a></h2>
     <div>
       <ul id="cadornos">
-        <li>iPhone</li>
-        <li>iPod</li>
-        <li>iPad</li>
       </ul>
     </div>
   </div>
