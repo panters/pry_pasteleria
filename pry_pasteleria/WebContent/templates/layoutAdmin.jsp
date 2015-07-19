@@ -84,7 +84,10 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="templateAdmin/dist/img/user1-128x128.jpg" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">${session.user.nombre}&nbsp;${session.user.ape_pa}&nbsp;${session.user.ape_ma}</span>
+                  
+                  <a href="logoutAdmin.action">Cerrar Cesion</a>
                 </a>
+                  
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">

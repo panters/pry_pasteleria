@@ -828,7 +828,189 @@ $("#RegistroRol").validate({
 			$(".submit input").addClass("disabled");
 					}
 					});
-			});   				
+			});   		
+			
+			
+////////////////////////////////////////////////////////////////////////
+//Validacion Actualizar Datos de Perfil
+////////////////////////////////////////////////////////////////////////
+$("#formUpdateCustomer").validate({
+rules: {
+"cliente.nombre": {
+minlength: 3,
+maxlength:50,
+lettersonlyWithSpace:true,
+required: true
+},
+"cliente.ape_pa":{
+minlength: 3,
+maxlength:50,
+lettersonlyWithSpace:true,
+required: true	
+},
+"cliente.ape_ma":{
+minlength: 3,
+maxlength:50,
+lettersonlyWithSpace:true,
+required: true
+},
+"cliente.dni":{
+required:true,
+dni:true
+},
+"cliente.fec_nacimiento":{
+required:true,
+date:true
+},
+"cliente.email":{
+	required:true,
+	email:true
+},
+"cliente.telefono":{
+telefono:true
+},
+"cliente.celular":{
+required:true,
+celular:true
+},
+"cliente.estado_civil":{
+required:true,
+lettersonlyWithSpace:true
+}
+
+},
+messages:{ 
+"cliente.estado_civil": {
+lettersonlyWithSpace:"Seleccione una opci&oacute;n v&aacute;lida."
+}
+},
+highlight: function(element) {
+$(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+},
+unhighlight: function(element) {
+$(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+var f=$(element).parent().parent().parent().children().eq(1);
+if (f.hasClass('input-group-addon')){}	        	
+else{/**/}
+}
+});
+$('input[type=submit]').click(function() {
+
+$('#formUpdateCustomer.animated').removeClass('animated shake');
+if ($("#formUpdateCustomer").valid()) {
+$("#formUpdateCustomer").addClass("success");
+} else {
+$("#formUpdateCustomer").removeClass("success").addClass("invalid");
+$(this).addClass("disabled");
+}
+
+$("#formUpdateCustomer.invalid input").on("keyup blur", function() {
+if ($("#formUpdateCustomer").valid()) {
+$(".submit input").removeClass("disabled");
+$("#formUpdateCustomer").removeClass("invalid");
+} else {
+$(".submit input").addClass("disabled");
+}
+});
+});   			
+
+
+////////////////////////////////////////////////////////////////////////
+//Validacion Recuperar Clave
+////////////////////////////////////////////////////////////////////////
+$("#formRecPass").validate({
+rules: {
+"email":{
+email:true,
+required:true
+}							
+},
+highlight: function(element) {
+$(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+},
+unhighlight: function(element) {
+$(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+var f=$(element).parent().parent().parent().children().eq(1);
+if (f.hasClass('input-group-addon')){}	        	
+else{/**/}
+}
+});
+$('input[type=submit]').click(function() {
+
+$('#formRecPass.animated').removeClass('animated shake');
+if ($("#formRecPass").valid()) {
+$("#formRecPass").addClass("success");
+} else {
+$("#formRecPass").removeClass("success").addClass("invalid");
+//$(this).addClass("disabled");
+}
+
+$("#formRecPass.invalid input").on("keyup blur", function() {
+if ($("#formRecPass").valid()) {
+$(".submit input").removeClass("disabled");
+$("#formRecPass").removeClass("invalid");
+} else {
+//$(".submit input").addClass("disabled");
+}
+});
+});   
+////////////////////////////////////////////////////////////////////////
+//Validacion Cambiar Contraseña
+////////////////////////////////////////////////////////////////////////
+$("#formActPass").validate({
+rules: {
+"passAct":{
+required:true
+},
+"password":{
+required:true
+},
+"cliente.password":{
+required:true
+}
+},
+messages:{ 
+"passAct": {
+required:"campo requerido."
+},
+"password": {
+required:"campo requerido."
+},
+"cliente.password": {
+required:"campo requerido."
+}
+},
+highlight: function(element) {
+$(element).closest(".form-group").removeClass("has-success").addClass("has-error").parents('form.animate-form').addClass("animated shake");;
+},
+unhighlight: function(element) {
+$(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+var f=$(element).parent().parent().parent().children().eq(1);
+if (f.hasClass('input-group-addon')){}	        	
+else{/**/}
+}
+});
+$('input[type=submit]').click(function() {
+
+$('#formActPass.animated').removeClass('animated shake');
+if ($("#formActPass").valid()) {
+$("#formActPass").addClass("success");
+} else {
+$("#formActPass").removeClass("success").addClass("invalid");
+$(this).addClass("disabled");
+}
+
+$("#formActPass.invalid input").on("keyup blur", function() {
+if ($("#formActPass").valid()) {
+$(".submit input").removeClass("disabled");
+$("#formActPass").removeClass("invalid");
+} else {
+$(".submit input").addClass("disabled");
+}
+});
+
+});   	  			
+
   
   
 });

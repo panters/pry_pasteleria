@@ -58,7 +58,7 @@ public class CustomerAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	@Action(value="updatePassword1",results={@Result(name=SUCCESS,type="tiles",location="catalogo")})
+	@Action(value="updatePassword1",results={@Result(name=SUCCESS,type="json")})
 	public String updatePassword(){
 		new ServiceCustomer().updatePassword(cliente);
 		return SUCCESS;

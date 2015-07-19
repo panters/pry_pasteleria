@@ -29,6 +29,10 @@ public class LogoutAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	@Action(value="logoutAdmin",results={@Result(name="success",type="redirectAction",location="Admin")})
+	public String executeAdmin() throws Exception {
+		session.invalidate();
+		return SUCCESS;
+	}
 
 }

@@ -14,6 +14,8 @@
 				type:'success'
 			}
 		  );
+		
+		
 	</script>
 </s:if>
 
@@ -35,9 +37,49 @@
 	</script>
 </s:if>
 
+<script>
 
-	<div class="centrando">
-  <div class="row row-centered">
+$(document).ready(function(){
+	
+	$('#olvClave').click(function(){
+		$('#myModalRecPass').modal('show');
+		$('#emailrec').val('');
+	});
+	
+	$('#formRecPass').submit(function(e){
+		   e.preventDefault();
+		   
+		   var $form=$(this);
+		   if(! $form.valid()){
+			   return false;
+		   }else{
+			   $.ajax({
+				   type: 'POST',
+				   url: $(this).attr('action'),
+				   data: $(this).serialize(),
+				   success: function(data){
+					   $.growl(
+		            			{
+		            				title:" <strong>!Mensaje :</strong>:",
+		            				message:" <strong>Envio Conforme</strong>",
+		            				icon:"glyphicon glyphicon-thumbs-up"
+		            			},{
+		            				type:'success'
+		            			}
+		            		  );					   
+					   window.location.href="logueo.action";	
+		             }
+			   })
+			   return false;
+		   }
+		   return false;
+	});
+});
+</script>
+
+
+<div class="centrando">
+<div class="row row-centered">
   
 	  <div class="col-xs-12 col-sm-0 col-md-0 col-lg-2 col-centered">
 	  </div>
@@ -50,8 +92,6 @@
 							<h1>INICIE SESIÓN</h1>
 						</div>
 						<br></br>
-
-
 						<div class="form-group has-feedback">
 							<div class="input-group-addon">
 								<div class="glyphicon glyphicon-envelope"></div>
@@ -66,11 +106,11 @@
 								<div class="glyphicon glyphicon-lock"></div>
 							</div>
 							<input class="form-control" id="password" name="password"
-								placeholder="Contraseña" type="password"> <span
-								class="glyphicon glyphicon-ok form-control-feedback"></span>
+								placeholder="Contraseña" type="password">
+								 <span class="glyphicon glyphicon-ok form-control-feedback"></span>
 						</div>
 						<div style="text-align: left; height: 0px;">
-							&nbsp; <a href="recoverPwd.action">Olvidaste tu clave?</a>&nbsp;
+							&nbsp; <a href="#" id="olvClave">Olvidaste tu clave?</a>&nbsp;
 							&nbsp;&nbsp;<a class="registrate" href="singup.action">Crear una cuenta</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -99,9 +139,6 @@
 				<br></br>
 			</div> <!------------------------------------------------ -->
 	    </div>
-			
-			
-			
 	
    	  <div class="col-xs-12 col-sm-0 col-md-0 col-lg-2 col-centered">
 	  
@@ -109,6 +146,34 @@
 
    </div> <!--en row -->
 </div> <!-- FIN CONTENEDOR LOGIN -->	
-	
 <br/>	
+
+
+<!-- Modal recuperar contraseña -->
+<div class="modal fade" id="myModalRecPass" role="dialog" ria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+  <s:form id="formRecPass" action="enviarClave"  theme="bootstrap" cssClass="animate-form well form-vertical">
+    <div class="modal-header">
+    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    	<h4>Recuperar mi Contraseña</h4>
+    </div>
+	<div class="modal-body">
+	    	<div class="form-group">
+	    		<s:textfield label="Ingresa tu correo electrónico para que tu clave sea enviada." id="emailrec" name="email" cssClass="form-control"/>
+	    	</div>
+   	</div>
+    <div class="modal-footer">
+	  	  <div style="text-align:left;">
+	  	  		<s:submit cssClass="btn btn-primary" value="Enviar Correo"/>&nbsp;&nbsp;
+	   	  </div>
+	      		<button type="button" class="btn btn-default" id="cancelar" data-dismiss="modal">Cancelar</button>
+    </div>
+    </s:form>
+  </div>
+</div>
+</div>
+
+
+	
 	
