@@ -12,6 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Customer;
 import com.pasteleria.bean.User;
 import com.pasteleria.services.ServiceCustomer;
+import com.pasteleria.services.ServiceUser;
 
 @ParentPackage(value="cloudedleopard")
 public class CustomerAction extends ActionSupport {
@@ -32,6 +33,7 @@ public class CustomerAction extends ActionSupport {
 	private String celular;
 	private String password;
 	
+	private byte cexiste;
 	
 	@Action(value="listCustomer",results={@Result(name="success",type="json")})
 	public String list(){
@@ -65,14 +67,31 @@ public class CustomerAction extends ActionSupport {
 	@Action(value="saveCustomer",results={
 			@Result(name="success",type="json"),
 			@Result(name="admin",type="json"),
-			@Result(name="cliente",type="tiles",location="catalogo")})
+			@Result(name="cliente",type="tiles",location="catalogo")
+			})
 	public String save(){
 		Map<String, Object> session=ActionContext.getContext().getSession();
 		User u=(User) session.get("user");
 	if(session.get("user")!=null){	
 		if (cliente.getIdUsuario().equals("nuevo")) {
-			new ServiceCustomer().create(cliente);
-		
+			
+			if(this.email!=null){
+				if((new ServiceUser().find(this.email))!=null){
+					this.cexiste=1;
+					System.out.println("ya existe");
+				}else{
+					new ServiceCustomer().register(username, apellidop, apellidom, documento, nacimiento, sexo,email, estadocivil, telefono, celular, password);
+				}
+			}else{
+				if((new ServiceUser().find(this.cliente.getEmail()))!=null){
+					this.cexiste=1;
+					System.out.println("existe");
+				    return "admin";
+				}else{
+					new ServiceCustomer().create(cliente);
+				}
+			}
+			
 		}else{
 				if(u.getRol().getIdRol()==2){
 					new ServiceCustomer().update(cliente);
@@ -84,10 +103,16 @@ public class CustomerAction extends ActionSupport {
 				}				
 		}
 	}else{
-		new ServiceCustomer().register(username, apellidop, apellidom, documento, nacimiento, sexo, email, estadocivil, telefono, celular, password);  
-	  }	
+		if((new ServiceUser().find(this.email))!=null){
+			this.cexiste=1;
+			System.out.println("ya existe");
+		}else{
+			new ServiceCustomer().register(username, apellidop, apellidom, documento, nacimiento, sexo, email, estadocivil, telefono, celular, password);
+		}
+    }	
 		return SUCCESS;
 	}
+	
 	
 	@Action(value="deleteCustomer",results={
 			@Result(name="success",type="redirectAction",location="mcustomer")})
@@ -199,5 +224,14 @@ public class CustomerAction extends ActionSupport {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public byte getCexiste() {
+		return cexiste;
+	}
+
+	public void setCexiste(byte cexiste) {
+		this.cexiste = cexiste;
+	}
+	
 	
 }

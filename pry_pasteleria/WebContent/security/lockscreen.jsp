@@ -82,7 +82,7 @@
         Ingresa tu contraseña para reanudar tu sessi&oacute;n.
       </div>
       <div class='text-center'>
-        <a href="Admin.action">O inicia sessi&oacute;n con un usuario diferente.</a>
+        <a href="Admin.action?newsession=1">O inicia sessi&oacute;n con un usuario diferente.</a>
       </div>
       <div class='lockscreen-footer text-center'>
         Copyright &copy; 2014-2015 <b><a href="http://almsaeedstudio.com" class='text-black'>Grupo uno Calidad</a></b><br>

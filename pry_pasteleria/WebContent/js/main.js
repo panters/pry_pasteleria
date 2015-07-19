@@ -787,7 +787,8 @@ $("#RegistroRol").validate({
 				 required:true
 				},
 				"password":{
-					required:true
+					required:true,
+					min:5
 				}
 					
 				},

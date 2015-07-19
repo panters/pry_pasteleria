@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Employed;
 import com.pasteleria.services.ServiceEmployed;
+import com.pasteleria.services.ServiceUser;
 
 @ParentPackage(value="cloudedleopard")
 public class EmployedAction extends ActionSupport {
@@ -16,6 +17,7 @@ public class EmployedAction extends ActionSupport {
 
 	private List<Employed> empleados;
 	private Employed empleado;
+	private byte eexiste;
 	
 	@Action(value="listEmployed",results={@Result(name="success",type="json")})
 	public String list(){
@@ -31,8 +33,11 @@ public class EmployedAction extends ActionSupport {
 	
 	@Action(value="saveEmployed",results={@Result(name="success",type="json")})
 	public String save(){
-		if (empleado.getIdUsuario().equals("nuevo")) {
-			new ServiceEmployed().create(empleado);
+		if (empleado.getIdUsuario().equals("nuevo")){
+			if(new ServiceUser().find(this.empleado.getEmail())!=null)
+				this.eexiste=1;
+			else
+			  new ServiceEmployed().create(empleado);
 		}else{
 			new ServiceEmployed().update(empleado);
 		}
@@ -59,6 +64,14 @@ public class EmployedAction extends ActionSupport {
 
 	public void setEmpleado(Employed empleado) {
 		this.empleado = empleado;
+	}
+
+	public byte getEexiste() {
+		return eexiste;
+	}
+
+	public void setEexiste(byte eexiste) {
+		this.eexiste = eexiste;
 	}
 	
 	

@@ -84,6 +84,7 @@ $(document).ready(function(){
 				var telefono1=$('#telefono').val();
 				var celular1=$('#celular').val();
 				var password1=$('#password').val();
+				var ia="nuevo";
 				
 				if(!validatePassword(cclave)){
 					return false;
@@ -93,18 +94,33 @@ $(document).ready(function(){
 						url:'saveCustomer',
 						datatype:'json',
 						data:{username:username1,apellidop:apellidop1,apellidom:apellidom1,documento:documento1,nacimiento:nacimiento1,
-							sexo:sexo1,email:email1,estadocivil:estadocivil1,telefono:telefono1,celular:celular1,password:password1},
-						success:function(){
-							$.growl(
-									{
-								    title:"<strong>!Usted ha sido</strong>:",
-								    message:"<strong>Registrado</strong>",
-								    icon:"glyphicon glyphicon-thumbs-up"
-						        	},{
-						        		type:'success'
-						        	}
-						       );				
-							$(location).attr('href','logueo.action');				
+							sexo:sexo1,email:email1,estadocivil:estadocivil1,telefono:telefono1,celular:celular1,password:password1,'cliente.IdUsuario':ia},
+						success:function(data){
+							if(data.cexiste==1){
+								var msj="Ya hay un usuario registrado con este correo";
+								$.growl(
+										{
+											title:" <strong>!Mensaje: </strong></b>",
+											message:msj,
+											icon:"glyphicon glyphicon-alert"
+										},{
+											type:'danger'
+										}
+									  );
+								$('#email').val('');
+								$('#email').focus();
+							}else{
+								$.growl(
+										{
+									    title:"<strong>!Usted ha sido</strong>:",
+									    message:"<strong>Registrado</strong>",
+									    icon:"glyphicon glyphicon-thumbs-up"
+							        	},{
+							        		type:'success'
+							        	}
+							       );				
+								setTimeout(function(){$(location).attr('href','logueo.action');},2000);
+							}
 						}
 					});
 				  }
@@ -116,7 +132,6 @@ $(document).ready(function(){
 
 
 </script>
-
 <div class="form-header">
 	<h1>REGISTRO DE CLIENTE</h1>
 </div>

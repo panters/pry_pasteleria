@@ -22,6 +22,7 @@ public class LinkAction  extends ActionSupport{
 	
 	private String navbar;
 	private String username;
+	private byte newsession;
 
 	
 	Map<String,Object> session=ActionContext.getContext().getSession();
@@ -406,9 +407,13 @@ public class LinkAction  extends ActionSupport{
 	public String loginAdmin(){
 		
 		if(session.get("user")!=null){
-			User obj=(User) session.get("user");
-			if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
-				return "desbloquear";
+			if(this.newsession==1)
+				return SUCCESS;
+			else{
+				User obj=(User) session.get("user");
+				if(obj.getRol().getIdRol()==3 || obj.getRol().getIdRol()==4){
+					return "desbloquear";
+				}
 			}
 		}
 		return SUCCESS;
@@ -422,13 +427,17 @@ public class LinkAction  extends ActionSupport{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 	public String getNavbar() {
 		return navbar;
 	}
-
 	public void setNavbar(String navbar) {
 		this.navbar = navbar;
+	}
+	public byte getNewsession() {
+		return newsession;
+	}
+	public void setNewsession(byte newsession) {
+		this.newsession = newsession;
 	}
 
 	

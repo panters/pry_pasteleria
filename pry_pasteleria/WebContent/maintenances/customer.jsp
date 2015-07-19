@@ -238,20 +238,33 @@ $(document).ready(function() {
 	            data: $(this).serialize(),
 	            // Mostramos un mensaje con la respuesta
 	            success: function(data) {
-	            	$('#myModalNuevo').modal('hide');
-	                $('#result').html(data);
-	            	$.growl(
-	            			{
-	            				title:" <strong>!Cambios</strong>:",
-	            				message:" <strong>Guardados</strong>",
-	            				icon:"glyphicon glyphicon-thumbs-up"
-	            			},{
-	            				type:'success'
-	            			}
-	            		  );
-	                //recargamos el DataTable
-	                table.ajax.reload();
-	             }
+	            	if(data.cexiste==1){
+						var msj="Ya hay un usuario registrado con este correo";
+						$.growl(
+								{
+									title:" <strong>!Mensaje: </strong></b>",
+									message:msj,
+									icon:"glyphicon glyphicon-alert"
+								},{
+									type:'danger'
+								}
+							  );
+					}else{
+		            	$('#myModalNuevo').modal('hide');
+		                $('#result').html(data);
+		            	$.growl(
+		            			{
+		            				title:" <strong>!Cambios</strong>:",
+		            				message:" <strong>Guardados</strong>",
+		            				icon:"glyphicon glyphicon-thumbs-up"
+		            			},{
+		            				type:'success'
+		            			}
+		            		  );
+		                //recargamos el DataTable
+		                table.ajax.reload();
+	              }
+	            }
 	        })        
 	        return false;
 		   }
