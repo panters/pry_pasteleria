@@ -88,69 +88,34 @@ $(document).ready(function(){
 			<td width="400px">
 
 				<div class="form-group">
-					<label class="control-label sr-only" for="email">Correo
-						electrónico</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-envelope"></div>
-					</div>
-					<input class="form-control" id="email" name="email"
-						placeholder="Correo electronico" type="text"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<label class="control-label sr-only" for="email">Correo</label>
+					<input class="form-control" id="email" name="email" placeholder="Correo electronico" type="text">
 				</div>
 
 				<div class="form-group">
 					<label class="control-label sr-only" for="password">Contrase&ntilde;a</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-lock"></div>
-					</div>
-					<input class="form-control" id="password" name="password"
-						placeholder="Contraseña" type="password"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<input class="form-control" id="password" name="password" placeholder="Contraseña" type="password">
 				</div>
 
 
 				<div class="form-group">
 					<label class="control-label sr-only" for="password">Contrase&ntilde;a</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-lock"></div>
-					</div>
-					<input class="form-control" id="password" name="password"
-						placeholder="Confirmar Contrase&ntilde;a" type="password"
-						required="true"> <span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<input class="form-control" id="password" name="password" placeholder="Confirmar Contrase&ntilde;a" type="password">
 				</div>
 
 				<div class="form-group">
-					<label class="control-label sr-only" for="username">Nombre
-						Completo</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-user"></div>
-					</div>
-					<input class="form-control" id="username" name="nombre"
-						placeholder="Nombre Completo" type="text"> <span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<label class="control-label sr-only" for="username">Nombre Completo</label>
+					<input class="form-control" id="username" name="nombre" placeholder="Nombre Completo" type="text"> 
 				</div>
 
 				<div class="form-group">
-					<label class="control-label sr-only" for="email">Apellido
-						Paterno</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-user"></div>
-					</div>
-					<input class="form-control" id="apellidop" name="ape_pa"
-						placeholder="Apellido Paterno" type="text"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<label class="control-label sr-only" for="email">Apellido Paterno</label>
+					<input class="form-control" id="apellidop" name="ape_pa" placeholder="Apellido Paterno" type="text"> 
 				</div>
 
 				<div class="form-group">
-					<label class="control-label sr-only" for="email">Apellido
-						Materno</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-user"></div>
-					</div>
-					<input class="form-control" id="apellidom" name="ape_ma"
-						placeholder="Apellido Materno" type="text"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<label class="control-label sr-only" for="email">Apellido Materno</label>
+					<input class="form-control" id="apellidom" name="ape_ma" placeholder="Apellido Materno" type="text"> 
 				</div>
                 
                   
@@ -161,7 +126,7 @@ $(document).ready(function(){
 			<td width="80px"></td>
 			<td width="400px">
 
-                <div class="form-group">
+                <div class="form-group" style="margin-top: -59px;">
 					<div class="input-group">
 						<div class="radio">
 							Seleccione Estado Civil:&nbsp;&nbsp;&nbsp;&nbsp;
@@ -174,14 +139,8 @@ $(document).ready(function(){
 				</div>
 
                 <div class="form-group">
-					<label class="control-label sr-only" for="email">Documento
-						DNI</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-file"></div>
-					</div>
-					<input class="form-control" id="documento" name="dni"
-						placeholder="Documento DNI" type="text"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<label class="control-label sr-only" for="email">Documento DNI</label> 
+					<input class="form-control" id="documento" name="dni" placeholder="Documento DNI" type="text"> 
 				</div>
 
 				<div class="form-group">
@@ -199,34 +158,18 @@ $(document).ready(function(){
 
 				<div class="form-group">
 					<label class="control-label sr-only" for="email">Telefono</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-phone-alt"></div>
-					</div>
-					<input class="form-control" id="telefono" name="telefono"
-						placeholder="Telefono" type="text"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<input class="form-control" id="telefono" name="telefono" placeholder="Telefono" type="text"> 
 				</div>
 
 				<div class="form-group">
 					<label class="control-label sr-only" for="email">Celular</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-earphone"></div>
-					</div>
-					<input class="form-control" id="celular" name="celular"
-						placeholder="Celular" type="text"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<input class="form-control" id="celular" name="celular" placeholder="Celular" type="text">
 				</div>
 
 
  				<div class="form-group">
-					<label class="control-label sr-only" for="nacimiento">Fecha
-						Nacimiento</label>
-					<div class="input-group-addon">
-						<div class="glyphicon glyphicon-calendar"></div>
-					</div>
-					<input class="form-control" id="nacimiento" name="fec_nacimiento"
-						placeholder="Fecha Nacimiento" type="text"><span
-						class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<label class="control-label sr-only" for="nacimiento">Fecha Nacimiento</label>
+					<input class="form-control" id="nacimiento" name="fec_nacimiento" placeholder="Fecha Nacimiento" type="text">
 				</div> 
 				
 				<div class="form-group submit">
