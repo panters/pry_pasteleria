@@ -56,6 +56,7 @@ public class LoginAction  extends ActionSupport{
 				this.navbar=new ServiceNavbar().getNavBarWithRol(user.getRol().getIdRol());
 				session.put("navbar", this.navbar);
 				session.put("user", user);
+				session.put("lock",false);
 				addActionMessage(user.getNombre());
 				
 				if (session.get("cart")!=null) {

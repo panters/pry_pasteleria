@@ -22,10 +22,15 @@
 $(document).ready(function() {
 
 	var cakebuilder=$('#armador');
-	var cfrutas = $('#cfrutas');
-	var cadornos = $('#cadornos');
-	var cvela=$('#velas');
+	
+	var cbase=$('#cbase');
 	var cmoldes=$('#cmasas');
+	var cfrutas = $('#cfrutas');
+	var cdecoracion=$('#cdecoracion');
+	var ccaramelo=$('#ccaramelo');
+	var cadornos = $('#cadornos'); //son velas
+	
+	
 	var ui;
 
 	
@@ -39,25 +44,61 @@ $(document).ready(function() {
 		}	
 	});
 	
+/*
+	$.getJSON('listtipoinsumos',function(data){
+		var data=data.tipoinsumos;
+		
+		for (var i = 0; i < data.length; i++) {
+			var ctct=$('#catalog');
+			var x='<h2><a href="#">'+data[i]+'</a></h2><div><ul id="'+data[i]+'"></ul></div>';
+			ctct.append(x);
+		};
+		
+	});
+*/
 	
 	$.getJSON('listInsumos', function(data) {
 		var data = data.insumos;
+		
+		cbase.html('');
+		cmoldes.html('');
+	    cfrutas.html('');
+		cdecoracion.html('');
+		ccaramelo.html('');
+		cadornos.html(''); //son velas
+		/*
 		cfrutas.html('');
 		cadornos.html('');
 		cvela.html('');
 		cmoldes.html('');
 		cakebuilder.html('');
+		*/
 		
 		var imagen;
 		for (var i = 0; i < data.length; i++) {
 			switch (data[i].tipo) {
+			case 'base':{
+				imagen = '<div class="fruts"><img src="verImagen?imagenName='+ data[i].imagen +'" data-precio="'+ data[i].precio+'" width="350" heigth="184" class="drag"/></div>';
+				cbase.append(imagen);
+				break;
+			 }
+			case 'caramelo':{
+				imagen = '<div class="fruts"><img src="verImagen?imagenName='+ data[i].imagen +'" data-precio="'+ data[i].precio+'"  class="drag"/></div>';
+				ccaramelo.append(imagen);
+				break;
+			 }
+			case 'decoracion':{
+				imagen = '<div class="fruts"><img src="verImagen?imagenName='+ data[i].imagen +'" data-precio="'+ data[i].precio+'"  class="drag"/></div>';
+				cdecoracion.append(imagen);
+				break;
+			 }
 			case 'fruta':
 				imagen = '<div class="fruts"><img src="verImagen?imagenName='+ data[i].imagen +'" data-precio="'+ data[i].precio+'" width="30" heigth="70" class="drag"/></div>';
 				cfrutas.append(imagen);
 				break;
 			case 'vela':
 				imagen = '<div class="fruts"><img src="verImagen?imagenName='+ data[i].imagen + '" data-precio="'+ data[i].precio+'" class="drag" /></div>';
-						cadornos.append(imagen);
+				cadornos.append(imagen);
 				break;
 			case 'masa':
 				imagen = '<img src="verImagen?imagenName='+ data[i].imagen + '" data-precio="'+ data[i].precio+'" class="drag" />';
@@ -86,6 +127,7 @@ $(document).ready(function() {
 			accept: '.drag',
              activeClass: "drop-area",
              drop: function (e, ui) {
+            	 $('#eliminame').text('');
                  if ($(ui.draggable)[0]!=null) {
                      x = ui.helper.clone();
                      ui.helper.remove();
@@ -210,6 +252,12 @@ $(document).ready(function() {
 <div id="products" style="width:40%;">
   <h1 class="ui-widget-header">Ingredientes:</h1>
   <div id="catalog">
+  	<h2><a href="#">Base</a></h2>
+    <div>
+      <ul id="cbase">
+      </ul>
+    </div>
+    
     <h2><a href="#">Masas</a></h2>
     <div>
       <ul id="cmasas">
@@ -220,18 +268,31 @@ $(document).ready(function() {
       <ul id="cfrutas">
       </ul>
     </div>
-    <h2><a href="#">Adornos</a></h2>
+    <h2><a href="#">Decoracion</a></h2>
+    <div>
+      <ul id="cdecoracion">
+      </ul>
+    </div>
+    
+    <h2><a href="#">Caramelos</a></h2>
+    <div>
+      <ul id="ccaramelo">
+      </ul>
+    </div>
+    
+    <h2><a href="#">Velas</a></h2>
     <div>
       <ul id="cadornos">
       </ul>
     </div>
+    
   </div>
 </div>
  
 <div id="cart" style="width:50%;">
   <h1 class="ui-widget-header">Arma Tu Torta&nbsp;&nbsp;&nbsp;&nbsp;S/.<label id="sum"style="font-size:40px;">0.00</label></h1>
   <div class="ui-widget-content">
-      <div id="armador" class="placeholder" style="width:100%;height:100%;">Arrasta Aqui..!</div>
+      <div id="armador" class="placeholder" style="width:100%;height:100%;"><label id="eliminame">Arrasta Aqui..!</label></div>
       <div id="img-out"></div>
   </div>
   <!-- <button id="imprimir" class="btn btn-lg btn-primary">Enviar</button> -->

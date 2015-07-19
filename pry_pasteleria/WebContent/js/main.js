@@ -290,6 +290,9 @@ $("#FormInsumo").validate({
         "insumo.tipo":{
         	required: true,
         	lettersonlyWithSpace:true,
+        },
+        "archivo":{
+        	required:true
         }
       },
       messages:{ 
