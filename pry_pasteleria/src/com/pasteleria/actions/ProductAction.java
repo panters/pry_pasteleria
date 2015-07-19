@@ -1,14 +1,22 @@
 package com.pasteleria.actions;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import javax.mail.Session;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Product;
+import com.pasteleria.bean.User;
 import com.pasteleria.notifications.Email;
 import com.pasteleria.services.ServiceProduct;
 import com.pasteleria.util.SaveFile;
@@ -16,7 +24,8 @@ import com.pasteleria.util.SaveFile;
 @ParentPackage(value="cloudedleopard")
 public class ProductAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-
+	private Map<String,Object> session=(Map<String,Object>)ActionContext.getContext().getSession();
+	
 	private List<Product> productos;
 	private Product producto;
 	private File archivo;
@@ -33,6 +42,22 @@ public class ProductAction extends ActionSupport {
 		String res=this.imagen;		
 		//obtenemos solo el contenido en Base64
 		String imageDataBytes =res.substring(res.indexOf(",")+1);
+	
+		String plantilla=ResourceBundle.getBundle("com/pasteleria/resources/configMail").getString("cotizar");
+		
+		if(session.get("user")!=null){
+			User obj=(User)session.get("user");
+			plantilla=plantilla.replace("FECHA",new SimpleDateFormat("dd-mm-YYY").format(new Date()));
+			plantilla=plantilla.replace("CODIGO",obj.getIdUsuario());
+			plantilla=plantilla.replace("CLIENTE",obj.getNombre()+"-"+obj.getApe_pa());
+			plantilla=plantilla.replace("PRECIO",this.cotiprice+"");
+			
+			Email e=new Email("leonxandercs@gmail.com", imageDataBytes, new String[]{plantilla});
+			new Thread(e).start();
+		}else{
+			session.put("dct",this.imagen);
+			session.put("pct",this.cotiprice);
+		}
 		
 		/*
 		 byte[] decoded = Base64.getDecoder().decode(imageDataBytes);
@@ -40,8 +65,7 @@ public class ProductAction extends ActionSupport {
 		 Email e=new Email("C:\\Files\\destino\\imgTest.png","cotizacion","leonxandercs@gmail.com","cotizacion","prueba",true);
 		*/
 	    
-		Email e=new Email("leonxandercs@gmail.com", imageDataBytes, new String[]{"Envio de EMail prueba"});
-		new Thread(e).start();
+		
 		this.imagen=res;
 		return SUCCESS;
 	}

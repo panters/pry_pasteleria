@@ -28,6 +28,18 @@ $(document).ready(function() {
 	var cmoldes=$('#cmasas');
 	var ui;
 
+	
+	var logueado='false';
+	var rol=0;
+	//Cosultamos al servidor si el usuario esta logueado
+	$.get("isLogged.action",function(data){
+		rol=data.rol;
+		if(rol==2){
+			logueado=data.logged;
+		}	
+	});
+	
+	
 	$.getJSON('listInsumos', function(data) {
 		var data = data.insumos;
 		cfrutas.html('');
@@ -121,7 +133,7 @@ $(document).ready(function() {
 		$('#sum').text(parseFloat(cotizacion).toFixed(2));
 	});
 	
-	
+	/*
 	$('#imprimir').click(function(){
 		
 		var printcontent=document.getElementById('cart').innerHTML;
@@ -132,7 +144,7 @@ $(document).ready(function() {
 
 		document.body.innerHTML=original;
 	});
-	
+	*/
 	
 	  $("#btnSave").click(function() { 
 		  
@@ -166,15 +178,21 @@ $(document).ready(function() {
             url: $(this).attr('action'),
             data: $(this).serialize(),
             success: function(data) {
-            //$('body').append('<img src="'+data.imagen+'"/>');
-            	$.growl(
-						{
-							title:" <strong>Cotización&nbsp;</strong> ",
-							message:"enviada correctamente..!",
-							icon:"glyphicon glyphicon-thumbs-up"
-						},{
-							type:'success'
-					   });
+            	
+            	if (logueado=='false')
+        			window.location.href="logueo.action";
+        		else{
+        			$.growl(
+    						{
+    							title:" <strong>Cotización&nbsp;</strong> ",
+    							message:"enviada correctamente..!",
+    							icon:"glyphicon glyphicon-thumbs-up"
+    						},{
+    							type:'success'
+    					   });
+        			setTimeout(function(){window.location.href="catalogo.action"},2000);
+        		}
+            	
             }
     	});
     	return false;

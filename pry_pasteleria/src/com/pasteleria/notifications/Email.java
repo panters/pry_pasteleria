@@ -130,7 +130,7 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
             }
             
             if(this.imageBase64!=null){
-            	 texto.setText(this.plantilla[0]);
+            	 texto.setContent(this.plantilla[0],"text/html");
             }
 
             MimeMultipart multiParte = new MimeMultipart();
@@ -153,7 +153,8 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
 			}else{
 				if(this.imageBase64!=null){
 					MimeBodyPart filePart =  new  PreencodedMimeBodyPart( "base64" ); 
-			        filePart.setText ("agregado");
+					filePart.setContent(plantilla[0],"text/html");
+			        filePart.setText (this.plantilla[0]);
 					message.setSubject("Cotización de Torta personalizada");
 					multiParte.addBodyPart(addAttachment("diseño de torta",this.imageBase64));
 		            message.setContent(multiParte);
