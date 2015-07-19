@@ -57,7 +57,8 @@ public class ByteArrayImage{
 		
 		try {
            
-            File newFile= new File("C:\\Files\\destino\\imgTest-"+System.currentTimeMillis()+".jpg");
+            //File newFile= new File("C:\\Files\\destino\\imgTest-"+System.currentTimeMillis()+".png");
+            File newFile= new File("C:\\Files\\destino\\imgTest.png");
             BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bytes));
             ImageIO.write(imag, "jpg", newFile);
             ImageIO.write(imag, "png", newFile);
@@ -76,7 +77,7 @@ public class ByteArrayImage{
 		try {
            
             File newFile= new File("C:\\Files\\destino\\imgTest-"+System.currentTimeMillis()+".jpg");
-            ImageIO.write(bufferimage, "jpg", newFile);
+            ImageIO.write(bufferimage, "png", newFile);
            
         } catch (FileNotFoundException e) {
             e.printStackTrace();

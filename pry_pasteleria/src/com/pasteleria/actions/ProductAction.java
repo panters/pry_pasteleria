@@ -1,25 +1,16 @@
 package com.pasteleria.actions;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Base64;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import sun.misc.BASE64Decoder;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.pasteleria.bean.Product;
 import com.pasteleria.notifications.Email;
-import com.pasteleria.notifications.Notificaciones;
 import com.pasteleria.services.ServiceProduct;
-import com.pasteleria.util.ByteArrayImage;
 import com.pasteleria.util.SaveFile;
 
 @ParentPackage(value="cloudedleopard")
@@ -38,19 +29,19 @@ public class ProductAction extends ActionSupport {
 	
 	@Action(value="sendCotizacion",results={@Result(name="success",type="json")})
 	public String cotizar(){
-		String res=this.imagen;		 
-		String x=(ResourceBundle.getBundle("com/pasteleria/resources/configMail")).getString("cotizar");
-		x=x.replace("#",res);
 		
+		String res=this.imagen;		
+		//obtenemos solo el contenido en Base64
 		String imageDataBytes =res.substring(res.indexOf(",")+1);
-		byte[] decoded = Base64.getDecoder().decode(imageDataBytes);
 		
-	    ByteArrayImage.writeImageFromArrayBytes(decoded);
+		/*
+		 byte[] decoded = Base64.getDecoder().decode(imageDataBytes);
+		 ByteArrayImage.writeImageFromArrayBytes(decoded);
+		 Email e=new Email("C:\\Files\\destino\\imgTest.png","cotizacion","leonxandercs@gmail.com","cotizacion","prueba",true);
+		*/
 	    
-		System.out.println("pase");
-		
-		//Email e=new Email("leonxandercs@gmail.com",res,false);
-		//new Thread(e).start();
+		Email e=new Email("leonxandercs@gmail.com", imageDataBytes, new String[]{"Envio de EMail prueba"});
+		new Thread(e).start();
 		this.imagen=res;
 		return SUCCESS;
 	}

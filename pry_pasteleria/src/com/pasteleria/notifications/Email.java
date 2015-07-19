@@ -14,7 +14,6 @@ import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -44,9 +43,13 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
     private String body;
     private boolean recuperarClave=false;
     
+    private String mensaje;
     private String usuario;
     private String idpedido;
-    
+    @SuppressWarnings("unused")
+	private boolean cotizar;
+    private String imageBase64;
+    private String plantilla[];
     //Constructores
     public Email(String rutaArchivo, String nombreArchivo, String destinatario,String usuario,String idpedido) {
          this.rutaArchivo = rutaArchivo;
@@ -56,6 +59,17 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
         this.usuario=usuario;
         this.idpedido=idpedido;
     }
+    
+    
+    public Email(String rutaArchivo, String nombreArchivo, String destinatario, String asunto,String mensaje,boolean cotizar) {
+        this.rutaArchivo = rutaArchivo;
+        this.nombreArchivo = nombreArchivo;
+        this.destinatario = destinatario;
+        this.asunto = asunto;
+        this.mensaje = mensaje;
+        this.cotizar=cotizar;
+    }
+    
     
     public Email(String destinatario,String usuario,String idpedido){
         this("", "", destinatario, usuario, idpedido);
@@ -70,6 +84,12 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
     	this.destinatario=destinatario;
     	this.body=body;
     	this.recuperarClave=recuperarClave;
+    }
+    
+    public Email(String destinatario,String imageBase64,String plantilla[]){
+    	this.destinatario=destinatario;
+    	this.imageBase64=imageBase64;
+    	this.plantilla=plantilla;
     }
     
    //Metodo implementado de la Interfaz Runable
@@ -93,18 +113,24 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
 
             Session session = Session.getDefaultInstance(props, null);
             BodyPart texto = new MimeBodyPart();
-            //texto.setText(customMessage(usuario,idpedido));
+            
 
             BodyPart adjunto = new MimeBodyPart();
             
             if ( rutaArchivo!=null ){
             	
-            	if(!rutaArchivo.equals("") || rutaArchivo.length()<1){
+            	if(!rutaArchivo.equals("") || rutaArchivo.length()>1){
             		adjunto.setDataHandler(
                     new DataHandler(new FileDataSource(rutaArchivo)));
                     adjunto.setFileName(nombreArchivo);  
+                    
+                    texto.setText(this.mensaje);
             	}
                                
+            }
+            
+            if(this.imageBase64!=null){
+            	 texto.setText(this.plantilla[0]);
             }
 
             MimeMultipart multiParte = new MimeMultipart();
@@ -125,18 +151,16 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
             	message.setContent(multiParte);
             	message.setText("<h4>Contraseña Recuperada</h4><p>"+this.body+"</p>", "UTF-8", "html");
 			}else{
-				if(asunto==null || this.usuario==null){
-					
+				if(this.imageBase64!=null){
 					MimeBodyPart filePart =  new  PreencodedMimeBodyPart( "base64" ); 
-			        filePart.setText (this.body);
+			        filePart.setText ("agregado");
 					message.setSubject("Cotización de Torta personalizada");
-					multiParte.addBodyPart(addAttachment("cotizar",this.body));
+					multiParte.addBodyPart(addAttachment("diseño de torta",this.imageBase64));
 		            message.setContent(multiParte);
-		            //message.setText("hola", "UTF-8", "html");
-		            System.out.println("email printing l :"+body);
 				}else{
 					message.setSubject(asunto);
 		            message.setContent(multiParte);
+		            if(this.rutaArchivo==null || this.rutaArchivo.isEmpty() || this.rutaArchivo.equals(""))
 		            message.setText(customMessage(usuario, idpedido), "UTF-8", "html");
 				}
 			}
@@ -170,24 +194,23 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
     	return mensaje;
     }
 
-    @SuppressWarnings({ "resource" })
+    @SuppressWarnings("resource")
 	private MimeBodyPart addAttachment(final String fileName, final String fileContent) throws MessagingException {
-       if (fileName == null || fileContent == null) {
+        if (fileName == null || fileContent == null) {
             return null;
         }
-
-       
+ 
         MimeBodyPart filePart = new MimeBodyPart();
 
         String data = fileContent;
         DataSource ds;
-        //InputStream in = new ByteArrayInputStream(data.getBytes("UTF-8"), "application/octet-stream");
+        InputStream in = new ByteArrayInputStream(data.getBytes());
         try {
-            //in = MimeUtility.decode(in,"base64");
+            in = MimeUtility.decode(in, "base64");
             try {
-                ds = new ByteArrayDataSource(data.getBytes("UTF-8"), "application/octet-stream");
+                ds = new ByteArrayDataSource(in , "image/*");
             } finally {
-                //in.close();
+                in.close();
             }
         } catch (IOException ioe) {
             throw new MessagingException(fileName, ioe);
@@ -195,20 +218,20 @@ public class Email implements Runnable{ //Implementamos de Runable para utilizar
 
         // "image/*"
         filePart.setDataHandler(new DataHandler(ds));
-        filePart.addHeader("Content-Type", "text/plain; charset=\"UTF-8\"");
-        filePart.addHeader("Content-Transfer-Encoding", "base64");
-        filePart.setFileName(fileName+".png");
-        filePart.setDisposition(Part.ATTACHMENT);
-         
-      
+        filePart.setFileName(fileName);
+ 
         return filePart;
     }
+    
+    
     
     public static void main(String[] args){
         
       
-        //Email e = new Email("C:\\Users\\Pantera\\Downloads\\emblema.jpg","adjunto.jpg","leonxandercs@gmail.com ","Luis Hernandez Montenegro","P00021");
-    	Email e=new Email("leonxandercs@gmail.com", "Tu claves es 123456",true);
+    	 //Email e = new Email("C:\\Users\\Pantera\\Downloads\\emblema.jpg","adjunto.jpg","leonxandercs@gmail.com","Adjunto","Prueba del tutorial para mandar un email");
+    	 Email e=new Email("C:\\Files\\destino\\imgTest.png","cotizacion","leonxandercs@gmail.com","cotizacion","prueba",true);
+ 		
+    	 //Email e=new Email("leonxandercs@gmail.com", "Tu claves es 123456",true);
    
         if (e.sendMail()){
         	System.out.println("Envio correcto");
