@@ -4,13 +4,54 @@
 <style>
   h1 { padding: .2em; margin: 0; }
   #products { float:left; width: 500px; margin-right: 2em; }
-  #cart { width: 800px; float: left; margin-top: 1em; }
+  #cart { width: 800px; float: left; }
   /* style the list to maximize the droppable hitarea */
   /*#cart ol { margin: 0; padding: 1em 0 1em 3em; }*/
+  
+  .ui-accordion .ui-accordion-content {
+    padding: 1em 2.2em;
+    border-top: 0px none;
+    overflow: auto;
+    display: block;
+    height: 200px;
+  }
+  
+  .ui-widget-content {
+    border: 1px solid #B93078;
+    background: #EEE url("images/ui-bg_highlight-soft_100_eeeeee_1x100.png") repeat-x scroll 50% top;
+    color: #333;
+    height: 410px;
+  }
+  
+  .ui-widget-header {
+    border: 1px solid #E03C98;
+    background: #E03C98 url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50%;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+    color: #BF2550;
+    text-decoration: none;
+   }
+  .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: #B31166;
+    text-decoration: none;
+   }
+   .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border: 1px solid #A82987;
+    background: rgba(255, 255, 255, 0.78) url("images/ui-bg_glass_65_ffffff_1x400.png") repeat-x scroll 50% 50%;
+    font-weight: bold;
+    color: rgba(235, 0, 207, 0.9);
+   }
+  
   .fruts{display: inline-block;}
   
    .drop-area {
       background-color: #F9BC52;
+      background-color: #7937A7;
+      background-color: rgba(24, 243, 235, 0.32);
   }
   
   
@@ -290,13 +331,13 @@ $(document).ready(function() {
 </div>
  
 <div id="cart" style="width:50%;">
-  <h1 class="ui-widget-header">Arma Tu Torta&nbsp;&nbsp;&nbsp;&nbsp;S/.<label id="sum"style="font-size:40px;">0.00</label></h1>
+  <h1 class="ui-widget-header">Arma Tu Torta&nbsp;&nbsp;&nbsp;&nbsp;S/.<label id="sum"style="font-size:20px;">0.00</label></h1>
   <div class="ui-widget-content">
       <div id="armador" class="placeholder" style="width:100%;height:100%;"><label id="eliminame">Arrasta Aqui..!</label></div>
       <div id="img-out"></div>
   </div>
   <!-- <button id="imprimir" class="btn btn-lg btn-primary">Enviar</button> -->
-  <input type="button" id="btnSave" value="Enviar" class="btn btn-lg btn-primary"/>
+  <input type="button" id="btnSave" value="Enviar" class="btn btn-lg btn-primary" style="background-color: #7A035B;"/>
 </div>
 </div>
 <br></br>

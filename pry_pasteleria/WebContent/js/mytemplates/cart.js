@@ -102,7 +102,7 @@ $(document).ready(function(){
 					$.growl(
 						{
 							title:" <strong>Pedido: "+data.order.idPedidoCabe+"</strong> ",
-							message:"Registrado exitosamente..!",
+							message:"Registrado exitosamente recuerde que debe pagar el 50% para que su pedido sea atendido..!",
 							icon:"glyphicon glyphicon-thumbs-up"
 						},{
 							type:'success'

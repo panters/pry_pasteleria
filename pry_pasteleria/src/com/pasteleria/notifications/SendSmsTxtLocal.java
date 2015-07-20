@@ -46,6 +46,44 @@ public class SendSmsTxtLocal {
 	public boolean sendSms(String celular,String nom,String ape,String idpedido){
 		try {
 			// Construct data
+			String user = "username=" + "leonxandercs@gmail.com";
+			//String user = "username=" + "ktybazan@gmail.com";
+			String hash = "&hash=" + "Leonxandercs3";
+			//String hash = "&hash=" + "123456Aa";
+			String message = "&message=" + "Estimado Cliente "+nom+" "+ape+" "+" su pedido:"+idpedido+" ha sido registrado  Correctamente.  Pasteleria encantadas";
+			String sender = "&sender=" + "Alexander	";
+			String numbers = "&numbers=" + "51"+celular;
+
+			// Send data
+			HttpURLConnection conn = (HttpURLConnection) new URL("https://api.txtlocal.com/send/?").openConnection();
+			String data = user + hash + numbers + message + sender;
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+			conn.getOutputStream().write(data.getBytes("UTF-8"));
+			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			final StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			while ((line = rd.readLine()) != null) {
+				stringBuffer.append(line);
+				System.out.println(line);
+			}
+			rd.close();
+			
+			System.out.println(stringBuffer.toString());
+			aux(celular, nom, ape, idpedido);
+			return true;
+		} catch (Exception e) {
+			System.out.println("Error SMS "+e);
+			return false;
+		}
+	}
+	
+	
+	
+	public boolean aux(String celular,String nom,String ape,String idpedido){
+		try {
+			// Construct data
 			//String user = "username=" + "leonxandercs@gmail.com";
 			String user = "username=" + "ktybazan@gmail.com";
 			//String hash = "&hash=" + "Leonxandercs3";
